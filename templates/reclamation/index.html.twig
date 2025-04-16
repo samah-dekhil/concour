@@ -1,0 +1,69 @@
+{% extends 'layout_admin.html.twig' %}
+
+{% block main %}
+
+
+<div class="card-body">
+<h5 class="card-title">Liste des réclamations</h5>
+
+</div>
+    <div class="card">
+                <div class="card-body">
+                 
+                  <div class="table-responsive col-md-12">
+                    <table
+                      id="zero_config"
+                      class="table table-striped table-bordered"
+                    >
+                      <thead>
+                        <tr>
+                        <th>ID</th>
+                          <th>Nom & Prénom</th>
+                          <th>Cin</th>
+                          <th>Date Cin  </th>
+                          <th>Date naissance  </th>
+                          <th>Email </th>
+                          <th>Objet </th>
+                          <th>Grade </th>
+                          <th>Date Création</th>
+                          
+                        </tr>
+                      </thead>
+                      <tbody>
+                      
+                      {% for reclamation in list %}
+                        <tr>
+                        <td>  {{reclamation.id}}</td>
+                          <td>  {{reclamation.nom}}&nbsp; {{reclamation.prenom}}</td>
+                          <td>  {{reclamation.cin}}</td>
+                          <td>{{reclamation.dateCin|date("d/m/Y")}}</td>
+                          <td>{{reclamation.dateNaissance|date("d/m/Y ")}}</td>
+                          <td>  {{reclamation.mail}}</td>
+                          <td>  {{reclamation.objet}}</td>
+                          <td> <a href="{{path('grade_show',{tokenConcours:reclamation.grade.concours.token,token:reclamation.grade.token})}}"> {{reclamation.grade.libelle}} </a></td>
+                          <td>{{reclamation.dateCreation|date("d/m/Y H:i:s")}}</td>
+                         
+                        </tr>
+                      {% endfor %}
+                       
+                         
+                     
+                       
+                      </tbody>
+                   
+                    </table>
+                  </div>
+                </div>
+              </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{parent()}}
+
+<script> 
+       
+         jQuery('.dt-buttons').remove()
+   
+
+</script>
+{% endblock %}

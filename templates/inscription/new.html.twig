@@ -1,0 +1,1815 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}إستمارة ترشح  لإنتداب {{grade.libelle}} بعنوان سنة 2024   {% endblock %}
+{% block main %}
+
+
+
+  <h5 class="card-title title-page">
+      <b class="text-danger">
+    
+      إستمارة ترشح لإنتداب    {{grade.libelle}} بالسلك الإداري المشترك بالإدارات العمومية  بعنوان سنة 2024   
+      </b>
+  </h5>      
+  <div class="col-md-12" style="/*margin: 0 auto;*/">
+      <div class="card new_ins" style="padding: 0px 20px;">
+          <h4 class="card-title">لمواصلة مراحل التسجيل يجب على المترشح تأكيد إطّلاعه على دليل المترشّح، قرار ضبط كيفيّة تنظيم المناظرة، برنامج المناظرة حسب الإختصاص  و بطاقة عناصر التقييم    </h4>
+          <div class="alert alert-primary" role="alert">                         
+              <p>
+              يجب إدخال جميع المعلومات باللّغة العربيّة.
+              </p>
+              <p>
+              الخانات المسبوقة ب <font style="color:#ff3111;">(*) </font> هي خانات إجباريّة.
+              </p>
+          </div>
+      </div>
+  </div>
+
+<div class="card">
+  <div class="card-body wizard-content">
+    <h4 class="card-title"></h4>
+    <h6 class="card-subtitle"></h6>
+      {{ form_start(form) }}
+      <div>
+        <h3>شروط الترشح</h3>
+        <section data-step="0">
+        {% if app.request.hasPreviousSession %}
+        
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-danger" style="font-size: 22px;">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% endif %}
+
+      <div class="error-insc-cin " style="padding-right:15px;">
+ 
+    </div>
+      {# <div class="error-insc-cin  {% if message is not empty %} alert-danger catch{% endif %} " style="padding-right:15px;">
+    {% if message is not empty %} {{message}} {% endif %}
+    </div> #}
+      
+        <p style="font-size: 18px;"> <font style="color:#ff3111;">(*) </font> خانة إجباريّة</p>
+         <div class="col-md-4 form-group row ">
+          {{form_widget(form.grade)}}
+
+          <div class="invalid-feedback-cin">{{form_errors(form.grade)}}</div>
+        </div>
+                  <div class="col-md-4 form-group row specialiteC">
+                      {{ form_label(form.specialite) }}
+                      {{ form_widget(form.specialite) }}
+                  </div>
+                
+                  <div class="col-md-12 form-group row">
+
+
+                                    {% if grade.id == 1 %}
+                              {% set avis = asset('theme/documents/inspect/avis-concours.pdf')%}
+                            {% set decision= asset('theme/documents/inspect/decision-inscpecteurs.pdf') %}
+                               {% set programme= asset('theme/documents/inspect/programme-concours.pdf') %}
+                                {% set elements = asset('theme/documents/inspect/elements-evaluation.pdf') %}
+                            {% elseif grade.id == 6 %}
+                              {% set avis = asset('theme/documents/tresor/avis-concours.pdf')%}
+                              {% set decision= asset('theme/documents/tresor/decision-tresor.pdf') %}
+                               {% set programme= asset('theme/documents/tresor/programme-concours.pdf') %}
+                                {% set elements = asset('theme/documents/tresor/elements-evaluation.pdf') %}
+                        {% endif %}
+                      <ul class="list-task todo-list list-group mb-0" data-role="tasklist">
+                      <li class="list-group-item todo-item" data-role="task">
+                          <label class="col-md-12">هل تمّ الإطّلاع على <a href="{{decision}}" target="_blank"> قرار ضبط  كيفيّة تنظيم المناظرة </a>؟</label>
+                          <div class="form-check mr-sm-2" id="confirmDecision">
+                              {{ form_widget(form.confirmDecision) }} 
+                              {{ form_label(form.confirmDecision) }}    
+                            <div class="errorConfirmDecision error"></div>       
+                          </div>
+                        </li>
+                        <li class="list-group-item todo-item" data-role="task">
+                                <label class="col-md-12">هل تمّ الإطّلاع على <a href="{{programme}}" target="_blank"> برنامج المناظرة </a>؟</label>
+                                <div class="form-check mr-sm-2" id="confirmProgramme">
+                                {{ form_widget(form.confirmProgramme) }} 
+                                {{ form_label(form.confirmProgramme) }}    
+                              <div class="errorConfirmProgramme error"></div>       
+                                </div>
+                        </li>
+                        <li class="list-group-item todo-item" data-role="task">
+                            <label class="col-md-12">
+                            هل تمّ الإطّلاع على <a href="{{elements}}" target="_blank"> بطاقة عناصر التقييم   </a>؟
+                            </label>
+                            <div class="form-check mr-sm-2"  id="confirmFiche">
+                                {{ form_widget(form.confirmFiche) }} 
+                                {{ form_label(form.confirmFiche) }} 
+                              <div class="errorConfirmFiche error"></div>    
+                            </div>
+                        </li>
+                         
+
+                         
+                         
+                         
+                          
+                      </ul>
+
+                 
+                    </div>
+          
+          
+        </section>
+        <h3>مطلب الترشح</h3>
+        <section data-step="1">
+          <p style="font-size: 18px;"> <font style="color:#ff3111;">(*) </font> خانة إجباريّة</p>
+            <div class="content-form">
+                 <div class="text-bg-secondary p-3">
+                    <h4 class="card-title gouv">الترشح لمناظرة إنتداب {{grade.libelle}}   
+                   {# <span class="spec"></span>  #}
+                    <font style="color:red">*</font>: </h4>
+                </div>
+              <div class="bloc">
+                 {# <div class="form-group row col-md-4 clear">    
+                      <label class="mt-3 text-danger"> الرجاء اختيار جهة الترشح  </label>
+                      {{ form_widget(form.codeGouv) }}
+                  </div> #}
+                </div> 
+                <div class="text-bg-secondary p-3">
+                    <h4 class="card-title">الهويــة </h4>
+                </div>
+                <div class="bloc">
+                    <div class="col-md-12 right">
+                      <div class="form-group row col-md-4 right">
+                            {{ form_label(form.cin) }}
+                            {{ form_widget(form.cin) }}
+                          <div class="invalid-feedback-cin">{{form_errors(form.cin)}}</div>
+
+                      </div>
+                      <div class="form-group row col-md-4 right">
+                        <label  for="cin_verif" class="mt-3">
+                          تأكيد رقم ب.ت.و<font color="#FF0000">*</font>:</label>
+                          <input type="text" class="form-control confirm" id="cin_verif" name="cin_verif" maxlength="8" size="8"  >
+                      </div>
+                      <div class="form-group row col-md-4">
+                        {{ form_label(form.dateCin) }}
+                      
+                        {{ form_widget(form.dateCin) }}
+
+                      </div>
+                    </div>
+
+                    <div class="col-md-12 right">
+                      <div class="form-group row col-md-4 right">          
+                        {{ form_label(form.prenom) }}                                                 
+                        {{ form_widget(form.prenom) }}                                      
+                        </div>
+
+                      <div class="form-group row col-md-4 right">
+                            {{ form_label(form.nom) }}                                                 
+                            {{ form_widget(form.nom) }}  
+                      </div>
+                   {#   <div class="form-group row col-md-4">
+                        {{ form_label(form.nomJeunefille) }}                                                 
+                        {{ form_widget(form.nomJeunefille) }} 
+                      </div>  #}
+
+                    </div>
+                    <div class="col-md-12 right">
+                      <div class="form-group row col-md-4 right">
+                        {{ form_label(form.prenomPere) }}                                                 
+                        {{ form_widget(form.prenomPere) }} 
+                      </div>
+
+                      <div class="form-group row col-md-4">
+                        {{ form_label(form.prenomMere) }}                                                 
+                        {{ form_widget(form.prenomMere) }} 
+                      </div>
+                    </div>
+                      
+                      <div class="col-md-12 right">
+                        <div class="form-group row col-md-4 right">
+                          {{ form_label(form.dateNaissance) }}                                                 
+                          {{ form_widget(form.dateNaissance) }} 
+                        </div>
+                          <div class="form-group row col-md-4 right">
+                            <label for="date_naissance" class="mt-3">
+                            تأكيد تاريخ الولادة  <font color="#FF0000">*</font>:</label>                           
+                            <input type="text" class="form-control datepicker-auto confirm" id="date_naissance" name="date_naissance"  size="20"  maxlength="10"placeholder="" >
+                            
+                        </div>
+
+                        
+                        <div class="form-group row col-md-4 right">
+                          {{ form_label(form.villeNaissance) }}  
+                          {{ form_widget(form.villeNaissance) }}  
+                        </div>
+                      </div>
+
+                      <div class="col-md-12 right">
+                        <div class="form-group row col-md-4 right">
+                              {{ form_label(form.sexe) }}
+                              {{ form_widget(form.sexe, {'attr': {'class': 'required'}}) }}
+                            <div class="error_inscription_sexe error"></div>
+                        </div>
+
+                        <div class="form-group row col-md-4 right ">
+                          {{ form_label(form.etatCivil) }}
+                          {{ form_widget(form.etatCivil) }}
+                          
+                        </div>
+                        <div class="form-group row col-md-2 right  etatHide ">
+                            {{ form_label(form.nbEnfants ) }}
+                              {{ form_widget(form.nbEnfants) }}
+                        </div>
+                      </div>
+                      <div class="col-md-12 right etatHide">
+                        <div class="form-group row col-md-4 right">
+                              {{ form_label(form.nomPrenomConjoint) }}
+                              {{ form_widget(form.nomPrenomConjoint) }}
+                        </div>
+
+                        <div class="form-group row col-md-4">
+                                {{ form_label(form.emploiConjoint) }}
+                              {{ form_widget(form.emploiConjoint) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="text-bg-secondary p-3">
+                    <h4 class="card-title">العنوان الشخصي: </h4>
+                </div>
+                <div class="bloc">
+              
+                 <div class="col-md-12 right">
+                    <div class="form-group row col-md-9 right">    
+                      {{ form_label(form.adresse) }}
+                      {{ form_widget(form.adresse) }}
+                      </div>
+                    {# <div class="form-group row col-md-2 right">
+                    {{ form_label(form.num_adresse) }}
+                      {{ form_widget(form.num_adresse) }}
+                    </div> #}
+                    <div class="form-group row col-md-3 right ">
+                      {{ form_label(form.regionAdresse) }}
+                      {{ form_widget(form.regionAdresse) }}
+                    </div>
+                  </div>
+                  <div class="col-md-12 right">
+                    <div class="form-group row col-md-4 right">
+                    {{form_label(form.codeGouvAdresse)}}
+                    {{form_widget(form.codeGouvAdresse)}}
+                    </div>
+                        <div class="form-group row col-md-4">
+                      {{ form_label(form.codePostal) }}
+                      {{ form_widget(form.codePostal) }}
+                    </div>
+                  </div>
+                  <div class="col-md-12 right">
+                    <div class="form-group row col-md-4 phone right">
+                              {{ form_label(form.telephoneFixe) }}
+                      {{ form_widget(form.telephoneFixe) }}
+                    </div>
+                    <div class="form-group row col-md-4 phone right">
+                      {{ form_label(form.telephonePortable) }}
+                      {{ form_widget(form.telephonePortable) }}
+                    </div>
+                    <div class="form-group row col-md-4">
+                      {{ form_label(form.mail) }}
+                    
+                      {{ form_widget(form.mail) }}
+                      <p class="error erroremail"> </p>
+                    </div>
+                  </div>
+                  </div>
+                    <!-- Section 3-->
+                <div class="text-bg-secondary p-3">
+                    <h4 class="card-title">المستـوى العلمي المطلوب:</h4>
+                </div>
+                <div class="bloc">
+              
+              <div class="col-md-12 right">
+                    <div class="form-group row col-md-12 niv" data-niv="{{grade.id}}" data-lib="{{grade.libelle}}">
+                        {{form_label(form.niveau)}}
+                        {{form_widget(form.niveau)}}
+                      <div class="error_inscription_niveau error"></div>
+                    </div>
+                  </div>
+                  <div class="col-md-12 right">
+                    <div class="form-group row col-md-4 right">
+                          {{ form_label(form.nomDiplome) }}
+                        {{ form_widget(form.nomDiplome) }}
+                    </div>
+                    <div class="form-group row col-md-4 ">
+                          {{ form_label(form.specialiteDiplome) }}
+                        {{ form_widget(form.specialiteDiplome) }}
+                    </div>
+                  </div>
+                  <div class="col-md-12 right">
+                    <div class="form-group row col-md-4 right">
+                            {{ form_label(form.typeEtablissement) }}
+                            {{ form_widget(form.typeEtablissement) }}
+                          <div class="error_inscription_typeEtablissement error"></div>
+                    </div>
+                    <div class="form-group row col-md-4 right  ">
+                          {{ form_label(form.anneeDiplome) }}
+                          
+                          {{ form_widget(form.anneeDiplome) }}
+                        <p class="error erroranneeDiplome"> </p>
+                    </div>
+                   
+                    <div class="form-group row col-md-4 hideAE right">
+                          {{ form_label(form.anneeEquivalence) }}
+                          
+                          {{ form_widget(form.anneeEquivalence) }}
+                        <p class="error erroranneeEquivalence"> </p>
+                    </div>
+                    <div class="form-group row col-md-3 verif_annee" style="">    
+                      <label class="mt-3" for="verif_annee"> تأكيد سنة الحصول على الشهادة (سنة التخرّج) <font style="color:red">*</font>: </label>
+                      <input type="text" id="verif_annee" class="form-control  confirm">
+                  </div>
+                </div>
+                <div class="col-md-12 right">
+                    <div class="form-group row col-md-4">
+                          {{ form_label(form.nomEtablissement) }}
+                          {{ form_widget(form.nomEtablissement) }}
+                    </div>
+                </div>
+              </div>
+                <div class="section-moy">
+                    <div class="text-bg-secondary p-3">
+                      <h4 class="card-title">معدّل سنوات الدّراسة بالتعليم العالـي : </h4>
+                    </div>
+                    <div class="bloc  bloc-moyenne">
+
+                        <p class="text-danger"> مثال توضيحي لطريقة إدراج المعدّلات: 
+                        12,120
+                      </p>
+                     
+                       {# <div class="col-md-12 right"> #}
+                        
+                          <div class="form-group row col-md-3 moyenne1 right">    
+                            {{ form_label(form.moyenne1) }}
+                            {{ form_widget(form.moyenne1) }}
+                          </div>
+                          <div class="form-group row col-md-3 moyenne1" style="">    
+                            <label class="mt-3 required" for="confirm_inscription_moyenne1">  تأكيد المعدل العام للسنة الأولى بنجاح <font style="color:red">*</font>: (1)</label>
+                            <input type="text" id="confirm_inscription_moyenne1" name="confm1" required="required" class="form-control required confirm_inscription confirm">
+                          </div>
+                      <p style="float: right;width: 100%;"></p>
+
+                        {# </div>
+                        <div class="col-md-12 right"> #}
+                          <div class="form-group row col-md-3 moyenne2 right">    
+                            {{ form_label(form.moyenne2) }}
+                            {{ form_widget(form.moyenne2) }}
+                          </div>
+                          <div class="form-group row col-md-3 moyenne2" style="">    
+                            <label class="mt-3 required" for="confirm_inscription_moyenne2">  تأكيد المعدل العام للسنة الثانية بنجاح <font style="color:red">*</font>: (2)</label>
+                            <input type="text" id="confirm_inscription_moyenne2" name="confm2" required="required" class="form-control required confirm_inscription confirm">
+                          </div>
+                      <p style="float: right;width: 100%;"></p>
+
+
+                        {# </div>
+                        <div class="col-md-12 right"> #}
+                          <div class="form-group row col-md-3 moyenne3 right">    
+                            {{ form_label(form.moyenne3) }}
+                            {{ form_widget(form.moyenne3) }}
+                          </div>
+                          <div class="form-group row col-md-3 moyenne3" style="">    
+                            <label class="mt-3 required" for="confirm_inscription_moyenne3">  تأكيد المعدل العام للسنة الثالثة   بنجاح <font style="color:red">*</font>: (3)</label>
+                            <input type="text" id="confirm_inscription_moyenne3" name="confm3" class="form-control   confirm_inscription confirm">
+                          </div>
+                        {# </div>
+                        <div class="col-md-12 right"> #}
+                    <p style="float: right;width: 100%;"></p>
+
+
+                          <div class="form-group row col-md-3 moyenne4 right">    
+                            {{ form_label(form.moyenne4) }}
+                            {{ form_widget(form.moyenne4) }}
+                          </div>
+                          <div class="form-group row col-md-3 moyenne4" style="">    
+                            <label class="mt-3 required" for="confirm_inscription_moyenne4">  تأكيد المعدل العام للسنة الرابعة   بنجاح <font style="color:red">*</font>: (4)</label>
+                            <input type="text" id="confirm_inscription_moyenne4" name="confm4"  class="form-control   confirm_inscription confirm">
+                          </div>
+                        {# </div>
+                        <div class="col-md-12 right"> #}
+                    <p style="float: right;width: 100%;"></p>
+
+{#
+                        <div class="form-group row col-md-3 moyenne5 right">    
+                            {{ form_label(form.moyenne5) }}
+                            {{ form_widget(form.moyenne5) }}
+                          </div>
+                          <div class="form-group row col-md-3 moyenne5" style="">    
+                            <label class="mt-3 required" for="confirm_inscription_moyenne5"> تأكيد المعدل العام للسنة الخامس  بنجاح <font style="color:red">*</font>: (5)</label>
+                            <input type="text"   id="confirm_inscription_moyenne5" name="confm5" class="form-control   confirm_inscription confirm">
+                          </div> #}
+                        {# </div> #} 
+                    </div>
+                </div>
+                <div class="text-bg-secondary p-3">
+                 <h4 class="card-title">
+                           المعدّل المتحصّل عليه في شهادة البكالوريا  <font style="color:red">*</font>:
+                    </h4> 
+                </div>
+                <div class="bloc b-tanfil">
+                <div class="col-md-12 right">
+
+                <div class="col-md-12 right">
+                            <div class="form-group row col-md-4 right">
+                              {{ form_label(form.scoreTanfil) }}
+                              {{ form_widget(form.scoreTanfil) }}
+                               <div class="error errorscore"></div>
+                            </div>
+                            <div class="form-group row col-md-4 right">
+                             <label  for="confirm_inscription_scoreTanfil" class="mt-3">  تأكيد  المعدل المتحصل عليه في الباكالوريا <font color="#FF0000">*</font>:</label>
+                             <input type="text" required   id="confirm_inscription_scoreTanfil" name="confmbac" class="form-control  check-moy  confirm_inscription confirm"> 
+                            </div>
+                     </div> 
+                    <div class="form-group row col-md-4 right">    
+                        {{ form_label(form.diplomeTanfil) }}
+                        {{ form_widget(form.diplomeTanfil) }}
+                          <div class="error_inscription_diplomeTanfil error"></div>
+                      </div>
+
+
+                      
+                      {# <input type="button" class="btn-3"value="verifier"/> #}
+                </div>
+            </div>
+           <div class="g-recaptcha" data-sitekey="6Lf0LEgqAAAAAJIzrgBaxDjFKr2E4cHtvKisgzIw" data-callback="recaptchaCallback" style="margin-top: 41px;float: right;"></div>
+        </section>
+        <h3>تأكيد التسجيل</h3>
+        <section data-step="2">
+          
+          
+            <h4 class="card-title text-danger" style="font-size: 1.5rem;">
+              تأكيد التّسجيل -  إستمارة ترشح لإنتداب    {{grade.libelle}} بالسلك الإداري المشترك بالإدارات العمومية بعنوان سنة 2024   
+            </h4>
+            <div class="bloc" id="verfiy-inscription" >
+            </div>
+            <div class="bloc">
+              <div class="alert alert-danger" role="alert">
+                  <p style="color:red;margin-bottom: 0;font-size: 19px;">
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true" style="padding-left: 5px;"></i>
+                    <u>   ملاحظة 1    </u> :  الرجاء التثبت جيداً من كل المعطيات فبعد تأكيد التسجيل لا يمكن تغييرها
+                  </p>
+              </div>
+              <div class="alert alert-warning" role="alert">  
+                <p style="color:red;margin-bottom: 0;font-size: 19px;">
+                  <i class="fa fa-exclamation-triangle" aria-hidden="true" style="padding-left: 5px;"></i>
+                  <u>  ملاحظة 2   </u> :  يتحمل المترشح المسؤولية التامة عن البيانات التي يرقنها و لا يمكن التوجه بمطالب للإدارة في أي حال من الأحوال قصد تغيير أو إصلاح أي معطى  أو بيان رقنه أو سجله المترشح عند تعميره لإستمارة الترشح .
+                </p>
+              </div>
+          </div>
+        </section>
+      </div>
+    {{ form_end(form) }}
+
+    <div class="modal fade" id="ModalVerif" tabindex="-1" role="dialog"  data-bs-keyboard="false" data-bs-backdrop="static">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"> الرجاء التّأكد من صحّة المعطيات التي قمتم بإدراجها وخاصّة البيانات التي لها علاقة بمجموع  النقاط وهي : </h4>
+            </div>
+            <div class="modal-body">
+              <p> <b>1. معدلات سنوات الدراسة في التعليم العالي :</b></p>
+              <ul>
+                <li>            المعدل العام لسنوات الدراسة في التعليم العالي    </li>
+              </ul>
+              <p><b>  2. المعدّل المتحصّل عليه في البكالوريا  </b></p>
+              <p><b>  3. الرجاء التثبت أيضا من البيانات التالية  </b></p>
+
+              <ul>
+                <li>       الإختصاص في الشهادةالعلمية  </li> 
+                <li>      رقم بطاقة التعريف الوطنية </li>
+                <li>        الإسـم و اللقب  </li> 
+                <li>      تاريخ الولادة  </li> 
+                <li>     العنوان   </li> 
+              </ul>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary btnoui"  data-bs-dismiss="modal">
+              أريد التثبت 
+              </button>
+           
+              <button type="button"  class="btn btn-warning btnnon"  data-bs-dismiss="modal">
+              أصادق
+              </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="ModalConfirm" tabindex="-1" role="dialog"  data-bs-keyboard="false" data-bs-backdrop="static">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            
+            <div class="modal-body">
+                <h4 class="modal-title" style="margin-top:15px;margin-bottom:15px;"> هل تريد تحييين بعض البيانات ؟</h4>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary btnouiConf"  data-bs-dismiss="modal">
+                  نعم 
+              </button>
+           
+              <button type="button"  class="btn btn-warning btnnonConf"  data-bs-dismiss="modal">
+                  لا
+              </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+  </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+      <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.fr.min.js"></script>
+    <script>
+
+      $(function () {
+        $("#inscription_dateCin").datepicker({ 
+            autoclose: true,
+            language: "fr",
+             endDate: '+0D', 
+             format: "yyyy/mm/dd",
+            todayHighlight: true,
+         
+        })
+
+        $("#date_naissance,#inscription_dateNaissance").datepicker({ 
+          autoclose: true,
+          language: "fr",
+           endDate: '-1D', 
+           format: "yyyy/mm/dd",
+          todayHighlight: false,
+          
+       
+      }) .on("change", function (e) {
+            ////console.log("Date changed: ", e.target.value);
+            $(this).blur()
+           jQuery("#date_naissance").rules("add", {
+              required: true,
+              equalTo: "#inscription_dateNaissance",
+              rangelength: [10, 10],
+              messages: {
+                equalTo: "الرجاء التّثبّت من  تاريخ الولادة.",
+            
+              }})
+          });
+    });
+
+      function summary(){
+          let summary = '';
+          var niveau ='';
+          $('form').find('input, select').each(function(){
+            if($(this).is(':radio')) {
+          
+                bool=0;
+                if($(this).is(':checked')){
+                 
+                  bool=1;
+                  id=$(this).attr('id')
+                    value=$('label[for="'+id+'"]').text()
+                    label =$(this).parent().parent().find('label:nth-child(1)').text().replace('*', '')
+                }
+                if(bool==1){
+                   summary +='<div class="form-group row col-md-4  '+$(this).attr('id')+'">'
+                              +'<label class="mt-3">'+label+'</label>'
+                              +'<p class="mt-3">'+value+'</p>'
+                          +'</div>';
+                }
+                  
+
+            }
+            if( $(this).is(':text') ||$(this).attr('id')=="inscription_mail" || $(this).attr('id')=="inscription_dateCin"  || $(this).attr('id')=="inscription_dateNaissance" )  {
+              if(!$(this).hasClass('confirm') && !$(this).hasClass('hiddenRecaptcha')){
+                x="";
+                if($(this).hasClass('check-moy') ||$(this).hasClass('confirm_inscription') ){
+                  x=" /20 ";
+                }
+                 summary +='<div class="form-group row col-md-4 '+$(this).attr('id')+'">'
+                              +'<label class="mt-3">'+$(this).parent().find('label:not(.error),label:not(.errorlg)') .text().replace('*', '')+'</label>'
+                              +'<p class="mt-3">'+$(this).val()+x+'</p>'
+                          +'</div>';
+              }
+            }
+           /* if( $(this).hasClass('datepicker-auto') && $(this).hasClass('dte')) {
+                   summary +='<div class="form-group row col-md-4  '+$(this).attr('id')+'">'
+                                  +'<label class="mt-3">'+$(this).parent().find('label:not(.error),label:not(.errorlg)') .text().replace('*', '')+'</label>'
+                                  +'<p class="mt-3">'+$(this).val().replace('-', '/') .replace('-', '/')+'</p>'
+                            +'</div>';
+                
+            } */
+            if($(this).hasClass('form-select')) {
+                label= $(this).parent().find('label:not(.error),label:not(.errorlg)') .text().replace('*', '')
+                Gouv = $('#steps-uid-0-p-1 h4.gouv').html().replace('*', '')
+                if($(this).hasClass('gouv')){ 
+                  label=Gouv; }
+
+                    summary +='<div class="form-group row col-md-4  '+$(this).attr('id')+'">'
+                                  +'<label class=" ">'+label +'</label>'
+                                  +'<p class="">'+$(this).find('option:selected').text()+'</p>'
+                              +'</div>';
+             }
+                                 
+          });
+         
+           $('#verfiy-inscription .inscription_codeGouv > label').empty().html(Gouv)
+           $('.inscription_niveau_0, .inscription_niveau_1, .inscription_niveau_2, .inscription_niveau_3').addClass('col-md-12')
+           $('.inscription_niveau_0, .inscription_niveau_1, .inscription_niveau_2, .inscription_niveau_3').removeClass('col-md-4')
+           //  //console.log(summary)
+           $("#verfiy-inscription").empty().html(summary)
+   
+             niveau =$('#inscription_niveau input:checked').val()
+         //   //console.log('niveau selected '+niveau )
+            tab =["1er cycle","licence","iset","formation"];
+           // errorNiveau=0;
+            if(niveau=="licence"){
+              $('.inscription_moyenne4,.inscription_moyenne5').remove()
+              $('.confirm_inscription_moyenne4,.confirm_inscription_moyenne5').remove()
+            }
+            else if(niveau=="1er cycle"){
+              $('.inscription_moyenne3,.inscription_moyenne4,.inscription_moyenne5').remove()
+              $('.confirm_inscription_moyenne3,.confirm_inscription_moyenne4,.confirm_inscription_moyenne5').remove()
+            }
+            else if(niveau=="formation"){
+              $('.inscription_moyenne5').remove()
+              $('.confirm_inscription_moyenne5').remove()
+              
+            }else if(niveau=="iset"){
+             /* $('.inscription_moyenne1,.inscription_moyenne2,.inscription_moyenne3,.inscription_moyenne4,.inscription_moyenne5').show() */
+              $('.inscription_moyenne5').remove()
+              $('.confirm_inscription_moyenne5').remove()
+            }else{  
+              if( !isInArray(niveau,tab) ){
+                  errorNiveau = 1 ;
+                  $('.inscription_moyenne1,.inscription_moyenne2,.inscription_moyenne3,.inscription_moyenne4,.inscription_moyenne5').remove()
+                  //console.log('errorNiveau')
+                }
+              }
+
+
+
+
+            if($('#inscription_diplomeTanfil input:checked').val()=="formation"){
+              $('#verfiy-inscription .inscription_scoreTanfil').hide()
+            }
+            
+            $('.inscription_cin').before('<div class="col-md-12 titleRe"> 1. الهويــة :</div>')
+            $('.inscription_adresse').before('<div class="col-md-12 titleRe">2. العنوان الشخصي:</div>')
+            $('.inscription_niveau_0,.inscription_niveau_1,.inscription_niveau_2,.inscription_niveau_3').before('<div class="col-md-12 titleRe">3. المستـوى العلمي المطلوب: </div>')
+            $('.inscription_scoreTanfil').before('<div class="col-md-12 titleRe tanfil">5. المعدل المتحصل عليه في البكالوريا  :</div>')
+            $('.inscription_nomEtablissement').after('<div class="col-md-12 titleRe">4.  معدّل سنوات الدّراسة بالتعليم العالـيي  :</div>')
+          
+           moyGenerale()
+             
+              if($("#inscription_typeEtablissement input:checked").val() =="وطنية"  ){
+                  $('.inscription_anneeEquivalence').hide()
+                  $('#inscription_anneeEquivalence').val('')
+              }
+              if($("#inscription_etatCivil option:selected").val() =="أعزب"  ){
+                $('.inscription_nbEnfants,.inscription_nomPrenomConjoint,.inscription_emploiConjoint','.inscription_nomJeunefille').hide()
+                $('.inscription_nbEnfants,#inscription_nbEnfants').val('')
+                $('.inscription_nomPrenomConjoint,#inscription_nomPrenomConjoint').val('')
+                $('.inscription_emploiConjoint,#inscription_nomPrenomConjoint').val('')
+                $('.inscription_nomJeunefille,#inscription_nomJeunefille').val('')
+              }
+             // $('.inscription_anneeEquivalence label').html().replace('أذكر ', '')
+                formuleScore ="((I*2) + (II))/3";
+                 $('.inscription_scoreTanfil label').prepend('(II)-')
+              
+          $( "#verfiy-inscription" ).append('<div class="col-md-12 titleRe"> 5. مجموع النقاط المسندة لملف الترشح : </div>'
+               +'<div class="col-md-12"><p class="formule-score"><b>مجموع النقاط = </b><span class="val_moyGeneral">'+formuleScore+'</span></p></div>' );
+
+
+      }
+     
+      
+// 
+$( document ).ready(function() {
+
+
+      $niveau = $(".niv").attr('data-niv')
+
+
+
+        if($('.error-insc-cin').hasClass('catch')){
+            $token= $('#inscription__token').val()
+              $(':input','form')
+            .not(':button, :submit, :reset,:checkbox,:radio')
+            .val('');
+
+            $('input[type="checkbox"],input[type="radio"]')
+            .prop('checked', false)
+            .prop('selected', false);
+
+            $('#inscription__token').val( $token)
+      }
+
+      
+      if($('.invalid-feedback-cin ul li').length>0){
+
+            $('.error-insc-cin').addClass('alert-danger')
+            $('.error-insc-cin').html($('.invalid-feedback-cin li:nth-child(1)').html());
+
+            $token= $('#inscription__token').val()
+             $(':input','form')
+            .not(':button, :submit, :reset,:checkbox,:radio')
+            .val('');
+      
+            $('input[type="checkbox"],input[type="radio"]')
+            .prop('checked', false)
+            .prop('selected', false);
+
+            $('#inscription__token').val( $token)
+        
+      }
+
+
+
+      /*
+      show/hide list diplomes  if niveau ==  عدول خزينة
+      */
+      if($niveau==2 && $(".niv").attr('data-lib') =="عدول خزينة"){
+       
+        $('#inscription_niveau input').each(function(){
+          id=$(this).attr('id')
+          if($(this).val()=="formation" || $(this).val()=="iset"){
+           
+            $('label[for="'+id+'"]').remove()
+            $(this).remove()
+          }
+          if($(this).val()=="licence") {
+                $('label[for="'+id+'"]').html('شهادة الإجازة التطبيقية في غير نظام أمد على الأقل أو شهادة معادلة لها في إختصاص : (حقوق و علوم قانونية)')
+          }
+          if($(this).val()=="1er cycle") {
+            $('label[for="'+id+'"]').html('الشهادة الجامعية للمرحلة الأولى من التعليم العالي على الأقل أو شهادة معادلة لها في إختصاص : (حقوق و علوم قانونية)')
+          }
+        })
+      }
+});
+ 
+    //special_caratc: Interdire les caractères spéciaux et la langue française 
+    function onlyLettersAndNumbers(str) {
+      return /^[ء-ي0-9_ ]*$/.test(str);
+    }
+    // special_caratc4 : Interdire les caractères spéciaux et la langue française & numbers
+    function onlyLetters(str) {
+      return /^[ء-ي-_ ]*$/.test(str);
+    }
+
+
+    $('input.required,select.required')
+    .on('invalid', function(){
+      return this.setCustomValidity('الرجاء تعمير هذه الخانة');
+    })
+    .on('input', function(){
+      return this.setCustomValidity('');
+    });
+
+    function validateEmail(email) {
+        let res = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        return res.test(email);
+      }
+     $('body').ready(function(){
+        $('.wizard-content .wizard>.actions>ul>li>a[href="#next"]').html(' التالي >>')
+        $('.wizard-content .wizard>.actions>ul>li>a[href="#previous"]').html('<< رجوع')
+        $('.wizard-content .wizard>.actions.clearfix > ul > li > a[href="#finish"]').html('تأكيد التسجيل ')
+      })
+
+
+
+      
+     
+      // Basic Example with form
+
+      var form = $("form");
+      form.validate({
+        errorPlacement: function errorPlacement(error, element) {
+          element.after(error);
+        },
+        onkeyup: true,
+        ignore: ".ignore",
+        rules: {
+          hiddenRecaptcha: {
+            required: function () {
+                if (grecaptcha.getResponse() == '') {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+           } 
+    			},
+          messages: {
+            hiddenRecaptcha: {
+            required: '.Veuillez valider le test reCAPTCHA '
+            }
+           
+            
+        },
+      });
+    function recaptchaCallback() {
+      $('#hiddenRecaptcha').valid();
+    };
+    
+      $('#inscription_diplomeTanfil_placeholder,#inscription_diplomeTanfil > label[for="inscription_diplomeTanfil_placeholder"]').remove()
+
+      $('li[role="tab"]').click(function(){
+        step = $('form').find('section.current').attr('data-step');
+        
+
+        if(!$(this).hasClass('error') && step == 2  ){
+          summary()
+        }
+      })
+
+      let checkModalVerification = 0;
+      let checkModalConfirmation = 0;
+
+
+      $('.btnoui').click(function(){
+        checkModalVerification=0
+      })
+
+
+      $('.btnnon').click(function(){
+        checkModalVerification=1
+        $('#steps-uid-0 > div.actions.clearfix > ul > li>a[href="#next"]').click()
+
+      })
+      $('.btnouiConf').click(function(){
+        checkModalConfirmation=0
+        $('#steps-uid-0 > div.actions.clearfix > ul > li>a[href="#previous"]').click()
+      })
+      $('.btnnonConf').click(function(){
+        checkModalConfirmation=1
+        $('#steps-uid-0 > div.actions.clearfix > ul > li>a[href="#finish"]').click()
+
+      })
+
+  
+     
+      form.children("div").steps({
+        headerTag: "h3",
+        bodyTag: "section",
+        transitionEffect: "slideLeft",
+        onStepChanged: function(e, currentIndex, priorIndex) {      
+        
+          var fv         = $('form').data('formValidation'), // FormValidation instance
+        
+          step = $('form').find('section.current').attr('data-step');
+
+              if(currentIndex==0)  
+                     $('.wizard-content .wizard>.actions>ul>li>a[href="#next"]').html(' التالي >>')
+
+              if(currentIndex==1) {
+                   $('.wizard-content .wizard>.actions>ul>li>a[href="#next"]').html(' مصادقة >>')
+              }
+              if( currentIndex==2) 
+                    $('.wizard-content .wizard>.actions.clearfix > ul > li > a[href="#finish"]').html('تأكيد التسجيل ')
+
+              $('.wizard-content .wizard>.actions>ul>li>a[href="#previous"]').html('<< رجوع')
+      },
+        onStepChanging: function (event, currentIndex, newIndex) {
+          form.validate().settings.ignore = ":disabled,:hidden";
+         
+            $errorEmail =checkEmail() ;
+            
+            $('.special_caratc').each(function(evt){
+
+              if($(this).val() !=""){         
+              $('#'+$(this).attr('id')+'-error').remove()
+                $(this).removeClass('error-lg')
+                if(!onlyLettersAndNumbers($(this).val())){
+                    $('#'+$(this).attr('id')+'-error').remove()
+                          $(this).addClass('error-lg')
+                          $(this).removeClass('valid')
+                          $(this).attr('aria-invalid','true')
+                              alert='يجب إدخال جميع المعلومات باللّغة العربيّة';
+                          $(this).after('<label id="'+$(this).attr('id')+'-error" class="error">     '+alert+' </label>')
+                    
+                        
+                }
+              }
+            
+            }) 
+            $('.special_caratc4').each(function(){
+                if($(this).val() !=""){
+
+                $('#'+$(this).attr('id')+'-error').remove()
+                  $(this).removeClass('error-lg')
+                  if(!onlyLetters($(this).val())){
+                      $('#'+$(this).attr('id')+'-error').remove()
+                            $(this).addClass('error-lg')
+                            $(this).removeClass('valid')
+                            $(this).attr('aria-invalid','true')
+                                alert='يجب إدخال جميع المعلومات باللّغة العربيّة';
+                            $(this).after('<label id="'+$(this).attr('id')+'-error" class="error">     '+alert+' </label>')
+                  }
+                }
+            })
+          $countErrorLang = $('input.errorlg').length
+         
+          if($countErrorLang ==0 && $errorEmail== 0   && erroranneeEquivalence==0 
+            && erroranneeDiplome==0   && errorscore==0  && error_moyenne1==0 && error_moyenne2==0
+            && error_moyenne3==0 && error_moyenne4==0 && error_moyenne5==0 && errorNiveau==0 ){ 
+              if(form.valid() &&  currentIndex==1 && newIndex==2) 
+                {
+                    if(checkModalVerification ==1){
+                        summary()
+                      return form.valid();  
+                    }
+                    else{
+                      $('#ModalVerif').modal('show');
+                    }
+                }
+                else{
+                  if((currentIndex==2 && newIndex==1) ||(currentIndex==1 && newIndex==0) ||(currentIndex==2 && newIndex==0)){
+                    checkModalVerification =0;
+                   }
+                   if(newIndex<2) {checkModalConfirmation =0;}
+
+                  return form.valid();
+                }
+           
+              
+            } else{
+                return false;
+            }
+         
+        },
+        onFinishing: function (event, currentIndex) {
+          form.validate().settings.ignore = ":disabled";
+          $countErrorLang = $('input.errorlg').length
+     
+          if($('.hiddenRecaptcha ').hasClass('error')){
+           form.children("div").steps("previous");
+          }
+          return form.valid();
+        },
+        onFinished: function (event, currentIndex) {
+            $errorEmail =checkEmail() ;
+          $countErrorLang = $('input.errorlg').length
+          if($countErrorLang ==0 && $errorEmail== 0 && erroranneeEquivalence==0  && erroranneeDiplome==0 && errorscore==0 
+          && error_moyenne1==0   && error_moyenne2==0  && error_moyenne3==0    && error_moyenne4==0   && error_moyenne5==0 && errorNiveau==0){
+
+           if(checkModalConfirmation == 1  && checkModalVerification == 1){
+              form.submit();
+            }
+            else{
+              if(checkModalConfirmation == 0) {
+                  $('#ModalConfirm').modal('show');
+              }
+            
+              return false;
+            }
+          
+                
+        }
+      }});
+   
+      
+      jQuery.extend(jQuery.validator.messages, {
+        required: "الرجاء تعمير هذه الخانة",
+        remote: "الرجاء تصحيح هذا المجال.",
+        email: "يرجى إدخال عنوان بريد إلكتروني صحيح.",
+        url: "Please enter a valid URL.",
+        date: "ارجوك ادخل تاريخ صحيح.",
+        dateISO: "Please enter a valid date (ISO).",
+        number: "يرجى إدخال  رقما صالحا.",
+        digits: "الرجاء إدخال أرقام فقط.",
+        creditcard: "Please enter a valid credit card number.",
+        equalTo: "من فظلك ادخل نفس الخانة مرة أخرى.",
+        accept: "Please enter a value with a valid extension.",
+        maxlength: jQuery.validator.format("الرجاء إدخال ما لا يزيد عن {0} حرف."),
+        minlength: jQuery.validator.format("الرجاء إدخال {0} حرف على الأقل."),
+        rangelength: jQuery.validator.format("الرجاء إدخال قيمة يتراوح طولها بين {0} و {1} حرفًا."),
+        range: jQuery.validator.format("Please enter a value between {0} and {1}."),
+        max: jQuery.validator.format("الرجاء إدخال قيمة أقل من أو تساوي {0}."),
+        min: jQuery.validator.format("الرجاء إدخال قيمة أكبر من أو تساوي {0}.")
+      });
+    //  //console.log(document.forms[0].children)
+      
+
+    
+        /***************************************************************************************/
+      $('input[type="radio"]').addClass('form-check-input')
+      $('input[type="radio"] ').click(function(){
+        if($(this).is(':checked')){
+          id= $(this).parent().attr('id')
+          $('.error_'+id).empty()
+        }
+
+      })
+      $('input[type="checkbox"] ').click(function(evt){
+        
+          id= $(this).parent().attr('id')
+          label =$('#'+id+' label.error')
+          elem= $('#'+id+' div.error')
+          elem.empty()
+          
+            setTimeout(function() { 
+              
+                elem.empty().html(label.html())
+                
+            
+            }, 100);
+          
+        })
+
+
+       /***************************************************************************************/
+        $('#steps-uid-0 > div.actions.clearfix > ul > li:nth-child(2) > a').click(function(){
+
+            $('.error_inscription_sexe,.error_inscription_niveau,.error_inscription_typeEtablissement,.error_inscription_diplomeTanfil').html('')
+
+            if($("#inscription_sexe label.error").length>0){
+              
+              $('.error_inscription_sexe').html($("#inscription_sexe label.error").html())
+            } 
+
+            if($("#inscription_niveau label.error").length>0){
+              
+              $('.error_inscription_niveau').html($("#inscription_niveau label.error").html())
+            } 
+
+            if($("#inscription_typeEtablissement label.error").length>0){
+              
+              $('.error_inscription_typeEtablissement').html($("#inscription_typeEtablissement label.error").html())
+            }
+
+            if($("#inscription_diplomeTanfil label.error").length>0){
+              
+              $('.error_inscription_diplomeTanfil').html($("#inscription_diplomeTanfil label.error").html())
+            } 
+        
+            /***/
+             if($("#inscription_confirmDecision").hasClass('error')){
+              
+              $('.errorConfirmDecision').html($('label.error[for="inscription[confirmDecision]"]').html())
+            } 
+
+            if($("#inscription_confirmProgramme").hasClass('error')){
+              
+              $('.errorConfirmProgramme').html($('label.error[for="inscription[confirmProgramme]"]').html())
+            }
+
+            if($("#inscription_confirmFiche").hasClass('error')){
+              
+              $('.errorConfirmFiche').html($('label.error[for="inscription[confirmFiche]"]').html())
+            } 
+        })
+       /*****************************************************************************************/
+      let errorNiveau =0;
+      var countCheckedNiveau = $('#inscription_niveau input[type="radio"]').filter(':checked').length
+      if(countCheckedNiveau ==1){
+        diplome=$('#inscription_niveau input:checked').val()
+   
+        $('#inscription_niveau input') .prop('checked', false).prop('selected', false);
+      }
+
+      
+      function showSectionMoy(diplome, $niveau){
+    
+        $('.section-moy').show()
+        $('.bloc-moyenne input').val('')
+        $('.bloc-moyenne >div').hide()
+        $('.bloc-moyenne >div>label.error').remove()
+        $('.bloc-moyenne >div >input').removeClass('error')
+        $('.bloc-moyenne input').attr('required','required')
+       
+       
+
+        $label1 ="";
+        $conf_label1 ="";
+
+        $label2 =""
+        $conf_label2 ="";
+
+        $label3 =""
+        $conf_label3 ="";
+
+        $label4 ="";
+        $conf_label4 ="" 
+        $label5 ="";
+        $conf_label5 ="" 
+        $val = diplome;
+        tab =["1er cycle","licence","iset","formation"];
+        errorNiveau=0;
+    
+         if(diplome =="iset" && isInArray($val,tab) ){
+          
+            $('.bloc-moyenne >div').show()
+              $('.bloc-moyenne input').attr('required','required')
+
+              $label1 ="المعدل العام للسنة الأولى من التعليم العالي بنجاح (1)";
+              $conf_label1 ="تأكيد المعدل العام للسنة الأولى من التعليم العالي بنجاح (1)";
+
+              $label2 ="المعدل العام للسنة الثانية من التعليم العالي بنجاح (2)"; 
+              $conf_label2 ="تأكيد المعدل العام للسدنة الثانية من التعليم العالي بنجاح (2)";
+
+              $label3 ="المعدل العام للسنة الثالثة من التعليم العالي بنجاح (3)";
+              $conf_label3 ="تأكيد المعدل العام للسنة الثالثة من التعليم العالي بنجاح (3)";
+
+              $label4 ="المعدل العام للسنة الرابعة من التعليم العالي بنجاح (4)";
+              $conf_label4 ="تأكيد المعدل العام للسنة الرابعة من التعليم العالي بنجاح (4)";
+
+             $label5 ="المعدل العام للسنة الخامس بنجاح (5)";
+             $conf_label5 ="تأكيد المعدل العام للسنة الخامس بنجاح (5)";
+
+             
+        } 
+        else  if(diplome =="licence" && isInArray($val,tab)){
+          
+         $label1 ="المعدل العام للسنة الأولى من التعليم العالي بنجاح (1)";
+          $conf_label1 ="تأكيد المعدل العام للسنة الأولى من التعليم العالي بنجاح (1)";
+
+          $label2 ="المعدل العام  للسنة الثانية من التعليم العالي بنجاح (2)"; 
+          $conf_label2 ="تأكيد المعدل العام  للسنة الثانية من التعليم العالي بنجاح (2)";
+
+          $label3 ="المعدل العام للسنة الثالثة من التعليم العالي بنجاح (3)";
+          $conf_label3 ="تأكيد المعدل العام للسنة الثالثة من التعليم العالي بنجاح (3)";
+
+  
+
+
+           $('.scoreTanfil,.moyenne1,.moyenne2,.moyenne3').show()
+           $('.moyenne4 input,.moyenne5 input').removeAttr('required')
+
+           $('.moyenne4 input,.moyenne5 input').addClass('NOTrequired')
+        } 
+        else   if(diplome  =="1er cycle"  && isInArray($val,tab)){
+       
+        $label1 ="المعدل العام للسنة الأولى من التعليم العالي بنجاح (1)";
+        $conf_label1 ="تأكيد المعدل العام للسنة الأولى من التعليم العالي بنجاح (1)";
+
+        $label2 ="المعدل العام  للسنة الثانية من التعليم العالي بنجاح (2)"; 
+        $conf_label2 ="تأكيد المعدل العام  للسنة الثانية من التعليم العالي  بنجاح (2)";
+
+
+           $('.scoreTanfil,.moyenne1,.moyenne2').show()
+           $('.moyenne3 input,.moyenne4 input,.moyenne5 input').removeAttr('required')
+        } 
+
+        else   if(diplome =="formation" && isInArray($val,tab) ){
+         
+          $label1 ="  معدل الكفاية المستهدفة 1 (CC1) ";
+          $conf_label1 =" تأكيد معدل الكفاية المستهدفة 1 (CC1) ";
+
+          $label2 =" معدل الكفاية المستهدفة 2 (CC2)  "; 
+          $conf_label2 =" تأكيد معدل الكفاية المستهدفة 2 (CC2)  ";
+
+          $label3 =" معدل الكفاية المستهدفة 3  (CC3) "; 
+          $conf_label3 =" تأكيد معدل الكفاية المستهدفة 3  (CC3) ";
+
+          $label4 =" معدل الكفاية المستهدفة 4 (CC4) "; 
+          $conf_label4 ="  تأكيد معدل الكفاية المستهدفة 4  (CC4) ";
+
+            $('.scoreTanfil,.moyenne1,.moyenne2,.moyenne3,.moyenne4').show()
+           $('.moyenne5 input').removeAttr('required')
+        }else{
+          if($(this).is(':checked')&& !isInArray($val,tab) ){
+              errorNiveau = 1 ;
+             
+              }
+        }
+        
+       
+       $('label[for="inscription_moyenne1"]').html($label1+'<font style="color:red">*</font> :')
+        $('label[for="confirm_inscription_moyenne1"]').html($conf_label1+'<font style="color:red">*</font> :')
+
+        $('label[for="inscription_moyenne2"]').html($label2+'<font style="color:red">*</font> :')
+        $('label[for="confirm_inscription_moyenne2"]').html($conf_label2+'<font style="color:red">*</font> :')
+
+        $('label[for="inscription_moyenne3"]').html($label3+'<font style="color:red">*</font> :')
+        $('label[for="confirm_inscription_moyenne3"]').html($conf_label3+'<font style="color:red">*</font> :')
+
+        $('label[for="inscription_moyenne4"]').html($label4+'<font style="color:red">*</font> :')
+        $('label[for="confirm_inscription_moyenne4"]').html($conf_label4+'<font style="color:red">*</font> :')
+
+        $('label[for="inscription_moyenne5"]').html($label5+'<font style="color:red">*</font> :')
+        $('label[for="confirm_inscription_moyenne5"]').html($conf_label5+'<font style="color:red">*</font> :')
+
+      }
+
+     
+      $('#inscription_niveau input').change(function(){
+          diplome=$('#inscription_niveau input:checked').val()
+           showSectionMoy(diplome,$niveau)
+          
+           moyGenerale()
+      })
+      
+      function moyGenerale(){
+          $('.val_moyGeneral').html('')
+          $niveau = $('#inscription_niveau input:checked').val()
+          $.ajax({
+            method: "POST",
+            url: "{{ path('inscription_moyenne_generale') }}",
+            data: {
+             /*   scoreTanfil: $('#inscription_scoreTanfil').val(),*/
+                moyenne1: $('#inscription_moyenne1').val(),
+                moyenne2: $('#inscription_moyenne2').val(),
+                moyenne3: $('#inscription_moyenne3').val(),
+                moyenne4: $('#inscription_moyenne4').val(),
+                moyenne5: $('#inscription_moyenne5').val(),
+                niveau: $niveau,
+            },
+            success: function(reponse){
+           
+                if($niveau =="1er cycle"){
+                  label="(I)- المعدل العام لسنتي الدراسة في التعليم العالي";
+                  formule='f2';
+                  src="{{asset('theme/dist/img/f2.png')}}"
+                }
+                if($niveau =="iset"){
+                  label="(I)- المعدل العام لسنوات الدراسة في التعليم العالي";
+                  formule=" f4";
+                  src="{{asset('theme/dist/img/f4.png')}}"
+
+                }
+                if($niveau =="licence"){
+                  label="(I)- المعدل العام لسنوات الدراسة في التعليم العالي";
+                  formule=" f3";
+                 src="{{asset('theme/dist/img/f3.png')}}"
+
+                }
+                if($niveau =="formation"){
+                  label="(I)- المعدل العام لسنوات الدراسة   ";
+                  formule=" f4"; 
+                  src="{{asset('theme/dist/img/f4.png')}}"
+
+                }
+
+                $('#verfiy-inscription .moyGeneral').remove()
+                  $('.tanfil').before('<div class="form-group row col-md-12  moyGeneral" style="padding-right:32%;">'
+                          +'<label class="mt-3"><span style="width: 100%;float: right;">'+label+'</span>'
+                                  +'<span class="formule '+formule +'">   </span>'
+                                  +'<img class="formule" src="'+src+'" />'
+                                +'</label>'
+                                +'<p class="mt-3 val_moyGeneral">'+reponse+' /20</p>'
+                            +'</div>');
+              
+            }
+          });
+      }
+        /***************************************************************************************/
+        var countCheckedTypeEtablissement = $('#inscription_typeEtablissement input[type="radio"]').filter(':checked').length
+      if(countCheckedTypeEtablissement ==1){
+       
+        $('#inscription_typeEtablissement input') .prop('checked', false).prop('selected', false);
+      }
+        $('#inscription_typeEtablissement input').change(function(){
+          $('.hideAE').hide()
+          $('#inscription_anneeEquivalence').val('')
+          $('.verif_annee').hide()
+          $('#inscription_anneeEquivalence').removeAttr('required')
+         
+          $('.verif_annee label.error').empty()
+          $('#verif_annee').val('')
+          $('#verif_annee').removeClass('error')
+
+          if($(this).is(':checked') && ($(this).val() =="خاصّة" || $(this).val() =="أجنبيّة") ){
+                $('.hideAE,.verif_annee').show()
+                $('#inscription_anneeEquivalence').attr('required','required')
+                $('.verif_annee label.mt-3').empty().html('تأكيد سنة الحصول على مقرر المعادلة  <font style="color:red">*</font>:')
+                jQuery("#verif_annee").rules("add", {
+                  number: true,
+                  equalTo: "#inscription_anneeEquivalence",
+                  rangelength: [4,4],
+                  messages: {
+                    rangelength: " السنة تتكون من 4 أرقام"   ,
+                    equalTo: " الرجاء التّثبّت من سنة الحصول على مقرر المعادلة  "   ,
+                  }
+                  
+                })
+
+          } else{
+                $('.verif_annee label.mt-3').empty().html('تأكيد سنة الحصول على الشهادة (سنة التخرّج) <font style="color:red">*</font>:')
+                $('#verif_annee').attr('required','required')
+                $('.verif_annee').show()
+                jQuery("#verif_annee").rules("add", {
+                  number: true,
+                  equalTo: "#inscription_anneeDiplome",
+                  rangelength: [4,4],
+                
+                  messages: {
+                    rangelength: " السنة تتكون من 4 أرقام"   ,
+                    equalTo: " الرجاء التّثبّت من سنة الحصول على الشهادة (سنة التخرّج ) "   ,
+                  }
+                  
+                })
+          }
+        })
+        let erroranneeEquivalence=0;
+
+        let erroranneeDiplome=0;
+         $('#inscription_anneeEquivalence').on( 'keypress blur mouseup',function( evt ) {
+            erroranneeEquivalence=0;
+          $('.erroranneeEquivalence').hide()
+          $('.erroranneeEquivalence').empty()
+            $currentYear  = new Date().getFullYear()  
+            
+              if($(this).val() !=""  && $(this).hasClass('valid')){
+                if($(this).val() <=$currentYear && $(this).val()>=$('#inscription_anneeDiplome').val()){
+                  $('.erroranneeEquivalence').hide()
+                    $('.erroranneeEquivalence').empty()
+                }else{
+                  
+                  $('.erroranneeEquivalence').empty().html(' الرجاء التثبت من سنة الحصول على مقرر المعادلة ')
+                  $('.erroranneeEquivalence').show()
+                  erroranneeEquivalence=1;
+                }
+            }
+
+         })
+          $('#inscription_anneeDiplome').on( 'keypress blur mouseup',function( evt ) {
+            erroranneeDiplome=0;
+          $('.erroranneeDiplome').hide()
+          $('.erroranneeDiplome').empty()
+            $currentYear  = new Date().getFullYear()  
+     
+            if($(this).val() !=""  && $(this).hasClass('valid')){
+                if($(this).val() <=$currentYear ){
+                  $('.erroranneeDiplome').hide()
+                    $('.erroranneeDiplome').empty()
+                }else{
+                  
+                  $('.erroranneeDiplome').empty().html(' الرجاء التثبت من سنة الحصول على الشهادة  ')
+                  $('.erroranneeDiplome').show()
+                  erroranneeDiplome=1;
+                }
+            }
+
+         })
+
+         
+    $('.scoreTanfil').show()
+        /*************************************************************************************/
+        
+   
+        jQuery("#date_naissance").rules("add", {
+          required: true,
+          equalTo: "#inscription_dateNaissance",
+          rangelength: [10, 10],
+          messages: {
+            equalTo: "  الرجاء التّثبّت من  تاريخ الولادة.",
+        
+          }})
+   
+ 
+
+
+        jQuery("#cin_verif").rules("add", {
+ 						required: true,
+            number:true,
+						equalTo: "#inscription_cin",
+						rangelength: [8,8],
+           
+					messages: {
+				    rangelength: " يتكوّن رقم ب.ت.و  من 8 أرقام",
+						equalTo: " الرجاء التّثبّت من رقم ب.ت.و",
+             number: "يتكوّن رقم ب.ت.و من 8 أرقام"
+         
+          }})
+
+
+          jQuery("#inscription_cin").rules("add", {
+ 						required: true,
+            number:true,
+						rangelength: [8,8],
+           
+					messages: {
+             number: "يتكوّن رقم ب.ت.و من 8 أرقام",
+				    rangelength: " يتكوّن رقم ب.ت.و  من 8 أرقام",
+         
+          }})  
+
+
+            jQuery("#inscription_codePostal").rules("add", {
+ 						required: true,
+						rangelength: [4,4],
+           
+					  messages: {
+                number: " الترقيم البريدي يتكوّن من أرقام",
+                rangelength: " الترقيم البريدي يتكوّن من 4 أرقام"
+         
+          }})
+            jQuery("#inscription_nbEnfants").rules("add", {
+						number:true,
+					  messages: {
+                number: "  عـدد الأبنـاء يتكوّن من أرقام",
+         
+          }}) 
+        
+ 
+          jQuery("#inscription_anneeDiplome").rules("add", {
+ 						required: true,
+						number:true,
+            rangelength: [4,4],
+					  messages: {
+                number: "    السنة  تتكون من أرقام",
+                  rangelength: "   السنة  تتكون من 4 أرقام"
+         
+          }})  ;
+         
+       
+        
+      
+
+
+        
+
+          jQuery("#inscription_telephoneFixe").rules("add", {
+ 						required: true,
+						number:true,
+            rangelength: [8,8],
+					  messages: {
+                number:  "  الرجاء التثبت من  رقم الهاتف  " ,
+                rangelength: "  الرجاء التثبت من  رقم الهاتف  "
+         
+           }
+          });
+
+          jQuery("#inscription_telephonePortable").rules("add", {
+ 						//required: true,
+						number:true,
+            rangelength: [8,8],
+					  messages: {
+                number:  "  الرجاء التثبت من  رقم الهاتف  " ,
+                rangelength: "  الرجاء التثبت من  رقم الهاتف  "
+         
+            }
+          }) 
+
+
+          jQuery("#inscription_anneeEquivalence").rules("add", {
+            //required: true,
+           number:true,
+           rangelength: [4,4],
+           messages: {
+               number: "    السنة  تتكون من أرقام",
+                 rangelength: "   السنة  تتكون من 4 أرقام"
+        
+           }
+         }) ;
+  
+           jQuery("#confirm_inscription_scoreTanfil").rules("add", {
+              required: true,
+              equalTo: "#inscription_scoreTanfil",
+              rangelength: [6,6],
+              messages: {
+                rangelength: " الرجاء التّثبّت من طريقة إدراج المعدل "   ,
+                equalTo: " الرجاء التّثبّت من  المعدل ",
+              }
+            })
+
+           jQuery("#confirm_inscription_moyenne1").rules("add", {
+              required: true,
+              equalTo: "#inscription_moyenne1",
+              rangelength: [6,6],
+              messages: {
+                rangelength: " الرجاء التّثبّت من طريقة إدراج المعدل "   ,
+                equalTo: " الرجاء التّثبّت من  المعدل ",
+              }
+            })
+
+            jQuery("#confirm_inscription_moyenne2").rules("add", {
+              required: true,
+              equalTo: "#inscription_moyenne2",
+              rangelength: [6,6],
+            
+              messages: {
+                rangelength: " الرجاء التّثبّت من طريقة إدراج المعدل "   ,
+                equalTo: " الرجاء التّثبّت من  المعدل ",
+              }
+            })
+
+            jQuery("#confirm_inscription_moyenne3").rules("add", {
+              //required: true,
+              equalTo: "#inscription_moyenne3",
+              rangelength: [6,6],
+            
+              messages: {
+                rangelength: " الرجاء التّثبّت من طريقة إدراج المعدل "   ,
+                equalTo: " الرجاء التّثبّت من  المعدل ",
+              }
+              })
+
+              jQuery("#confirm_inscription_moyenne4").rules("add", {
+                //required: true,
+                equalTo: "#inscription_moyenne4",
+                rangelength: [6,6],
+          
+               messages: {
+                rangelength: " الرجاء التّثبّت من طريقة إدراج المعدل "   ,
+                equalTo: " الرجاء التّثبّت من  المعدل ",
+               }
+             })
+
+            jQuery("#confirm_inscription_moyenne5").rules("add", {
+              //required: true,
+              equalTo: "#inscription_moyenne5",
+              rangelength: [6,6],
+            
+              messages: {
+                rangelength: " الرجاء التّثبّت من طريقة إدراج المعدل "   ,
+                equalTo: " الرجاء التّثبّت من  المعدل ",
+              }
+              
+            })
+
+/***moy bac validate */
+
+
+
+         
+        /*************************************************************************************/
+
+        let error_scoreTanfil = 0;
+        let error_moyenne1 = 0;
+        let error_moyenne2 = 0;
+        let error_moyenne3 =0;
+        let error_moyenne4 =0;
+        let error_moyenne5 =0;
+
+        $(".confirm_inscription").inputmask("\(0|1)9,999");
+
+        $("#inscription_moyenne1").inputmask("\(0|1)9,999",{ 
+          //autoUnmask: true,
+
+          "onincomplete": function(){ 
+            $('#'+$(this).attr('id')+'-errorM').remove()
+             if($(this).val()!='' &&     $(this).hasClass('check-moy')){
+             
+              $(this).after('<label id="'+$(this).attr('id')+'-errorM" class="errorM">الرجاء التثبت من المعدل</label>')
+              error_moyenne1=1;
+             }
+          },
+          "oncomplete": function(){ 
+             $('#'+$(this).attr('id')+'-errorM').remove()
+             error_moyenne1=0;
+          } ,
+      
+        });
+       
+
+        $("#inscription_moyenne2").inputmask("\(0|1)9,999",{ 
+          
+          "onincomplete": function(){ 
+            $('#'+$(this).attr('id')+'-errorM').remove()
+             if($(this).val()!='' &&     $(this).hasClass('check-moy')){
+             
+              $(this).after('<label id="'+$(this).attr('id')+'-errorM" class="errorM">الرجاء التثبت من المعدل</label>')
+              error_moyenne2=1;
+             }
+          },
+          "oncomplete": function(){ 
+             $('#'+$(this).attr('id')+'-errorM').remove()
+             error_moyenne2=0;
+          } ,
+        });
+
+
+        $("#inscription_moyenne3,#confirm_inscription_moyenne3").inputmask("\(0|1)9,999",{ 
+          "onincomplete": function(){ 
+            $('#'+$(this).attr('id')+'-errorM').remove()
+             if($(this).val()!='' &&     $(this).hasClass('check-moy')){
+             
+              $(this).after('<label id="'+$(this).attr('id')+'-errorM" class="errorM">الرجاء التثبت من المعدل</label>')
+              error_moyenne3=1;
+             }
+          },
+          "oncomplete": function(){ 
+             $('#'+$(this).attr('id')+'-errorM').remove()
+             error_moyenne3=0;
+          } 
+        });
+
+        $("#inscription_moyenne4,#confirm_inscription_moyenne4").inputmask("\(0|1)9,999",{ 
+          "onincomplete": function(){ 
+            $('#'+$(this).attr('id')+'-errorM').remove()
+             if($(this).val()!='' &&     $(this).hasClass('check-moy')){
+             
+              $(this).after('<label id="'+$(this).attr('id')+'-errorM" class="errorM">الرجاء التثبت من المعدل</label>')
+              error_moyenne4=1;
+             }
+          },
+          "oncomplete": function(){ 
+             $('#'+$(this).attr('id')+'-errorM').remove()
+             error_moyenne4=0;
+          }  
+        });
+
+        $("#inscription_moyenne5,#confirm_inscription_moyenne5").inputmask("\(0|1)9,999",{ 
+          "onincomplete": function(){ 
+            $('#'+$(this).attr('id')+'-errorM').remove()
+             if($(this).val()!='' &&     $(this).hasClass('check-moy')){
+             
+              $(this).after('<label id="'+$(this).attr('id')+'-errorM" class="errorM">الرجاء التثبت من المعدل</label>')
+              error_moyenne5=1;
+             }
+          },
+          "oncomplete": function(){ 
+             $('#'+$(this).attr('id')+'-errorM').remove()
+             error_moyenne5=0;
+          } ,
+        });
+
+/****moy bac*/
+  $("#inscription_scoreTanfil,confirm_inscription_scoreTanfil").inputmask("\(0|1)9,999",{ 
+          "onincomplete": function(){ 
+            $('#'+$(this).attr('id')+'-errorM').remove()
+             if($(this).val()!='' &&     $(this).hasClass('check-moy')){
+             
+              $(this).after('<label id="'+$(this).attr('id')+'-errorM" class="errorM">الرجاء التثبت من المعدل</label>')
+              error_scoreTanfil=1;
+             }
+          },
+          "oncomplete": function(){ 
+             $('#'+$(this).attr('id')+'-errorM').remove()
+             error_scoreTanfil=0;
+          } ,
+        });
+
+
+
+        $("#inscription_anneeDiplome").inputmask("9999");
+        $("#inscription_anneeEquivalence,#verif_annee").inputmask("9999"); 
+        $("#inscription_codePostal").inputmask("9999");
+         $("#cin_verif,#inscription_cin,.phone input").inputmask("99999999");
+        /*************************************************************************************/
+       
+         
+                let $error_chek_langue=0;
+        $( ".special_caract" ).on( 'keypress blur mouseup',function( evt ) {
+      
+
+        
+            if($(this).val() !=""){
+              $('#'+$(this).attr('id')+'-errorlg').remove() 
+              $('#'+$(this).attr('id')+'-error').remove()
+                  $(this).removeClass('errorlg')
+                  if(!onlyLettersAndNumbers($(this).val())){
+                      $('#'+$(this).attr('id')+'-errorlg').remove()
+                            $(this).addClass('errorlg')
+                            $(this).removeClass('valid')
+                            $(this).attr('aria-invalid','true')
+                            alert='يجب إدخال جميع المعلومات باللّغة العربيّة';
+                            $(this).after('<label id="'+$(this).attr('id')+'-errorlg" class="errorlg">     '+alert+' </label>')
+                          $error_chek_langue=  $error_chek_langue+1;
+                  }
+            }
+          
+    
+        })
+
+        $( ".special_caract4" ).on( 'keypress blur mouseup',function( evt ) {
+           //  special_caract4(evt) 
+            if($(this).val() !=""){
+              $('#'+$(this).attr('id')+'-errorlg').remove()
+               $('#'+$(this).attr('id')+'-error').remove()
+                  $(this).removeClass('errorlg')
+                  if(!onlyLetters($(this).val())){
+                      $('#'+$(this).attr('id')+'-errorlg').remove()
+                            $(this).addClass('errorlg')
+                            $(this).removeClass('valid')
+                            $(this).attr('aria-invalid','true')
+                            alert='يجب إدخال جميع المعلومات باللّغة العربيّة';
+                            $(this).after('<label id="'+$(this).attr('id')+'-errorlg" class="errorlg">     '+alert+' </label>')
+                          $error_chek_langue=  $error_chek_langue+1;
+                  }
+            }
+        })
+
+
+        /******************************Controle email *********************************************/
+        function checkEmail (){
+          $errorEmail = 0 ; 
+          $('p.erroremail').hide()
+           $('p.erroremail').empty()
+             
+             $("#inscription_mail").removeClass('error erroremail')
+              if($('#inscription_mail').val() !=""  && $('#inscription_mail').hasClass('valid')){
+                if(!validateEmail($('#inscription_mail').val())){
+         
+                    $errorEmail =1 ;
+                    $("#inscription_mail").addClass('error erroremail')
+                     $('p.erroremail').empty().html('  يرجى إدخال عنوان بريد إلكتروني صالح. ')
+                     $('p.erroremail').show()
+                }
+           }
+           return $errorEmail;
+        }
+        $('#inscription_mail').on( 'input blur mouseup', function(evt){
+           
+           checkEmail()
+       })
+
+       if($('#inscription_etatCivil').find('option:selected').val()!="أعزب" && $('#inscription_etatCivil').find('option:selected').val()!="")
+         $('.etatHide').show()
+      
+       $('#inscription_etatCivil').change(function(){
+             $('#inscription_nomPrenomConjoint,#inscription_emploiConjoint,#inscription_nbEnfants').removeAttr('required')
+             $('.inscription_nbEnfants').val('')
+             $('.inscription_nomPrenomConjoint').val('')
+             $('.inscription_emploiConjoint').val('')
+            $option = $(this).find('option:selected').val()
+            $('.etatHide').hide()
+            if($option !="أعزب" && $option !=""){
+              $('.etatHide').show()
+                $('#inscription_nomPrenomConjoint,#inscription_emploiConjoint,#inscription_nbEnfants,#inscription_nomJeunefille').attr('required', 'required')
+            }
+       })
+      let  errorscore=0;
+      function isInArray(value, array) {
+        return array.indexOf(value) > -1;
+      }
+    
+       /*****************************Ajax list diplome Grade********************************/
+
+       $('#inscription_grade').val("{{grade.id}}")
+
+       function ajaxListDiplome(){
+            var $form = $(this).closest('form');
+             // Submit data via AJAX to the form's action path.
+            $.ajax({
+              url : $form.attr('action'),
+              type: $form.attr('method'),
+              data : {grade:'{{grade.id}}'},
+              success: function(html) {
+                   //console.log('list diplome  '+html)
+                  
+                  $('#inscription_niveau').empty().trigger('change');
+                  $(html.responseText).find('#inscription_niveau').each(function(){
+                    $('#inscription_niveau').append($(this)).trigger('change');
+                  });
+                  
+                }
+            });
+       }
+
+        /************************************Ajax List gouv for each  specialite*********************************************/
+      
+
+         // $("#inscription_codeGouv").parent().hide();
+          var $specialite = $('#inscription_specialite');
+        
+          $specialite.on('change',function() {
+        //    ajaxListDiplome()
+                var $form = $(this).closest('form');
+                // Simulate form data, but only include the selected sport value.
+                var data = {};
+                data[$specialite.attr('name')] = $specialite.val();
+               $('#inscription_codeGouv').empty().trigger('change');
+                // Submit data via AJAX to the form's action path.
+                $.ajax({
+                  url : $form.attr('action'),
+                  type: $form.attr('method'),
+                  data : data,
+                  complete: function(html) {
+                  
+                    $(html.responseText).find('#inscription_codeGouv option').each(function(){
+                      $('#inscription_codeGouv').append($(this)).trigger('change');
+                    });
+              
+                    $('#inscription_codeGouv option:eq(0)').prop('selected', true)
+                    if($('#inscription_codeGouv option').length == 0){
+                      $("#inscription_codeGouv").parent().hide();
+                      $('#inscription_codeGouv').removeAttr('required')
+                    }else{
+                      $('#inscription_codeGouv').attr('required','required')
+                      $("#inscription_codeGouv").parent().show();
+                    } 
+                  
+                  }
+                });
+
+
+          });
+
+          /*****************************GET LIST SPECIALITES FOR EACH GRADE*****************************/
+
+          $('#inscription_specialite').empty()
+          $.ajax({
+            url : '{{path("inscription_grade_specialite")}}',
+            type: 'POST',
+            data : {grade:'{{grade.id}}'},
+            success: function(html) {
+            
+                $('#inscription_specialite').empty().trigger('change');
+                $('#inscription_specialite').append('<option value=""></option>')
+              
+                let array = Object.entries(html);
+                array.forEach( el => {
+                 
+                        $('#inscription_specialite').append('<option value="'+el[1].id+'">'+el[1].libelle+'</option>');
+      
+              });
+              }
+          });
+         
+    </script>
+{% endblock %}

@@ -1,0 +1,116 @@
+.card h5.card-title {
+    font-size: 22px;
+}
+
+.form-check .form-check-input {
+    float: right;
+}
+
+.btn {
+
+    font-size: 1.25rem;
+}
+
+.form-check-label {
+    margin-right: 33px;
+}
+
+#main-wrapper div.border-top {
+    border-top: 0px !important;
+}
+
+.card-body {
+    font-size: 17px;
+}
+
+.list-group-item {
+    border: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.card .card-title {
+    font-size: 17px;
+    margin-top: 15px;
+
+        padding: 11px;
+    }
+
+.list-group-item {
+    border: 0;
+    border-bottom: 0;
+    padding: 0.9rem 1rem;
+}
+
+.select2-container--default[dir="rtl"] .select2-selection--single .select2-selection__arrow {
+    left: 18px !important;
+}
+
+#main-wrapper .topbar .top-navbar .navbar-header[data-logobg=skin5],
+#main-wrapper .topbar .navbar-collapse[data-navbarbg=skin5],
+#main-wrapper .topbar[data-navbarbg=skin5] {
+    background: #fff !important;
+}
+
+.topbar {
+    height: 94px;
+}
+.topbar .top-navbar {
+    min-height: 94px;
+}
+a.navbar-brand > span > img{
+    width: 290px;
+}
+#main-wrapper > header > nav > div.navbar-header{    margin-right: 55px;}
+footer {
+    background-color: #000;
+    color: #fff;
+}
+
+footer a {
+    color: #fff;
+}
+
+footer a:focus,
+footer a:hover {
+    text-decoration: none;
+    color: #127ced;
+}
+
+.wizard>.content>.body ul>li {
+    list-style: none !important;
+    padding: 18px;
+}
+
+.wizard>.content>.body label.error {
+
+    width: 100%;
+}
+
+select.error {
+    background: rgb(251, 227, 228);
+    border: 1px solid #fbc2c4;
+    color: #8a1f11;
+}
+
+.p-3 {
+    background-color: #023f6a;
+    padding: 1px 15px !important;
+    color: #fff;
+}
+
+.hideAE {
+    display: none;
+}
+.scoreTanfil{display: none;}
+.section-moy {
+    display: none;
+}
+.title-page{    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 43px;
+}
+#print{right: 0 !important;direction:rtl;
+    width: 100%;
+
+    padding: 0 9%;
+}

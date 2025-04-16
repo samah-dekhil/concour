@@ -1,0 +1,45 @@
+{% extends 'layout_admin.html.twig' %}
+
+
+{% block main %}
+
+            <div class="col-md-8">
+              <div class="card">
+                
+                  <div class="card-body">
+                    <h4 class="card-title">Détails du Grade </h4>
+                <div class="d-flex justify-content-end" style="margin-top:0">
+                            <!--begin::Button-->
+                            
+                              <a href="{{ path('specialite_new',{tokenConcours:grade.concours.token,tokenGrade:grade.token}) }}" class="btn btn-light me-5"style=>Ajouter une spécialité</a>
+                                <a href="" class="btn btn-primary">Modifier</a>
+                         
+                    </div>
+                    <div class="form-group row">
+                        Libellé :
+                      <div class="input-group">
+                       {{ grade.libelle }}
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                        Nombre de postes
+                        <div class="input-group">
+                              {{ grade.nbrePostes }}
+                           
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                      Spécialités
+                      <div class="input-group">
+                          
+                      </div>
+                    </div>
+            
+                    
+               
+                    </div>
+              </div>
+              
+            </div>
+            
+{% endblock %}

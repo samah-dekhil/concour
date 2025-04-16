@@ -1,0 +1,48 @@
+{% extends 'layout_admin.html.twig' %}
+
+{% block main %}
+
+
+
+        
+    <div class="card-body">
+            <h4 class="card-title">Ajouter Spécialité  </h4>
+            
+        </div>
+
+            <div class="col-md-12">
+              <div class="card">
+              {{ form_start(form) }}
+                <div class="card-body">
+                    <div class="form-group row">
+                       {{ form_label(form.libelle) }}
+                      <div class="input-group">
+                       {{ form_widget(form.libelle) }}
+                      </div>
+                    </div>
+                     <div class="form-group row">
+                       {{ form_label(form.gouvernorats) }}
+                      <div class="input-group">
+                       {{ form_widget(form.gouvernorats) }}
+                      </div>
+                    </div> 
+                     
+                  </div>     
+                
+                  <div class=" card-body d-flex justify-content-end">
+                        <!--begin::Button-->
+                        <a href="{{ path('grade_show',{tokenConcours:grade.concours.token,token:grade.token}) }}" class="btn btn-light me-5">Retour </a>
+                        <!--end::Button-->
+                        <!--begin::Button-->
+                        <button type="submit" class="btn btn-primary">
+                            <span class="indicator-label">Enregistrer</span>
+                        </button>
+                        <!--end::Button-->
+                  </div>
+               
+              </div>
+              {{ form_end(form) }}
+            </div>
+ 
+{% endblock %}
+

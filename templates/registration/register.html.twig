@@ -1,0 +1,46 @@
+{% extends 'layout_admin.html.twig' %}
+
+
+
+{% block main %}
+  <h5 class="card-title title-page title-form-bo">  <b class="text-danger"> Ajouter nouveau utilisateur </b> </h5>      
+<style>.invalid-feedback{font-size:14px;}     </style>     
+                     
+  <div class="col-md-12 " >
+      <div class="" >
+
+              <div class="card-body card  ">
+                      
+              {{ form_start(registrationForm, {'attr': {'id': 'regForm', 'class': 'form-bo form w-100 fv-plugins-bootstrap5 fv-plugins-framework'}}) }}
+                        <div class="form-group row">
+                        {{ form_widget(registrationForm.fullName, {'attr': {'class': 'form-control bg-transparent','placeholder': 'Nom et prénom'}}) }}
+                        <div class="fv-plugins-message-container invalid-feedback">{{ form_errors(registrationForm.fullName) }}</div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control bg-transparent','placeholder': 'Email'}}) }}
+                        <div class="fv-plugins-message-container invalid-feedback">{{ form_errors(registrationForm.email) }}</div>
+                    </div>
+                      
+                    <div class="form-group row">
+                          {{ form_widget(registrationForm.password.first, {'attr': {'class': 'form-control bg-transparent','placeholder': 'Mot de passe'}}) }}
+                        <div class="fv-plugins-message-container invalid-feedback">{{ form_errors(registrationForm.password.first) }}</div>
+                    </div>
+                    <div class="form-group row">
+                    {{ form_widget(registrationForm.password.second, {'attr': {'class': 'form-control bg-transparent','placeholder': 'Resaisir le mot de passe'}}) }}
+                        <div class="fv-plugins-message-container invalid-feedback">{{ form_errors(registrationForm.password.second) }}</div>
+                 
+                        <div class="card-body" style="padding-right: 0;">
+                            <button type="submit" class="btn btn-primary">
+Créer                            </button>
+                        </div>
+                        
+          {{ form_end(registrationForm) }} 
+                            
+              </div>    
+        
+      </div>
+  
+  </div>
+
+{% endblock %}

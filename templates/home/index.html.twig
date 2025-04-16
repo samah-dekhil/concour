@@ -1,0 +1,39 @@
+{% extends 'layout.html.twig' %}
+{% block main %}
+  <style>
+     
+     h5{
+        -webkit-animation: fade 2s ease-in,  up 1s ease-in; 
+       -webkit-animation-fill-mode: forwards;
+     }
+     .table td.text-danger {
+        color: #da542e !important;
+        font-size: 16px;
+        font-weight: 700;
+        }
+    </style>
+   <h5 class="card-title zoomIn" style=" font-size: 31px;  text-align: center; padding: 63px 0 0 0;">
+      <b class="text-danger">إعلانات المناظرات </b>
+  </h5> 
+  {% set display="" %}
+  {% if listConcours|length >0 %} 
+    {% for concours in listConcours  %}
+      {% if concours.grades|length >0  %}
+          {% for phase  in concours.phases  | filter(phase => phase.isEnabled 
+            and  phase.dateFin |date("Y/m/d") >= date()|date("Y/m/d")
+            and  phase.dateDebut |date("Y/m/d") <= date()|date("Y/m/d")) %}
+         
+              {{ include('home/index_phase_dossiers.html.twig') }}
+          {% else %}  
+              {{ include('home/index_phase_publication_concours.html.twig') }}
+          {% endfor %}
+      {% endif %}
+    {% endfor %}
+  {% else %}
+    <div class="row" style="height:96vh">
+      <div class="card card-body printableArea" style="padding: 1.25rem;margin: 68px 77px;">
+        <h5 class="card-title t1"><b class="text-danger" > لا توجد مناظرات     </b></h5>
+      </div>
+    </div>    
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,287 @@
+{% extends 'layout.html.twig' %}
+
+{% block main %}
+  <h5 class="card-title title-page">
+    <b class="text-danger">
+    يرجى من المترشح تعمير هذا المطلب  في صورة تعرضه لأي مشكل تقني 
+    </b>
+    </h5>      
+            
+                     
+  <div class="col-md-12 reclamationPage" >
+      <div class="col-md-8 " style="margin: 0 auto;">
+        <div class=" mssssg">
+            {{ include('_flash_messages.html.twig') }}
+        </div>
+              <div class="card-body card edition ">
+                      
+                {{ form_start(form) }}
+
+                    <div class="col-md-12 right">
+                        <div class="form-group row col-md-6 right">          
+                        {{ form_label(form.prenom) }}                                                 
+                        {{ form_widget(form.prenom) }}                                      
+                        </div>
+                    
+                        <div class="form-group row col-md-6 ">
+                            {{ form_label(form.nom) }}                                                 
+                            {{ form_widget(form.nom) }}  
+                        </div>
+                    </div>
+                    <div class="col-md-12 right">
+                        <div class="form-group row col-md-6 right">
+                            {{ form_label(form.cin) }}
+                            {{ form_widget(form.cin) }}
+                        </div>
+                   
+                        <div class="form-group row col-md-6">
+                            {{ form_label(form.dateCin) }}
+                            <div class="input-group" style="padding-right: 0;padding-left: 0;">
+                            {{ form_widget(form.dateCin) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 right">
+                        <div class="form-group row col-md-6 right">
+                            {{ form_label(form.dateNaissance) }}
+                            <div class="input-group" style="padding-right: 0;padding-left: 0;">
+                            {{ form_widget(form.dateNaissance) }}
+                            </div>
+                        </div>
+                  
+                        <div class="form-group row col-md-6">
+                        {{ form_label(form.mail) }}
+                        {{ form_widget(form.mail) }}
+                        <p class="error erroremail"> </p>
+                        </div>
+                    </div>
+                    <div class="form-group row col-md-6 right">
+                      {{form_label(form.grade)}}
+                      {{form_widget(form.grade)}}
+                      {# <div class="error_reclamation_objet error"></div> #}
+                    </div>
+                    <div class="form-group row col-md-12 right">
+                      {{form_label(form.objet)}}
+                      {{form_widget(form.objet)}}
+                      <div class="error_reclamation_objet error"></div>
+                    </div>
+                  <div class="g-recaptcha" data-sitekey="6LcNeXImAAAAAJ3hfLjkSS7aEUOwYf1AZHKTjd5Q" data-callback="recaptchaCallback" style="margin-top: 41px;float: right;"></div>
+                  <input type="text" class="hiddenRecaptcha required" name="hiddenRecaptcha" id="hiddenRecaptcha">
+        
+                    <div class="border-top">
+                        <div class="card-body" style="padding-right: 0;">
+                            <button type="submit" class="send btn btn-primary">
+                            مصادقة
+                            </button>
+                        </div>
+                        
+                    </div>
+          {{ form_end(form) }} 
+                            
+              </div>    
+        
+      </div>
+  
+  </div>
+<style>
+    .alert-success{
+        font-size: 17px;
+    }
+    form .form-group {
+        margin-bottom: 0.2rem;
+        padding: 0 20px;
+    }
+
+    #reclamation_objet .form-check-input[type=radio] {
+
+        float: right;
+        margin-left: 9px;
+        clear: both;
+
+    }
+    #reclamation_objet  label{
+        float: right;
+        margin-left: 9px;
+        text-align: right;}
+
+</style>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script>
+          // special_caratc4 : Interdire les caractères spéciaux et la langue française & numbers
+        function onlyLetters(str) {
+            return /^[ء-ي-_ ]*$/.test(str);
+        }
+  
+  
+        $('input[type="radio"]').addClass('form-check-input')
+        $("#reclamation_mail").inputmask("email");
+        let $error_chek_langue =0;
+        $( ".special_caract4" ).on( 'keypress blur mouseup',function( evt ) {
+          
+             if($(this).val() !=""){
+               $('#'+$(this).attr('id')+'-errorlg').remove()
+                $('#'+$(this).attr('id')+'-error').remove()
+                   $(this).removeClass('errorlg')
+                   if(!onlyLetters($(this).val())){
+                       $('#'+$(this).attr('id')+'-errorlg').remove()
+                             $(this).addClass('errorlg')
+                             $(this).removeClass('valid')
+                             $(this).attr('aria-invalid','true')
+                             alert='يجب إدخال جميع المعلومات باللّغة العربيّة';
+                             $(this).after('<label id="'+$(this).attr('id')+'-errorlg" class="errorlg">     '+alert+' </label>')
+                          // $error_chek_langue=  $error_chek_langue+1;
+                   }
+             }
+           //  console.log('val==== '+$error_chek_langue)
+         })
+        $('.send').click(function(){
+         
+            var countCheckedInput = $('#reclamation_objet input[type="radio"]').filter(':checked').length
+            if(countCheckedInput==1){
+                $('.error_reclamation_objet').empty()
+            }
+            $('.special_caratc4').each(function(){
+                if($(this).val() !=""){
+
+                $('#'+$(this).attr('id')+'-error').remove()
+                  $(this).removeClass('error-lg')
+                  if(!onlyLetters($(this).val())){
+                      $('#'+$(this).attr('id')+'-error').remove()
+                            $(this).addClass('error-lg')
+                            $(this).removeClass('valid')
+                            $(this).attr('aria-invalid','true')
+                                alert='الرجاء تعمير هذه الخانة باللغة العربية';
+                            $(this).after('<label id="'+$(this).attr('id')+'-error" class="error">     '+alert+' </label>')
+                  }
+                }
+            })
+            $countErrorLang = $('input.errorlg').length
+            if($countErrorLang>0) return false;
+        })
+
+        function restrictInputOtherThanArabic($field)
+        {
+          // Arabic characters fall in the Unicode range 0600 - 06FF
+          var arabicCharUnicodeRange = /[\u0600-\u06FF]/;
+
+          $field.bind("keypress hover", function(event)
+          {
+            var key = event.which;
+            // 0 = numpad
+            // 8 = backspace
+            // 32 = space
+            if (key==8 || key==0 || key === 32)
+            {
+              return true;
+            }
+
+            var str = String.fromCharCode(key);
+            if ( arabicCharUnicodeRange.test(str) )
+            {
+              return true;
+            }
+
+            return false;
+          });
+        }
+
+
+        $("#reclamation_dateNaissance").datepicker({ 
+            autoclose: true,
+            language: "fr",
+             endDate: '-1D', 
+             format: "yyyy/mm/dd",
+            todayHighlight: false,
+            
+         
+        }) 
+      
+
+        $("#reclamation_dateCin").datepicker({ 
+            autoclose: true,
+            language: "fr",
+             endDate: '+0D', 
+             format: "yyyy/mm/dd",
+            todayHighlight: true,
+         
+        })
+
+      $('input.required')
+        .on('invalid', function(){
+          return this.setCustomValidity('الرجاء تعمير هذه الخانة');
+        })
+        .on('input', function(){
+          return this.setCustomValidity('');
+        });
+        var form = $("form");
+      form.validate({
+        errorPlacement: function errorPlacement(error, element) {
+          element.after(error);
+            if($("#reclamation_objet label.error").length>0){
+                 $('.error_reclamation_objet').html($("#reclamation_objet label.error").html())
+            } 
+        },
+       
+        ignore: ".ignore",
+        rules: {
+          hiddenRecaptcha: {
+            required: function () {
+                if (grecaptcha.getResponse() == '') {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+           } 
+    			},
+          messages: {
+            hiddenRecaptcha: {
+            required: '.Veuillez valider le test reCAPTCHA '
+           }
+            
+        },
+      });
+
+
+      $("#reclamation_cin").inputmask("99999999");
+      function recaptchaCallback() {
+             $('#hiddenRecaptcha').valid();
+      };
+
+
+      jQuery.extend(jQuery.validator.messages, {
+        required: "الرجاء تعمير هذه الخانة",
+        remote: "الرجاء تصحيح هذا المجال.",
+        email: "يرجى إدخال عنوان بريد إلكتروني صالح.",
+        url: "Please enter a valid URL.",
+        date: "ارجوك ادخل تاريخ صحيح.",
+        dateISO: "Please enter a valid date (ISO).",
+        number: "يرجى إدخال  رقما صالحا.",
+        digits: "الرجاء إدخال أرقام فقط.",
+        creditcard: "Please enter a valid credit card number.",
+        equalTo: "من فظلك ادخل نفس الخانة مرة أخرى.",
+        accept: "Please enter a value with a valid extension.",
+        maxlength: jQuery.validator.format("الرجاء إدخال ما لا يزيد عن {0} حرف."),
+        minlength: jQuery.validator.format("الرجاء إدخال {0} حرف على الأقل."),
+        rangelength: jQuery.validator.format("الرجاء إدخال قيمة يتراوح طولها بين {0} و {1} حرفًا."),
+        range: jQuery.validator.format("Please enter a value between {0} and {1}."),
+        max: jQuery.validator.format("الرجاء إدخال قيمة أقل من أو تساوي {0}."),
+        min: jQuery.validator.format("الرجاء إدخال قيمة أكبر من أو تساوي {0}.")
+      });
+        jQuery("#reclamation_cin").rules("add", {
+          required: true,
+          number:true,
+          rangelength: [8,8],
+          
+        messages: {
+            number: "يتكوّن رقم ب.ت.و من أرقام",
+          rangelength: " يتكوّن رقم ب.ت.و  من 8  أرقام",
+        
+        }})  
+    
+    </script>
+{% endblock %}

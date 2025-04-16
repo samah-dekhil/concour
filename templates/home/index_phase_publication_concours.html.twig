@@ -1,0 +1,69 @@
+<div class="row fadeIn">
+<div class="card card-body printableArea hp" style=" ">
+    <h5 class="card-title t1"><b class="text-danger" > {{concours.libelle}}       </b></h5>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">رتبة الإنتداب</th>
+          <th scope="col"> الإختصاص</th>
+          <th scope="col">عدد الخطط المفتوحة للتناظر</th>
+          <th scope="col">الاطلاعات وشروط المشاركة </th>
+          <th scope="col"> تاريخ فتح باب التّرشّحات </th>
+          <th scope="col">تاريخ غلق باب التّرشّحات </th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for grade in concours.grades %}
+          <tr>
+            <td data-label=" رتبة الإنتداب" ><b>{{grade.libelle}}</b></td>
+            <td data-label=" الإختصاص  &nbsp;">
+              <ul cl
+              ass="speciG list">
+                {% for sp in grade.specialites %}
+                  <li> <i class="me-2 mdi mdi-checkbox-blank-circle"></i>{{sp.libelle}}</li>
+                {% endfor %}
+              </ul>
+            </td>
+            <td data-label=" عدد الخطط المفتوحة للتناظر">{{grade.nbrePostes}} </td>
+            <td data-label="الاطلاعات وشروط المشاركة">
+              <ul class="list">
+                 {% if grade.id == 1 %}
+                      <li><i class="me-2 mdi mdi-playlist-play"></i><a href="{{asset('theme/documents/inspect/avis-concours.pdf')}}" target="_blank">الإطّلاع على البلاغ</a></li>
+                      <li><i class="me-2 mdi mdi-playlist-play"></i><a href="{{asset('theme/documents/inspect/decision-inscpecteurs.pdf')}}"  target="_blank">الإطّلاع على قرار  ضبط كيفيّة تنظيم المناظرة</a></li>
+                      <li><i class="me-2 mdi mdi-playlist-play"></i><a href="{{asset('theme/documents/inspect/programme-concours.pdf')}}"  target="_blank"> الإطّلاع على برنامج المناظرة حسب الإختصاص</a></li>
+                      <li><i class="me-2 mdi mdi-playlist-play"></i><a href="{{asset('theme/documents/inspect/elements-evaluation.pdf')}}"  target="_blank">الإطّلاع على بطاقة عناصر التقييم</a></li>
+                {% elseif grade.id == 6 %}
+                    <li><i class="me-2 mdi mdi-playlist-play"></i><a href="{{asset('theme/documents/tresor/avis-concours.pdf')}}" target="_blank">الإطّلاع على البلاغ</a></li>
+                    <li><i class="me-2 mdi mdi-playlist-play"></i><a href="{{asset('theme/documents/tresor/decision-tresor.pdf')}}"  target="_blank">الإطّلاع على قرار  ضبط كيفيّة تنظيم المناظرة</a></li>
+                    <li><i class="me-2 mdi mdi-playlist-play"></i><a href="{{asset('theme/documents/tresor/programme-concours.pdf')}}"  target="_blank"> الإطّلاع على برنامج المناظرة حسب الإختصاص</a></li>
+                    <li><i class="me-2 mdi mdi-playlist-play"></i><a href="{{asset('theme/documents/tresor/elements-evaluation.pdf')}}"  target="_blank">الإطّلاع على بطاقة عناصر التقييم</a></li>
+               {% endif %} 
+               
+               {# {% if concours.dateFinInscription|date("Y/m/d") > date()|date("Y/m/d") %} #}
+
+                {% if concours.dateFinInscription|date("Y/m/d") >= date()|date("Y/m/d") and  concours.dateDebutInscription|date("Y/m/d") <= date()|date("Y/m/d") %}
+                  <li><i class="me-2 mdi mdi-pencil-box-outline"></i>
+                      <a href="{{path('inscription_new',{tokenConcours:grade.concours.token, token:grade.token})}}">
+                          تسجيل الترشح  </a>
+                  </li>
+                {% endif %}
+                {% if  concours.dateDebutInscription|date("Y/m/d") <= date()|date("Y/m/d") %}
+                  <li>
+                      <i class="me-2 mdi mdi-printer"></i>
+                      <a href="{{path('inscription_edition',{tokenConcours:grade.concours.token, token:grade.token})}}">
+                         طباعة مطلب الترشح 
+                        </a>
+                  </li>
+                  {% endif %}
+                 
+              </ul>
+            </td>
+            <td data-label="تاريخ فتح باب التّرشّحات " class="text-danger"> <i class="fas fa-calendar-alt"></i> {{concours.dateDebutInscription |date("Y/m/d")}}</td>
+            <td data-label=" تاريخ غلق باب التّرشّحات " class="text-danger"><i class="fas fa-calendar-alt"></i>{{concours.dateFinInscription |date("Y/m/d")}}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    
+</div>
+</div>

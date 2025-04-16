@@ -1,0 +1,62 @@
+{% extends 'layout_admin.html.twig' %}
+
+{% block body_id 'admin_concours_index' %}
+
+{% block main %}
+
+<div class="card-body">
+<h5 class="card-title">
+Liste des concours
+
+{% if is_granted("ROLE_ADMIN") %}
+<a href="{{ path('concours_new') }}" class="btn btn-primary me-5" style="float:right"><i class="me-2 mdi mdi-plus-circle"></i>Ajouter Concours</a>
+{% endif %}
+  </h5>
+</div>
+    
+    <div class="card">
+      <div class="card-body">
+       
+        
+        <div class="table-responsive col-md-12">
+          <table id="zero_config" class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>Libellé</th>
+                <th>Année</th>
+                <th>Date début inscription</th>
+                <th>Date fin inscription</th>
+                <th>Date création</th>
+                <th>Date modification</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+            
+            {% for concours in list %}
+              <tr>
+                <td class="field-rtl">  {{concours.libelle}}</td>
+                <td>  {{concours.annee}}</td>
+                <td>{{concours.dateDebutinscription|date("d/m/Y")}}</td>
+                <td>{{concours.dateFininscription|date("d/m/Y")}}</td>
+                <td>{{concours.dateCreation|date("d/m/Y H:i:s")}}</td>
+                <td>{{concours.dateModification|date("d/m/Y H:i:s")}}</td>
+                <td>
+                  <a  class="btn btn-warning me-5" href="{{path('concours_show',{token:concours.token})}}" style="width: 65%;">
+                <i class="me-2 mdi mdi-eye" aria-hidden="true"></i>Voir<a>
+                  
+                  </td>
+
+
+              </tr>
+            {% endfor %}
+ 
+              
+            </tbody>
+          
+          </table>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}

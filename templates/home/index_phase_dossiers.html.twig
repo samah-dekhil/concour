@@ -1,0 +1,107 @@
+   
+   <style>
+    .glow {
+      font-size: 80px;
+      color: #fff;
+      text-align: center;
+      animation: glow .5s infinite alternate;
+    }
+ 
+
+    @keyframes glow {
+      to {
+          text-shadow: 0 0 10px orange;
+      }
+  }
+    @media (max-width: 1280px){
+    .table td.text-danger {
+    width: 22%;
+    }} @media (max-width: 1060px){
+      .table td.text-danger {
+      width: 19%;
+      }}
+
+      @media (max-width: 650px){
+        .table td.text-danger {
+        width: 100%;
+        }}
+</style>
+   <div class="row fadeIn" style="{{display}}">
+          <div class="card card-body printableArea hp" style=" ">
+              <h5 class="card-title t1"><b class="text-danger" >
+            {{phase.libelle}}        
+            </b></h5>
+              <table class="table dossiers">
+                <thead>
+                  <tr>
+                    <th scope="col">رتبة الإنتداب</th>
+                    <th scope="col"> الإختصاص</th>
+                    <th scope="col">عدد الخطط المفتوحة للتناظر</th>
+                    <th scope="col"> الاطلاعات وشروط المشاركة </th>
+                   
+                    <th scope="col">    تاريخ بداية استخراج مطبوعة  
+                  <br>الإستدعاء لاستكمال ملف الترشح  </th>
+                    <th scope="col">   آخر أجل لطباعة الإستدعاء 
+                  <br>
+                  لاستكمال ملف الترشح  </th>
+                     {# <th scope="col"> تاريخ الاعلان </th> #}
+                  </tr>
+                </thead>
+                <tbody>
+                  {# {{dump(phase.grades)}} #}
+                  {% for grade in concours.grades %}
+                     {# {% if grade.id == 1 %} #}
+                      {% if grade.id in phase.grades %}
+                          <tr>
+                              <td data-label=" رتبة الإنتداب" ><b>{{grade.libelle}}</b></td>
+                              <td data-label=" الإختصاص  &nbsp;">
+                                <ul class="speciG list">
+                                  {% for sp in grade.specialites %}
+                                    <li> <i class="me-2 mdi mdi-checkbox-blank-circle"></i>{{sp.libelle}}</li>
+                                  
+                                  {% endfor %}
+                                </ul>
+                              </td>
+                              <td data-label=" عدد الخطط المفتوحة للتناظر">{{grade.nbrePostes}} </td>
+                              <td data-label=" المشاركة">
+                                <ul class="list">
+                                  {# {% if grade.id == 1 %} #}
+                                  {# ~ #}
+                                  {% set link = concours.id~'/'~grade.id%}
+                                
+                                    <li><i class="me-2 mdi mdi-playlist-play"></i><a href="{{asset('theme/documents/concours/'~link~'/avis-concours.pdf')}}" target="_blank">الإطّلاع على البلاغ</a></li>
+                                    <li><i class="me-2 mdi mdi-playlist-play"></i><a href="{{asset('theme/documents/concours/'~link~'/decision.pdf')}}"  target="_blank">الإطّلاع على قرار  ضبط كيفيّة تنظيم المناظرة</a></li>
+                                    <li><i class="me-2 mdi mdi-playlist-play"></i><a href="{{asset('theme/documents/concours/'~link~'/programme-concours.pdf')}}"  target="_blank"> الإطّلاع على برنامج المناظرة حسب الإختصاص</a></li>
+                                    <li><i class="me-2 mdi mdi-playlist-play"></i><a href="{{asset('theme/documents/concours/'~link~'/elements-evaluation.pdf')}}"  target="_blank">الإطّلاع على بطاقة عناصر التقييم</a></li>
+                                  {# {% endif %} #}
+                                  {% if  concours.dateDebutInscription|date("Y/m/d") <= date()|date("Y/m/d") %}
+                                    <li>
+                                        <i class="me-2 mdi mdi-printer"></i>
+                                        <a href="{{path('inscription_edition',{tokenConcours:grade.concours.token, token:grade.token})}}">
+                                          طباعة مطلب الترشح 
+                                          </a>
+                                    </li>
+                                    {% endif %}
+                                    {% if phase.dateFin|date("Y/m/d") >= date()|date("Y/m/d") and phase.dateDebut|date("Y/m/d") <= date()|date("Y/m/d") %}
+                                      <li style="    color: #d70d0d;font-weight: 500;">
+                                          <i class="me-2 mdi mdi-printer" ></i>
+                                          <a  class="glow" style="color: #d70d0d; font-weight: 500;"  href="{{path('inscription_convocation',{tokenConcours:grade.concours.token, token:grade.token})}}">
+                                        طباعة  إستدعاء القبول الأولي       </a>
+                                      </li>
+                                      {% endif %}
+                                </ul>
+                              </td>
+
+                              <td data-label="  تاريخ بداية استخراج مطبوعة الإستدعاء لاستكمال ملف الترشح " class="text-danger"> <i class="fas fa-calendar-alt"></i> {{phase.dateDebut|date("Y/m/d")}}</td>
+                              <td data-label="  آخر أجل لطباعة الإستدعاء لاستكمال ملف الترشح " class="text-danger"><i class="fas fa-calendar-alt"></i>{{  phase.dateFin|date("Y/m/d")}}</td>
+            
+                          </tr>
+                       {% endif %}
+                   {% endfor %}
+                </tbody>
+              </table>
+              
+          </div>
+        </div>
+      
+

@@ -1,0 +1,516 @@
+{% extends 'layout_impression.html.twig' %} 
+
+{% block title %}دعوة {% endblock %}
+
+{% block stylesheets %}
+
+	 {{parent()}}
+	 
+ 
+	<style>
+		@import url(https://fonts.googleapis.com/earlyaccess/droidarabickufi.css);
+
+		body,#printD {
+		font-family: 'Droid Arabic Kufi', serif;
+		}
+		html{direction: rtl}
+		.btn {
+			font-size: 0.99rem;
+		}
+        .infos {    padding: 10px 0 0px;
+           
+        } 
+		.vide {
+			height: 20px;
+		}
+		.card {
+			margin-bottom: 94px;
+			padding-bottom: 47px;
+		}
+		.card .card-title {
+			font-size: 22px;
+			margin-top: 0;
+			padding: 0;
+			text-decoration: underline;
+
+		}
+		.p-3 {
+			background-color: none !important;
+			padding: 1px 15px !important;
+			color: #023f6a;
+		}
+		.container {
+			width: 80%;
+			margin: 0 auto;
+		}
+		#print {
+			width: 100%;
+			margin-left: 0;
+		}
+		p {  font-stretch: ultra-expanded;
+			margin-top: 1rem !important;
+		}
+		.mt-3,
+		p {line-height: 33px;
+			width: auto;
+			margin-top: 0 !important;
+			margin-bottom: 0;
+		}
+		.form-group.row {
+			float: right;
+			margin-bottom: 0;
+
+		}
+		.text-bg-secondary {
+			float: right;
+			width: 100%;
+		}
+		.bloc-moyenne {
+			float: right;
+		}
+		.title-page {
+			font-size: 20px;
+			padding: 31px 0;
+			margin-bottom: 8px;
+		}
+		table {
+			width: 80% !important;
+			margin: auto;
+		}
+		#example_filter,
+		.buttons-print {
+			display: none;
+		}
+		table.dataTable > thead > tr > th,
+		table.dataTable > thead > tr > td {
+			padding: 10px;
+			border-bottom: none !important;
+			text-align: right;
+		}
+		table.dataTable.row-border > tbody > tr > th,
+		table.dataTable.row-border>tbody>tr>td,
+		table.dataTable.display>tbody>tr>th,
+		table.dataTable.display > tbody > tr > td {
+			border-top: 0;
+		}
+		p.pcd {
+			font-weight: 900;
+			float: right;
+			padding-right: 14px;
+		}
+
+	
+		.moy label,
+		.moy p {
+			float: right;
+		}
+
+		.score p.pcd {
+			color: #2195db;
+			border: 1px solid #2195db;
+			padding: 8px;
+			background-color: #cccccc17;
+			width: 136px;
+			text-align: center;
+		}
+
+		.score label.mt-3 {
+			color: #322eda;
+			font-size: 18px;
+			padding: 8px 0 8px 8px;
+		}
+		.scoreTotal label.mt-3 {
+			color: red;
+		}
+		.scoreTotal p.pcd {
+			color: #da542e;
+			border: 1px solid #da542e;
+		}
+
+		#example td {
+			width: 25%;
+
+		}
+		#example th {
+
+			text-align: right;
+		}
+		#printD #example td {
+
+			font-size: 15.2px;
+		}
+		.content{padding:20px;}
+		#navbarSupportedContent{
+			display:none;}
+			.t1{width: 100%;padding-bottom:10px ;
+			float: right;text-align:center ;    font-size: 12px; color: #000}
+			.t2{text-align:right ;    color: #000}
+			.spe{text-align:center ;    padding-bottom: 75px; padding-top: 74px;color: #000}
+			.t3{text-align:right ;  color: #000}
+			.t4{text-align:left ;  padding-left: 93px;}
+			.t5{text-align:left;padding-top: 14px; color: #000;    padding-left: 65px;}
+			.t6{text-align:right;color: #c51515;margin-top: 105px !important;padding-left: 93px;border: 1px solid #222;text-align: center;padding: 17px;}
+			.t7{text-align:right;font-size: 12px;color: #9d9999;margin-top: 105px !important;padding-left: 93px;border-top: 1px solid #9d9999;text-align: center;padding: 7px 0 0 0 ;}
+			footer.footer{margin-top: 0;}
+			.t7 span{height: 19px;
+				width: 100% !important;
+			float: right !important;
+			text-align: center !important;}
+			.t2 ,.t3, .t4 , .t5 ,.t6{ font-size: 13px;}
+			#c-fluid{
+				min-height: calc(100vh - 180px )!important;
+			}
+			.btns-print .card-body {
+				padding: 0.5rem;
+			}
+			.btns-print {
+				top: 130px;
+			}
+			.infos img.log1{        float: right;
+			width: 261px;
+			margin-top: 6px;}
+			.infos img.log2{ float: left;
+			width: 115px;
+			margin-top: 3px !important;
+			margin-left: 25px;}
+
+
+			.t1 b{width:100%;float:right;    margin-top: -5px;}
+			.t1 span{width: 100%;
+				font-size: 12px;
+				float: left;
+				margin-left: 18%;
+				text-align: left;
+			}
+			b{color:#000}
+			.esp{padding:0 25px;}
+		span em,.t1 i{    font-style: normal;}
+		ul{  font-size: 13.5px;  list-style: none;        padding-right: 16px;
+		color: #000;}
+		.t3 b{    border-bottom: 1px solid #000;}
+		.t3 {     line-height: normal;width:100%;float:right;}
+.li-tr{padding-right: 12px;}
+			@media (max-width: 1024px){
+				.btns-print {
+					top: 120px;
+				}
+				}
+			@media (min-width:992px){
+
+				#print {
+			
+					padding: 9% 18%;
+				}
+			}
+			@media (max-width:992px){
+
+			
+			
+				#print {
+					width: 100%;
+					margin-left: 0;
+					margin-top: 9%;
+				
+				}
+				.infos img.log1 {
+			
+						margin-top: 18px;/*6*/
+					
+				}
+			}
+			@media (max-width: 580px){
+				#print {
+					
+					margin-top: 20%;
+				}
+				#print > div > span{
+					padding:15px 0;
+				}
+				.infos img.log1 {
+					width: 60%;/*261*/
+						margin-top: 21px;/*6*/
+					
+				}
+				.infos img.log2 {
+					width: 20%;/*115*/
+					margin-top: 0;/*3*/
+				}
+			}
+
+		@media print {
+			#print {
+		
+				margin-top: 0%;
+			
+			}
+			a.navbar-brand>span>img {
+				width: 200px !important;
+			}
+			header.topbar{display:none;}
+			#print{page-break-inside: avoid;padding: 0;}
+			.content{padding-top:0 !important;}
+			.infos{padding-top:0px !important;}
+			#navbarSupportedContent{
+				display:none;}
+			.btns-print {
+				display: none
+			}
+			.topbar {
+				box-shadow: none;
+			}
+			.vide {
+				height: 10px;
+			}
+			footer,#printD,
+			#printButton,
+			.navbar-collapse a,
+			.topbar .nav-toggler,
+			.topbar .topbartoggler {
+				display: none;
+			}
+			.topbar{    box-shadow: none;}
+			p, span{page-break-after: auto;}
+
+			#print > div > span{
+					padding: 0;
+				}
+				.infos img.log1 {
+					width: 261px;
+						margin-top: 6px
+					
+				}
+				.infos img.log2 {
+					width: 115px;
+					margin-top: 3px;
+				}
+			@page:second {
+				page-break-after: auto;
+			}
+	 
+		}
+	</style>
+
+{% endblock %}
+{% block main %}
+	<div id="print">
+	
+		<div class="infos col-md-12 print-mobile">
+		<span class="logo-text ms-12" style="    width: 100%;
+		float: right;">
+		<!-- dark Logo text -->
+		<img
+		  src=" {{asset('theme/assets/images/dggrh.png')}}"
+		  alt="homepage"
+		  class="light-logo log1"
+		/>
+	 
+	  <!-- dark Logo text -->
+	  <img
+		src=" {{asset('theme/assets/images/logo-mf.png')}}"
+		alt="homepage"
+		class="light-logo log2"
+	  />
+	</span>
+			<div class="content">
+				<p class="t1">
+
+					<b>
+					
+					من وزيـرة الماليّـة
+					</b>
+					<b>
+						
+						إلـى
+					</b>
+						<b>
+						<i>	السيّد (ة) :  </i>	 {{inscription.nomPrenom}}	
+						</b>
+				<span>
+				<em style="padding:0 3px;font-style:normal;"> طُبعت بتاريخ </em>
+			<em>{{'now'|date("Y/m/d") }} </em>
+				</span>
+				</p>
+			
+				<p class="t3">
+					<span class="esp"></span>
+					أعلمك بأنّ مجموع النقاط الّذي تحصّلت عليه في المناظرة الخارجيّة لإنتداب عدول خزينة بسلك عدول الخزينة التابع لوزارة الماليّة 
+					<span class="par-right">(</span>  
+					<span>إختصاص حقوق وعلوم قانونيّة</span>  
+					<span class="par-left">)</span>   
+					بعنوان سنة 2023 مكّنك من إدراج إسمك ضمن قائمة المترشحين المدعوّين للإدلاء بملفّاتهم لعرضها على لجنة المناظرة
+					<span >.</span>   
+				</p>
+
+				<p class="t3">
+					<span class="esp"></span> 
+					لذا المطلوب منك إرسال ملفك عن طريق رسالة مضمونة الوصول مع الإعلام بالبلوغ 
+					<span class="par-right">(</span> 
+					<b style="border:0" > آخر أجل لقبول الملفات 27 مارس 2024 </b>
+					<span class="par-left">)</span> 
+					ويكون ختم البريد دليلا على معرفة تاريخ الإرسال
+					<span >.</span>   
+				</p>
+				<p class="t3">
+					<b>عنوان إرسال الملفّات  <span>:</span> </b>
+				</p>
+				<p class="t3">  وزارة الماليّة – ساحة الحكومة القصبة 1030 – تونس</p>
+			<p class="t3">	
+		<b style="border:0; font-weight:600;    font-size: 12px;" >ويُكتب على الظرف الخارجي </b>
+					<span class="par-right">(</span>
+				
+					المناظرة الخارجيّة لإنتداب عدول خزينة بعنوان سنة
+					<span style="padding:0 1px;" >2023</span> 
+					<span class="par-left">)</span>
+				</p>
+				<p class="t3"><b>  الوثائق المطلوبــة <span>:</span>  </b></p>
+				<ul>
+						
+				<li>
+					1<span>-</span>	استمارة الترشح ممضاة من قبل المترشح<span>،</span>
+				</li>	
+				<li>
+						2<span>-</span>	نسخة من بطاقة التعريف الوطنية<span>،</span>
+					</li>	
+					<li>
+							3<span>-</span>	نسخة من الشهادة العلمية المطلوبة مصحوبة وجوبا بالنسبة إلى الشهائد الأجنبية أو الشهائد الممنوحة من الجامعات الخاصة بشهادة معادلة<span>،</span>
+					</li>	
+					<li>
+							4<span>-</span>	نسخة من شهادة الباكالوريا أو شهادة معادلة لها<span>،</span>
+					</li>	
+					<li>	
+						5<span>-</span>  <b>نسخ مشهود بمطابقتها للأصل</b>
+							  من كشوفات الأعداد لسنوات الدّراسة في التعليم العالي 
+							<span>:</span>
+					</li>	
+					<li  class="li-tr">	
+					<span>-</span> 
+				   بالنسبّة  لحاملي شهادة الإجازة التطبيقيّة في غير نظام إمد 
+				<span>:</span>
+				   <span class="par-right">(</span> 
+				   كشف الأعداد للسنة الأولى بنجاح وللسنة الثانية بنجاج وللسنة الثالثة بنجاح					
+				   <span class="par-left">)</span> 
+				
+				</li>	
+					<li class="li-tr">	
+				<span>-</span>  
+				
+					 بالنسبّة  لحاملي الشهادة الجامعيّة للمرحلة الأولى من التعليم العالي  
+					<span>:</span> 
+					 <span class="par-right">(</span> 
+						كشف الأعداد للسنة الأولى بنجاح وللسنة الثانية بنجاح 
+					<span class="par-left">)</span> 
+					</li>	
+				<li>	6<span>-</span>		
+					شهادة ترسيم بصفة طالب شغل مسلّمة من قبل مكتب التشغيل والعمل المستقل لم يمض على تاريخ تسليمها أكثر من ثلاثة أشهر من تاريخ غلق قائمة الترشّحات أوشهادة تثبت القيام بعمل مدني فعلي بصفة عون متربص أو مترسم أو وقتي أو متعاقد بالإدارات العمومية أوبالجماعات المحلية أو بالمؤسسات العمومية ذات الصبغة الإدارية أو بالمنشآت العمومية أو بالمؤسسات العمومية التي لا تكتسي صبغة إدارية  
+					<b>بالنّسبة للّذي يتجاوز سن 40 سنة في غرّة جانفي 2023</b>
+					<span>.</span>
+				</li>	
+			
+					
+				</ul>
+			<p class="t4"><b>والسلام</b></p> 
+			<ul>
+			<li> <b>المناظـرة <span>:</span> </b> عدول خزينة بسلك عدول الخزينة</li>
+			<li> <b>رقم ب.ت.و <span>:</span>  </b>{{inscription.cin}}  </li>
+			<li> <b>رقم الملـف <span>:</span>  </b>{{inscription.idDossier}}  </li>
+			<li> <b>مجموع النقاط  <span>:</span>  </b>{{inscription.scoreTotal}}  </li>
+			<li> <b>الترتيــب  <span>:</span> </b>{{inscription.rang}}  </li>
+			<li> <b>ولاية الترشح  <span>:</span>  </b>{{inscription.gouvConcours}}  </li>
+			</ul>
+
+						
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent()}}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+	<script>
+
+		$(document).ready(function () {
+
+
+window.printPDF = function (name) {
+	$("#printD").empty().html($("#main-wrapper").html())
+	/*Customize html*/
+	$("#printD #navbarSupportedContent").remove()
+	$("#printD .topbar").attr('style','    box-shadow: none;')
+
+	$("#printD .content").attr('style','padding-top:15px !important;')
+	$("#printD #print").attr('style','padding:0px !important;margin-top:0px !important;')
+	$("#printD footer").remove()
+	$("#printD header.topbar").remove()
+	/*$niveau = $('#printD .niveau').text().replace('(', '<span class="arrow-left">(</span>');
+	$niveau = $niveau.replace(')', '<span class="arrow-right">(</span>');
+	$('#printD .niveau').html($niveau)*/
+	$("#printD td.col2").attr('colspan', '2')
+	$("#printD td.col3").attr('colspan', '3')
+	//$("#printD .pararrow-right").html(')')
+	$("#printD .par-left").html('(')
+	$("#printD .par-right").html(')')
+	$("#printD .esp").html('&nbsp;')
+	$("#printD .esp2").attr('style', 'padding-right: 1px !important;')
+	$("#printD  .infos").removeClass('print-mobile')
+	$("#printD  .infos").attr('style','padding-top:0 !important;padding-bottom:0 !important;')
+	$("#printD  #print > div > span").attr('style','padding:0 !important;    width: 100%;float: right;')
+	$("#printD  .infos img.log1").attr('style','margin-top: 6px!important;width: 261px !important;')
+	$("#printD  .infos img.log2").attr('style','margin-top: 3px!important;width: 115px !important;')
+				
+	//$("#printD  .title-inscription").removeClass('title-inscription-mobile')
+	var element = document.getElementById('printD');
+
+
+	var opt = {
+		margin: [10, 0, 10, 0], // top, left, buttom, right,
+		filename: name + '.pdf',
+		image: {
+			type: 'jpeg',
+			quality: 1
+			},
+		html2canvas: {
+			dpi: 500,
+			scale: 4,
+			letterRendering: true
+		},
+		pagebreak: {
+			mode: 'avoid-all'
+		},
+		jsPDF: {
+			unit: 'pt',
+			format: 'a4',
+			orientation: 'portrait'
+		}
+	};
+	var worker = html2pdf();
+
+	console.log(worker);
+	worker.set(opt).from(element).toPdf().get('pdf').then(function (doc) {
+		var totalPages = doc.internal.getNumberOfPages();
+		for (var i = 1; i <= totalPages; i++) {
+			if (i > 1) {
+				doc.setPage(i);
+				// ?????
+			}
+		}
+
+	}).save();
+	setTimeout(HidePrintFunction, 10);
+	// setTimeout(urlFunction, 400);
+
+
+}
+function HidePrintFunction() {
+	document.getElementById('printD').style.display = "none";
+}
+
+$('#dow').click(function(){ 
+    libelle  ="{{grade.libelle}}"  ;
+	printPDF('إستدعاء القبول  الأولي  '+ libelle+' 2023 ')
+	
+})
+});
+	</script>
+
+{% endblock %}

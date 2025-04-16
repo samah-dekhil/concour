@@ -1,0 +1,1101 @@
+.card h5.card-title {
+  font-size: 22px;
+}
+
+.form-check .form-check-input {
+  float: right;
+  position: relative;
+  z-index: 999;
+}
+
+#example td {
+  padding: 6px 0;
+  font-size: 16px;
+}
+
+#example th {
+  font-size: 19px;
+}
+
+.btn {
+  font-size: 1.25rem;
+}
+
+.form-check-label {
+  margin-right: 33px;
+}
+
+#main-wrapper div.border-top {
+  border-top: 0px !important;
+}
+
+.card-body {
+  font-size: 17px;
+}
+
+.list-group-item {
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.card .card-title {
+  font-size: 17px;
+  margin-top: 15px;
+
+  padding: 11px;
+}
+
+.list-group-item {
+  border: 0;
+  border-bottom: 0;
+  padding: 0.9rem 1rem;
+}
+
+.select2-container--default[dir="rtl"] .select2-selection--single .select2-selection__arrow {
+  left: 18px !important;
+}
+
+#main-wrapper .topbar .top-navbar .navbar-header[data-logobg="skin5"],
+#main-wrapper .topbar .navbar-collapse[data-navbarbg="skin5"],
+#main-wrapper .topbar[data-navbarbg="skin5"] {
+  background: #fff !important;
+}
+
+.topbar {
+  height: 94px;
+}
+
+.topbar .top-navbar {
+  min-height: 94px;
+}
+
+a.navbar-brand>span>img {
+  width: 290px;
+}
+
+#main-wrapper>header>nav>div.navbar-header {
+  margin-right: 55px;
+}
+
+footer {
+  background-color: #000;
+  color: #fff;
+}
+
+footer a {
+  color: #fff;
+}
+
+footer a:focus,
+footer a:hover {
+  text-decoration: none;
+  color: #fff;
+}
+
+.wizard>.content>.body ul>li {
+  list-style: none !important;
+  padding: 0px;
+  padding-top: 10px;
+}
+
+.wizard>.content>.body label.error {
+  width: 100%;
+}
+
+select.error {
+  background: rgb(251, 227, 228);
+  border: 1px solid #fbc2c4;
+  color: #8a1f11;
+}
+
+.p-3 {
+  background-color: #023f6a;
+  padding: 1px 15px !important;
+  color: #fff;
+}
+
+.hideAE {
+  display: none;
+}
+
+.titleRe {
+  font-size: 23px;
+  color: #da542e !important;
+  padding: 22px 0;
+  font-weight: 900;
+  float: right;
+  text-decoration: underline;
+}
+
+.val_moyGeneral {
+  color: red !important;
+  font-weight: 600;
+  border: 2px solid red;
+  padding: 5px 17px;
+}
+
+input[type="date"] {
+  text-align: right;
+}
+
+.scoreTanfil {
+  display: none;
+}
+
+.section-moy {
+  display: none;
+}
+
+.title-page {
+  padding-top: 37px;
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 43px;
+}
+
+input.error,
+.error-lg,
+input.errorlg,
+input.errorlg:-internal-autofill-selected {
+  background-color: rgb(251, 227, 228) !important;
+  border: 1px solid #fbc2c4;
+  color: #8a1f11;
+}
+
+label.error,
+label.error-lg,
+label.errorlg,
+p.error,
+.errorM,
+div.error {
+  width: 100% !important;
+  color: #ff3111 !important;
+  display: inline-block;
+  margin-left: 1.5em !important;
+  font-weight: 600 !important;
+  margin-bottom: 0px !important;
+  font-size: 15px;
+}
+
+.wizard-content .wizard>.actions>ul>li {
+  float: right !important;
+}
+
+.hidelabel,
+.erroremail {
+  display: none;
+}
+
+#verfiy-inscription .hidelabel {
+  display: block;
+}
+
+#print {
+  right: 0 !important;
+  direction: rtl;
+  width: 100%;
+
+  /* padding: 0 9%; */
+}
+
+#verfiy-inscription .mt-3,
+#verfiy-inscription p,
+#verfiy-inscription label {
+  margin-top: 0rem !important;
+  width: auto;
+  float: right;
+  font-size: 18px;
+}
+
+#verfiy-inscription .inscription_cin,
+#verfiy-inscription .cin_verif,
+.inscription_prenom,
+.inscription_prenomPere,
+.inscription_dateNaissance,
+.inscription_etatCivil,
+.inscription_adresse,
+.inscription_num_adresse,
+.inscription_region_adresse,
+.inscription_codeGouvAdresse,
+.inscription_telephoneFixe,
+.inscription_niveau_1,
+.inscription_nomDiplome,
+.inscription_anneeDiplome,
+.inscription_anneeEquivalence,
+.inscription_diplomeTanfil_0,
+.inscription_diplomeTanfil_1,
+#verfiy-inscription .date_naissance,
+.inscription_typeEtablissement_0,
+.inscription_typeEtablissement_1,
+.inscription_typeEtablissement_2,
+.inscription_sexe_1,
+.inscription_sexe_0,
+.inscription_etatCivil,
+.inscription_emploiConjoint,
+.inscription_nomPrenomConjoint,
+.inscription_telephonePortable,
+.inscription_mail,
+.inscription_codePostal,
+.inscription_specialiteDiplome,
+.inscription_regionAdresse {
+  float: right;
+}
+
+.inscription_telephoneFixe,
+.inscription_nomEtablissement,
+.inscription_niveau_0,
+.inscription_niveau_1,
+.inscription_niveau_2,
+.inscription_niveau_3,
+.inscription_codeGouv,
+.inscription_nomPrenomConjoint,
+.inscription_adresse {
+  clear: both;
+}
+
+.right {
+  float: right;
+}
+
+.inscription_diplomeTanfil_1,
+.inscription_scoreTanfil {
+  width: 100%;
+}
+
+inscription_adresse {
+  width: 66%;
+}
+
+.bloc,
+.p-3 {
+  width: 100%;
+  float: right;
+}
+
+.bloc {
+  padding-bottom: 25px;
+  padding-top: 25px;
+}
+
+#steps-uid-0-p-1 .form-group {
+  margin-bottom: 0.2rem;
+  padding: 0 20px;
+}
+
+#inscription_typeEtablissement label,
+#inscription_sexe label {
+  float: right;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+#inscription_typeEtablissement .form-check-input[type="radio"],
+#inscription_sexe .form-check-input[type="radio"] {
+  float: right;
+}
+
+#inscription_diplomeTanfil .form-check-input[type="radio"],
+#inscription_niveau .form-check-input[type="radio"] {
+  float: right;
+  margin-left: 9px;
+  clear: both;
+}
+
+#inscription_diplomeTanfil label,
+#inscription_niveau label {
+  float: right;
+  margin-left: 9px;
+  text-align: right;
+}
+
+#steps-uid-0-p-1>div>div:nth-child(2)>div:nth-child(12)>label,
+#steps-uid-0-p-1>div>div:nth-child(6)>div:nth-child(4)>label {
+  margin-top: 1rem;
+}
+
+.new_ins p,
+.new_ins h4 {
+  font-size: 19px !important;
+}
+
+#verfiy-inscription {
+  background-color: #fff;
+  padding: 32px 20px;
+}
+
+div[class^="inscription_moyenne"] p {
+  color: #bb4c4c;
+  font-weight: 600;
+}
+
+.table th,
+.table thead th {
+  font-weight: 800;
+}
+
+.table {
+  margin-bottom: 0px;
+}
+
+.table th,
+.table thead th {
+  font-weight: 800;
+  background-color: #55608f;
+  color: #ffff;
+}
+
+.table tr {
+  font-size: 17px;
+  border-color: inherit;
+  border-style: solid;
+  border-width: 4px;
+  background-color: #dce8ee;
+}
+
+.table p {
+  margin-bottom: 0.2rem;
+}
+
+.table a {
+  color: #55608f;
+  font-weight: 500;
+}
+
+.table a:hover {
+  color: #4d5da7;
+  font-weight: 600;
+}
+
+.footer {
+  padding: 25px 20px;
+  /* position: absolute; */
+  width: 100%;
+  text-align: center;
+  bottom: 0;
+  margin-top: 50px;
+}
+
+.table td.text-danger {
+  color: #892d13 !important;
+  font-size: 16px;
+}
+
+td.text-danger i {
+  margin-left: 8px;
+}
+
+.navbar-collapse a {
+  font-size: 18px;
+  font-weight: 600;
+  color: #55608f;
+  padding: 0 16px;
+}
+
+.navbar-collapse a i {
+  margin-left: 4px;
+}
+
+.navbar-collapse {
+  padding-top: 21px !important;
+  padding-right: 92px !important;
+}
+
+.zoomIn {
+  -webkit-animation-name: zoomIn;
+  animation-name: zoomIn;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@-webkit-keyframes zoomIn {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale3d(0.3, 0.3, 0.3);
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes zoomIn {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale3d(0.3, 0.3, 0.3);
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.wizard-content .wizard>.actions>ul>li>a {
+  background: #023f6a;
+
+  padding: 7px 36px;
+
+  font-size: 23px;
+}
+
+.section-moy p.text-danger {
+  color: #da542e !important;
+  font-weight: 800;
+  /* text-align: center; */
+  padding-right: 21px;
+  font-size: 19px;
+}
+
+.check-moy,
+.confirm_inscription {
+  width: 112px;
+  background: url(/theme/dist/img/back-note.png) no-repeat white 4px 5px;
+  background-size: 28%;
+  border: 1px solid #ccc;
+}
+
+.wizard>.content>.body label {
+  font-size: 15px;
+}
+
+.inscription_niveau_0,
+.inscription_niveau_1,
+.inscription_niveau_2,
+.inscription_niveau_3,
+.inscription_codeGouv {
+  width: 100%;
+  font-weight: 500;
+}
+
+.inscription_scoreTanfil {
+  width: 40%;
+}
+
+.modal-body b {
+  color: red;
+}
+
+.modal-title {
+  color: #011f35;
+}
+
+.val_moyGeneral {
+  height: 40px;
+}
+
+.formule {
+  float: right;
+  /* width: 163px;
+  height: 70px; */
+  background-size: contain;
+  clear: both;
+  width: auto;
+    height: auto;
+}
+
+.f5 {
+  background: url(/theme/dist/img/f5.png) center no-repeat;
+}
+
+.f4 {
+  background: url(/theme/dist/img/f4.png) center no-repeat;
+}
+
+.f3 {
+  background: url(/theme/dist/img/f3.png) center no-repeat;
+}
+
+.f2 {
+  background: url(/theme/dist/img/f2.png) center no-repeat;
+}
+
+.formule-score {
+  padding-right: 32%;
+}
+
+.verif_annee {
+  display: none;
+  float: right;
+}
+
+.dte,
+#date_naissance {
+  background: #fff url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png) 7px 50% no-repeat;
+}
+
+.dte::-webkit-inner-spin-button {
+  display: none;
+}
+
+.dte::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
+
+@media (min-width: 576px) {
+  .modal-sm {
+    max-width: 568px;
+    line-height: normal;
+  }
+}
+
+/* @import url(http://fonts.googleapis.com/earlyaccess/amiri.css); */
+
+#printD {
+  font-family: serif;
+}
+
+#printD .arrow-left,
+#printD .arrow-right {
+  padding: 0 2px;
+}
+
+.infos {
+  background-color: #fff;
+  padding: 40px 0;
+  margin: auto;
+}
+
+.btns-print {
+  position: absolute;
+  top: 150px;
+  background-color: #eee;
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+  font-family: "Droid Arabic Kufi", serif;
+}
+
+#print .col2.m {
+  text-align: left;
+}
+
+#print .col2.m label {
+  width: 100%;
+}
+
+#printD a.navbar-brand>span>img {
+  width: 200px;
+  margin-right: 30px;
+}
+
+#printD #example td {
+  padding: 6px 0;
+  font-size: 15.5px;
+}
+
+#printD .title-page {
+  padding: 15px 25px;
+}#printD #example td .niveau {
+
+  font-size: 16px;
+}
+
+#printD .topbar,
+#printD .topbar .top-navbar {
+  min-height: 65px;
+}
+
+footer span.img {
+  padding: 23px 70px 27px 0px;
+  background: url(theme/assets/images/logo.png) no-repeat 43px; 
+  background-size: auto;
+}
+
+iframe .rc-anchor-container #recaptcha-accessible-status {
+  display: block !important;
+  color: red;
+  padding-left: 15px;
+  padding-top: 8px;
+  font-size: 14px;
+}
+
+#hiddenRecaptcha,
+#hiddenRecaptcha.error {
+  border: 0;
+  background-color: transparent !important;
+  width: 100%;
+  float: right;
+}
+
+.edition div.border-top {
+  border-top: 0px !important;
+  float: right;
+  width: 100%;
+  margin-top: 22px;
+}
+
+#inscription_sexe label.error,
+#inscription_niveau label.error,
+#inscription_typeEtablissement label.error,
+#inscription_diplomeTanfil label.error,
+label.error[for="inscription[confirmGuide]"],
+label.error[for="inscription[confirmDecision]"],
+label.error[for="inscription[confirmProgramme]"],
+label.error[for="inscription[confirmFiche]"],
+#reclamation_objet label.error {
+  display: none !important;
+}
+
+.wizard>.content>.body ul {
+  padding: 18px;
+  background-color: #fff;
+}
+
+.alert-danger {
+  color: red;
+}
+
+.error-insc-cin.alert-danger {
+  color: red;
+  padding: 15px !important;
+}
+
+.invalid-feedback-cin ul {
+  display: none !important;
+}
+
+table ul {
+  padding: 0;
+}
+
+table ul:not(.speciG) {
+  list-style: none;
+  padding: 0;
+}
+
+table ul .me-2 {
+  margin-right: 0rem !important;
+}
+
+.table ul a {
+  color: #3e5569;
+  font-weight: normal;
+  padding-right: 4px;
+  font-size: 16px;
+}
+
+.etatHide {
+  display: none;
+}
+
+a.reclamation {
+  display: none;
+}
+
+.hp.printableArea {
+  border-radius: 16px;
+  padding: 0rem; 
+  margin: 25px  30px 9px 30px;
+  border-collapse: collapse;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+.hp.printableArea  .table.dossiers th {
+  padding: 0.5rem;
+}
+
+
+
+table ul .me-2.mdi.mdi-checkbox-blank-circle {
+  margin-right: 0rem !important;
+  font-size: 8px !important;
+  margin-left: 4px !important;
+}
+
+.hp.printableArea .table ul,
+.table ul {
+  list-style: none;
+}
+
+footer .mobile {
+  display: none !important;
+}
+
+/*===========================================================================================================
+                      ************RESPONSIVE*******************
+============================================================================================================*/
+
+@media (max-width: 1200px) {
+  #main-wrapper[data-layout="vertical"][data-sidebartype="mini-sidebar"] .topbar .top-navbar .navbar-header {
+    width: 25%;
+    margin-right: 4px;
+  }
+
+  .topbar .top-navbar .navbar-header .navbar-brand,
+  .topbar a.navbar-brand>span>img {
+    width: 100%;
+  }
+
+  #main-wrapper[data-layout="vertical"][data-sidebartype="mini-sidebar"] .topbar .top-navbar .navbar-header .logo-text {
+    display: block;
+  }
+
+  #main-wrapper .topbar .navbar-collapse[data-navbarbg="skin5"] {
+    width: 75%;
+    padding-right: 0 !important;
+  }
+
+  #verfiy-inscription .col-md-4 {
+    width: 50%;
+  }
+
+  .titleRe {
+    width: 100%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .hp.printableArea {
+    margin: 27px 15px 9px 15px;
+  }
+
+  .table tr,
+  .hp.printableArea .table tr,
+  .table ul a,
+  .hp.printableArea .table ul a {
+    font-size: 14px !important;
+  }
+
+  .table td.text-danger,
+  .table td.text-danger .table td.text-danger {
+    font-size: 13px !important;
+  }
+
+  .navbar-collapse a {
+    font-size: 15px !important;
+  }
+
+  .collapse:not(.show) {
+    display: block !important;
+  }
+
+  #steps-uid-0-p-1 {
+    padding: 0%;
+  }
+
+  .moyenne1,
+  .moyenne2,
+  .moyenne3,
+  .moyenne4,
+  .moyenne5 {
+    width: 50%;
+  }
+
+  .b-tanfil .col-md-4 {
+    width: 50%;
+  }
+
+  .verif_annee {
+    width: 50%;
+  }
+
+  #steps-uid-0-p-1 .col-md-4 {
+    width: 50%;
+  }
+
+  #inscription_typeEtablissement label {
+    margin-right: 2px;
+    margin-left: 3px;
+    font-size: 13px;
+  }
+
+  .wizard>.content>.body label {
+    font-size: 13.5px;
+  }
+  .btns-print {
+    top: 189px;}
+    .btns-print  .btn {
+      font-size: 1rem;
+      padding: 2px 11px;
+  }
+ #print  table {
+    width: 97% !important;
+
+}
+.reclamationPage .col-md-8,
+.editionPage.col-md-5{width: 97%;}
+}
+
+@media (max-width: 768px) {
+  #main-wrapper .topbar .navbar-collapse[data-navbarbg="skin5"] {
+    width: 73%;
+    padding-right: 0 !important;
+  }
+
+  .wizard-content .wizard>.steps>ul>li {
+    margin-bottom: 0.2rem;
+    float: left;
+    width: 33%;
+  }
+
+  #steps-uid-0-p-1 .col-md-4 {
+    width: 100%;
+  }
+
+  .moyenne1,
+  .moyenne2,
+  .moyenne3,
+  .moyenne4,
+  .moyenne5,
+  .verif_annee {
+    width: 100%;
+  }
+
+  #steps-uid-0-p-1 .right {
+    float: none;
+  }
+
+  #verfiy-inscription .col-md-4 {
+    width: 100%;
+  }
+
+  .modal-sm {
+    max-width: 319px;
+  }
+
+  .modal-title {
+    font-size: 1rem;
+  }
+
+  .modal-content {
+    font-size: 14px;
+  }
+
+  .modal-footer .btn {
+    font-size: 1rem;
+  }
+
+  .modal-dialog {
+    margin: 1.5rem;
+  }
+  .edition  .col-md-6{width: 100%;}
+  .edition .right {
+    float: none;
+}
+  /***************IMPRESSION******/
+ .print-mobile #example td {
+ 
+    font-size: 13px;
+  }
+  .print-mobile .score label.mt-3 {
+    font-size: 15px;
+  } 
+  .print-mobile #example th {
+    font-size: 14px;
+  }
+  .print-mobile .mt-3 {
+    font-size: 13px !important;
+}
+ #print .title-inscription-mobile.title-page {
+      font-size: 17px;}
+    }
+
+@media (max-width: 650px) {
+  .hp.printableArea {
+    padding: 7px;
+  }
+
+  .card h5.card-title {
+    font-size: 17px;
+  }
+
+  .table td,
+  .table th,
+  .hp.printableArea .table td,
+  .hp.printableArea .table th {
+    padding: 0rem 0 1rem 0;
+    border: 1px solid #ffffff59;
+  }
+
+  .hp.printableArea table td::before {
+    content: attr(data-label);
+    float: right;
+    font-weight: 900;
+    width: 100%;
+    font-size: 15px;
+    background-color: #55608f;
+    color: #fff;
+    padding-right: 6px;
+  }
+
+  .hp.printableArea table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  .hp.printableArea table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    text-align: right;
+  }
+
+  .hp.printableArea table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: 2em;
+  }
+
+  .topbar .top-navbar .navbar-header .navbar-brand,
+  .topbar a.navbar-brand>span>img {
+    width: 200px;
+    float: right;
+    padding: 0 0px 0 10px;
+  }
+
+  #main-wrapper[data-layout="vertical"][data-sidebartype="mini-sidebar"] .topbar .top-navbar .navbar-header {
+    margin-right: 4px;
+  }
+
+  #main-wrapper .topbar .navbar-collapse[data-navbarbg="skin5"] {
+    width: 68%;
+    display: block !important;
+  }
+
+  .navbar-collapse a {
+    font-size: 13px !important;
+    padding: 0 6px;
+  }
+
+  .topbar a.navbar-brand>span>img {
+    width: 135px;
+  }
+
+  .navbar-collapse {
+    padding-top: 12px !important;
+  }
+
+  .card-body {
+    padding: 0.75rem;
+  }
+
+  .wizard-content .wizard>.actions>ul>li>a {
+    padding: 7px 10px;
+  }
+
+  .wizard-content .wizard>.steps>ul>li {
+    width: 100%;
+  }
+
+  #steps-uid-0-p-1 .form-group {
+    margin-bottom: 0.2rem;
+    padding: 0 19px 0 0px;
+  }
+
+  .titleRe {
+    font-size: 17px;
+  }
+
+  #verfiy-inscription .mt-3,
+  #verfiy-inscription p,
+  #verfiy-inscription label,
+  .mt-3 {
+    font-size: 14px;
+  }
+
+  #steps-uid-0-p-2 .card .card-title {
+    font-size: 17px !important;
+  }
+  .title-page {
+    padding: 37px 19px 0 19px;
+    font-size: 1.4rem;
+  }
+  .new_ins p, .new_ins h4 {
+    font-size: 16px !important;    line-height: normal;
+}
+}
+@media (max-width: 570px) {  
+  .btns-print {
+  top: 190px;}
+}
+@media (max-width: 480px) {
+  .btns-print {
+    top: 214px;}
+  footer .desk {
+    display: none !important;
+  }
+
+  footer .mobile {
+    display: block !important;
+  }
+
+  .formule-score,
+  .moyGeneral {
+    padding-right: 0 !important;
+  
+  }
+
+  .formule {
+    background-position: right !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .btns-print {
+    top: 239px;
+  }
+  
+  #main-wrapper .topbar .navbar-collapse[data-navbarbg="skin5"] {
+    width: 65%;
+    display: block !important;
+  }
+
+  .navbar-collapse a {
+    font-size: 12px !important;
+    padding: 0 3px;
+  }
+
+  .topbar a.navbar-brand>span>img {
+    width: 122px;
+  }
+
+  .wizard>.content>.body {
+    padding: 2.5% 7%;
+  }
+
+  .modal-sm {
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 350px){
+  /* .btns-print {
+      top: 296px;
+  } */
+}

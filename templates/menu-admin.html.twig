@@ -1,0 +1,78 @@
+
+<aside class="left-sidebar" data-sidebarbg="skin5">
+        <!-- Sidebar scroll-->
+        <div class="scroll-sidebar">
+          <!-- Sidebar navigation-->
+          <nav class="sidebar-nav">
+            <ul id="sidebarnav" class="pt-4">
+           
+              <li class="sidebar-item">
+                <a
+                  class="sidebar-link waves-effect waves-dark sidebar-link"
+                  href="{{path('concours_index')}}"
+                  aria-expanded="false"
+                  ><i class="mdi mdi-format-list-bulleted"></i
+                  ><span class="hide-menu">Gestion des Concours</span></a
+                >
+                <ul aria-expanded="false" class="collapse first-level">
+                  <li class="sidebar-item">
+                    <a href="{{path('concours_index')}}" class="sidebar-link"
+                      ><i class="mdi mdi-note-outline"></i
+                      ><span class="hide-menu">Liste  des Concours  </span></a
+                    >
+                  </li>
+                  <li class="sidebar-item">
+                    <a href="{{path('concours_new')}}" class="sidebar-link"
+                      ><i class="mdi mdi-note-plus"></i
+                      ><span class="hide-menu"> Ajouter un concours </span></a
+                    >
+                  </li>
+                </ul>
+              </li>
+          
+              
+          
+         
+            {% set route = app.request.attributes.get('_route') %}
+          
+              <li class="sidebar-item">
+                <a
+                  class="sidebar-link waves-effect waves-dark sidebar-link"
+                  href="{{path('reclamation_index')}}"
+                  aria-expanded="false"
+                  ><i class="me-2 mdi mdi-comment-question-outline"></i
+                  ><span class="hide-menu">Gestion des Réclamations</span></a
+                >
+              </li>
+              {% if is_granted("ROLE_ADMIN") %}
+              <li class="sidebar-item">
+                <a
+                  class="sidebar-link has-arrow waves-effect waves-dark"
+                  href="{{path('user_index')}}"
+                  aria-expanded="false"
+                  ><i  class="mdi mdi-account-settings"></i
+                  ><span class="hide-menu">Gestion des utilisateurs </span></a
+                >
+                <ul aria-expanded="false" class="collapse first-level">
+                  <li class="sidebar-item">
+                    <a href="{{path('user_index')}}" class="sidebar-link"
+                      ><i class="mdi mdi-note-outline"></i
+                      ><span class="hide-menu">Liste des utilisateurs  </span></a
+                    >
+                  </li>
+                  <li class="sidebar-item">
+                    <a href="{{path('app_register')}}" class="sidebar-link"
+                      ><i class="mdi mdi-note-plus"></i
+                      ><span class="hide-menu"> Ajouter un utilisateur </span></a
+                    >
+                  </li>
+                </ul>
+              </li>
+              {% endif %}
+          
+            </ul>
+          </nav>
+          <!-- End Sidebar navigation -->
+        </div>
+        <!-- End Sidebar scroll-->
+      </aside>

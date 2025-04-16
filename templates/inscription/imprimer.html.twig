@@ -1,0 +1,612 @@
+{% extends 'layout_impression.html.twig' %}
+
+{% block title %}  مطلب ترشح لإنتداب   {{grade.libelle}}   إختصاص   {{inscription.specialite.libelle}} بعنوان سنة 2024 {% endblock %}
+{# {% block body_id 'front_concours_index' %} #}
+{% block stylesheets %}
+
+    {{parent()}}
+    <style>
+        .vide{height:20px;}
+        .card {
+            margin-bottom: 94px;
+            padding-bottom: 47px;
+        }
+        .card .card-title {
+            font-size: 22px;
+            margin-top: 0;
+            padding: 0;
+            text-decoration: underline;
+            
+        }
+        .p-3 {
+            background-color: none !important;
+            padding: 1px 15px !important;
+            color: #023f6a;
+        }
+        .container {
+            width: 80%;
+            margin : 0 auto;
+        }
+        #print{    width: 100%;
+            margin-left: 0;}
+        p{margin-top:1rem !important;}
+        .mt-3,p{width:auto;margin-top: 0rem!important;margin-bottom: 0rem;}
+        .form-group.row {
+            float: right;    margin-bottom: 0rem;
+        
+        }
+        .text-bg-secondary{
+            float:right;width:100%;
+        }
+        .bloc-moyenne{float:right;}
+        .title-page {
+        font-size: 20px;
+            padding: 31px 0;
+            margin-bottom: 8px;
+        }
+        table{width:80% !important;margin:auto;} #example_filter,.buttons-print{display:none;}
+        table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
+            padding: 10px;
+            border-bottom: none !important;
+            text-align: right;
+        }
+        table.dataTable.row-border>tbody>tr>th, table.dataTable.row-border>tbody>tr>td, table.dataTable.display>tbody>tr>th, table.dataTable.display>tbody>tr>td {
+            border-top: 0;
+        }
+        p.pcd {
+            font-weight: 900;
+            float: right;
+            padding-right: 14px;
+        }
+        
+            /*.score td{padding-right:20%!important;}*/
+        .moy label,.moy p{float: right;}
+
+        .score p.pcd{   
+        color: #2195db;
+        border: 1px solid #2195db;
+        padding: 8px;
+        background-color: #cccccc17;
+        width: 136px;
+        text-align: center;}
+
+        .score label.mt-3 {
+            color: #322eda;
+            font-size: 18px;
+            padding: 8px 0 8px 8px;
+        }
+        .scoreTotal label.mt-3{color:red;}
+        .scoreTotal p.pcd{    
+            color: #da542e;
+        border: 1px solid #da542e;}
+        
+        #example td {
+            width: 25%;
+        
+        }#example th {
+            
+            text-align: right;
+        }
+        #printD #example td {
+            
+            font-size: 15.2px;
+        }
+        @media print{
+            .btns-print{display:none}
+            .topbar {
+            box-shadow: none;}
+            #example th {
+            font-size: 14px;
+        }
+        #example td {
+            font-size: 13px;
+        
+        }
+        #example > tbody > tr > td:nth-child(1){
+           /* width: 32%;*/
+        }
+       
+            .vide{height:10px;}
+            footer,#printButton,.navbar-collapse a,.topbar .nav-toggler, .topbar .topbartoggler{display:none;}
+            table{width:100% !important;}
+            table{margin-top:-35px;font-size:8px;}
+    
+        @page :second {
+            margin-top: 50px !important;}
+            
+        }
+    </style> 
+
+{% endblock %}
+{% block main %}
+
+
+{# 
+ <link
+    rel="stylesheet"
+    type="text/css" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css"> 
+ <link
+    rel="stylesheet"
+    type="text/css" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css"> #}
+
+ 
+<div id="print">
+    <div class="card-title title-page title-inscription title-inscription-mobile">
+        <p> 
+            <b class="text-danger">
+                    {# مطلب ترشح لإنتداب {{grade.libelle}} إختصاص {{inscription.specialite.libelle}} بعنوان سنة {{grade.concours.annee}} #}
+            </b>
+        </p>
+        <p> 
+            <b class="text-success">
+        لقد تم تسجيلكم بالمناظرة الخارجية لإنتداب {{grade.libelle}} <span class="esp2">بالسلك</span> الإداري  <span class="esp2">المشترك للإدارات العمومية</span>   
+         </b>
+        </p>
+ 
+       <p> <b class="text-success">
+       إختصاص  {{inscription.specialite.libelle}} 
+         </b> </p>
+        <p>
+            <b class="text-success">عدد التسجيل <span>:</span> {{inscription.id}}</b>
+        </p>
+
+    </div>
+    <div class="infos col-md-12 print-mobile">
+        <table id="example" class="display">
+            <thead>
+                <tr>
+                    <th collspan="2">
+                    </th>
+                    <th >
+                    </th>
+                
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td  colspan="4"> <label class="mt-3"> الترشح لمناظرة إنتداب {{grade.libelle}} <span class="arrow-left">(</span>إختصاص {{inscription.specialite.libelle}} <span class="arrow-right">)</span> <span>:</span></label><span>&nbsp;</span>{{inscription.codeGouv }}</td>
+                    <td>   </td>
+                    <td> </td>
+                    <td> </td>
+                </tr>
+                {# <tr class="vide"><td> </td><td> </td></tr> #}
+                <tr>
+                    <th colspan="4">1<span>. </span>  الهويــة </th>
+                    <th> </th>
+                    <th> </th>
+                    <th> </th>
+                </tr>
+                
+                <tr>
+                    <td> <label  class="mt-3 ">رقم بطاقة التعريف الوطنية  <span>: </span></label> </td>
+                    <td> {{inscription.cin}}   </td>
+                    <td><label  class="mt-3 ">تاريـخ الإصـدار <span>: </span></label></td>
+                    <td>{{inscription.dateCin|date("Y/m/d")}}</td>
+                </tr>
+                <tr>
+                    <td><label  class="mt-3 ">الإسـم  <span>: </span></label></td>
+                    <td>{{inscription.prenom}} </td>
+                    <td><label  class="mt-3 ">اللقـب  <span>: </span></label></td>
+                    <td> {{inscription.nom}}</td>
+                </tr>
+                <tr>
+                <td class="col2">
+            <label  class="mt-3 ">اللقب قبل الزواج<span class="arrow-left">(</span><span>بالنسبة  للمترشحة المتزوجة أو الأرملة</span><span class="arrow-right">)</span> <span>: </span>
+                        </label> 
+                    </td>
+                <td> {{inscription.nomJeunefille}}</td>
+                <td> </td>
+                <td> </td>
+            </tr>
+                <tr>
+                    <td><label  class="mt-3 ">إسم الأب  <span>: </span></label></td>
+                    <td>  {{inscription.prenomPere}}</td>
+                    <td> <label  class="mt-3 ">إسم الأم  <span>: </span></label> </td>
+                    <td> {{inscription.prenomMere}}</td>
+                </tr>
+                <tr>
+                    <td><label  class="mt-3 ">تاريخ الولادة  <span>: </span></label></td>
+                    <td>  {{inscription.dateNaissance|date("Y/m/d")}} </td>
+                    <td> <label  class="mt-3 ">مكان الولادة  <span>: </span></label> </td>
+                    <td> {{villeNaissance}}</td>
+                </tr>
+                <tr>
+                    <td><label  class="mt-3 ">الجنــس  <span>: </span></label> </td>
+                    <td>  {{inscription.sexe}}</td>
+                    <td>  </td>
+                    <td></td>
+                </tr>
+             
+                <tr>
+                    
+                    <td> <label  class="mt-3 ">الحالة العائلية  <span>: </span></label> </td>
+                    <td> {{inscription.etatCivil}}</td>
+                    <td>    <label  class="mt-3 "> {% if inscription.etatCivil !="أعزب" %}عـدد الأبنـاء <span>: </span>  {% endif %}</label></td>
+                    <td>   {% if inscription.etatCivil !="أعزب" %} {{inscription.nbEnfants}}   {% endif %} </td>
+                </tr>
+
+                 {% if inscription.etatCivil !="أعزب" %} 
+                    <tr>
+                      
+                        <td>{% if inscription.etatCivil !="أعزب" %}<label  class="mt-3 ">إسم ولقب القرين  <span>: </span></label> {% endif %}</td>
+                        <td>{% if inscription.etatCivil !="أعزب" %}{{inscription.nomPrenomConjoint}} {% endif %} </td>
+                    
+                        <td><label  class="mt-3 "> {% if inscription.etatCivil !="أعزب" %}المهنـــة  <span>: </span>  {% endif %} </label> </td>
+                        <td>{% if inscription.etatCivil !="أعزب" %}{{inscription.emploiConjoint}} {% endif %} </td>
+                    </tr>
+                    
+            {% endif %}
+                <tr class="vide">
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                </tr>
+                <tr>
+                    <th colspan="4">2<span>. </span>  العنوان الرّسمـي <span>: </span>  </h4></th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            
+                <tr>
+                    <td  >  <label  class="mt-3 ">مكان الإقامـة  <span>: </span></label></td>
+                    <td  colspan="3">{{ inscription.adresse}}  <span class="esp"></span>&nbsp;{{inscription.regionAdresse}}</td>
+                    <td> </td>
+                    <td> </td>
+                </tr>
+                <tr>
+                    <td><label  class="mt-3 ">الولاية  <span>: </span></label></td>
+                    <td>{{codeGouvAdresse}}    </td>
+                    <td> </td>
+                    <td> </td>   
+                </tr>
+                <tr>
+                    <td ><label  class="mt-3 ">الترقيم البريدي  <span>: </span></label></td>
+                    <td> {{ inscription.codePostal}} </td>
+                    <td> </td>
+                    <td> </td>
+                </tr>
+                <tr  >
+                    <td><label  class="mt-3 ">رقم الهاتـف القـارّ  <span>: </span></label></td> 
+                    <td> {{ inscription.telephoneFixe}} </td>
+                    <td> </td>
+                    <td> </td>
+                </tr>
+                <tr>
+                    <td ><label  class="mt-3 ">الجـوّال  <span>: </span></label></td>
+                    <td> {{ inscription.telephonePortable}} </td>
+                    <td> </td>
+                    <td> </td>
+                </tr>
+                <tr>
+                    <td >  <label  class="mt-3 ">العنوان الإلكتروني  <span>: </span></label></td>
+                    <td>{{ inscription.mail}}  </td>
+                    <td> </td>
+                    <td> </td>
+                </tr>
+                <tr class="vide">
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                </tr>
+                <tr>
+                    <th colspan="4">3<span>. </span> المستـوى التعليمـي المطلوب <span>: </span>  </h4></th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            
+                <tr>
+                    <td > <label  class="mt-3 ">  المستـوى التعليمـي  <span>: </span></label></td>
+                    <td colspan="3">
+                        <b class="niveau">{{inscription.niveauAffiche}}</b>
+                     </td>
+                    <td> </td>
+                    <td> </td>
+                </tr>
+                <tr>
+                    <td  class="col2"><label  class="mt-3 ">إسم  الشهادة  المتحصّل عليها   <span>: </span></label></td>
+                    <td>{{inscription.nomDiplome}}   </td>
+                    <td> </td>
+                    <td> </td>
+                </tr>
+                <tr> 
+                    <td  class="col2" > <label  class="mt-3 ">  الإختصاص في  الشهادة      <span>: </span></label> </td>
+                    <td> {{inscription.specialiteDiplome}}    </td>
+                    <td> </td>
+                    <td> </td>
+                <tr>
+                    <td  class="col2" >   <label  class="mt-3 ">  صـادرة عـن <span>: </span>  </label></td>
+                    <td>  &nbsp;مؤسّسة &nbsp;{{inscription.typeEtablissement}}  </td>
+                    <td> </td>
+                    <td> </td>
+                </tr>
+                <tr>
+                    <td class="col2" ><label  class="mt-3">سنة الحصول على الشهادة <span class="arrow-left">(</span><span>سنة  <span class="esp"> </span> التخرّج</span><span class="arrow-right">)</span>   <span>: </span></label></td>
+                    <td> {{inscription.anneeDiplome}}  </td>
+                    <td> </td>
+                    <td> </td>
+                </tr>
+                {% if inscription.typeEtablissement !="وطنية" %}
+                <tr>
+                    <td class="col2"> <label  class="mt-3 "> سنة الحصول على  مقرر المعادلة   <span>: </span></label></td>
+                    <td>  {{inscription.anneeEquivalence}}  </td>
+                    <td> </td>
+                    <td> </td>
+                </tr>
+                 {% endif %}
+                <tr>
+                    <td  class="col2"><label  class="mt-3 ">   إسم مؤسّسة التعليم العالي   <span>: </span></label></td>   
+                <td> {{inscription.nomEtablissement}}</td>
+                <td> </td>
+                <td> </td>
+                </tr>
+                <tr>
+                    <th colspan="4">4<span>. </span>  معدّل سنوات الدّراسة في  التعليم العالـي  <span>: </span>  </th>
+                    <th> </th>
+                    <th> </th>
+                    <th> </th>
+                </tr>
+            
+                    {% set  labelMoyG = " " %}
+                     {% set  labelBac = " " %}  
+                    {% set  labelMoy1 = "" %} 
+                    {% set  labelMoy2 = "" %} 
+                    {% set  labelMoy3 = "" %} 
+                    {% set  labelMoy4= "" %} 
+                    {% set  labelMoy5 = "" %} 
+                    {% if inscription.niveau == "1er cycle" %}
+                    {% set  labelMoyG = "المعدل العام لسنتي الدراسة في التعليم العالي" %} 
+                    {% set  labelMoy1 = "المعدل العام  للسنة  الأولى   من التعليم العالي   بنجاح  " %}
+                    {% set  labelMoy2 = "المعدل العام  للسنة  الثانية   من التعليم العالي   بنجاح  " %}
+
+                    {% elseif inscription.niveau == "licence" %}
+                        {% set  labelMoyG = "المعدل العام لسنوات الدراسة في التعليم العالي" %}  
+                        {% set  labelMoy1 = "المعدل العام  للسنة  الأولى   من التعليم العالي   بنجاح  " %}
+                        {% set  labelMoy2 = "المعدل العام  للسنة  الثانية   من التعليم العالي   بنجاح  " %}
+                        {% set  labelMoy3 = "المعدل العام  للسنة  الثالثة   من التعليم العالي   بنجاح  " %}
+                    
+                    {% elseif inscription.niveau == "formation" %}
+                        
+                            {% set  labelMoyG = "المعدل العام لسنوات الدراسة   " %}  
+                            {% set  labelMoy1 = "معدل الكفاية المستهدفة (CC1)  " %}
+                            {% set  labelMoy2 = "معدل الكفاية المستهدفة (CC2)  " %}
+                            {% set  labelMoy3 = "معدل الكفاية المستهدفة (CC3)  " %}
+                            {% set  labelMoy4 = "معدل الكفاية المستهدفة (CC4)  " %}
+
+                    {% elseif inscription.niveau == "iset" %}
+                        
+                            {% set  labelMoyG = "  المعدل العام لسنوات الدراسة في التعليم العالي " %}  
+                            {% set  labelMoy1 = "المعدل العام   للسنة  الأولى   من التعليم العالي  بنجاح  " %}
+                            {% set  labelMoy2 = "المعدل العام  للسنة  الثانية   من التعليم العالي  بنجاح  " %}
+                            {% set  labelMoy3 = "المعدل العام  للسنة  الثالثة   من التعليم العالي   بنجاح  " %}
+                            {% set  labelMoy4 = "المعدل العام  للسنة  الرابعة   من التعليم العالي   بنجاح  " %}
+                         {#   {% set  labelMoy5 = "المعدل العام للسداسي الخامس  بنجاح  " %}  #}
+
+                    {% endif %}
+
+                <tr class="moy">
+                    
+                    <td   class="col2" >
+                        {% if inscription.moyenne1 is not null and inscription.moyenne1 is defined %}
+                            <label >{{labelMoy1}} <span>: </span> </label>
+                        {% endif %}
+                    </td>
+                    <td> <p class="pcd pd"  style=" font-weight: 400 !important;">{% if inscription.moyenne1 is not null and inscription.moyenne1 is defined %} {{inscription.moyenne1 }}  <span>/ </span> 20    {% endif %}</p> </td>
+                    <td> </td>
+                    <td> </td>
+                </tr>
+                <tr class="moy">
+                    <td  class="col2"  >
+                        {% if inscription.moyenne2 is not null and inscription.moyenne2 is defined   %}
+                                    <label  style="">{{labelMoy2}}   <span>: </span></label>
+                        {% endif %}
+                    </td>
+                    <td> {% if inscription.moyenne2 is not null and inscription.moyenne2 is defined %} <p class="pcd pd"  style=" font-weight: 400 !important;">  {{inscription.moyenne2 }} <span>/ </span> 20  {% endif %}</p></td>
+                    <td> </td>
+                    <td> </td>
+                </tr> 
+                {% if inscription.moyenne3 is not null   %}
+                <tr class="moy">
+                    <td  class="col2" >
+                        {% if inscription.moyenne3 is not null and  inscription.niveau in ["formation" ,"iset","licence"] %}
+                            <label  style=" ">  {{labelMoy3}}  <span>: </span> </label>
+                        {% endif %}
+                    </td>
+                    <td>   {% if inscription.moyenne3 is not null and  inscription.niveau in ["formation" ,"iset","licence"] %} <p class="pcd pd"  style=" font-weight: 400 !important;">  {{inscription.moyenne3 }} <span>/ </span> 20  {% endif %}</p></td>
+                    <td> </td> 
+                    <td> </td>
+                </tr>
+                {% endif %}
+                {% if  inscription.moyenne4 is not null and  inscription.niveau in ["formation" ,"iset"] %}
+                <tr class="moy">
+                    <td  class="col2"  >
+                        {% if inscription.moyenne4 is not null and inscription.moyenne4 is defined %}
+                            <label  style=" "> {{labelMoy4}}  <span>: </span></label>
+                        {% endif %}
+                    </td>
+                    <td>{% if inscription.moyenne4 is not null and inscription.moyenne4 is defined %}<p class="pcd pd"  style=" font-weight: 400 !important;">  {{inscription.moyenne4 }} <span>/ </span> 20 {% endif %}</p> </td>
+                    <td> </td>
+                    <td> </td>
+                </tr>
+                {% endif %}
+                {% if  inscription.moyenne5 is not null and  inscription.niveau == "iset" %}        
+                    <tr class="moy">
+                        <td  class="col2"  >
+                            {% if inscription.moyenne5 is not null and inscription.moyenne5 is defined %}
+                                <label  style=" "> {{labelMoy5}}  <span>: </span> </label>
+                            {% endif %}
+                        </td>
+                        <td>{% if inscription.moyenne5 is not null and inscription.moyenne5 is defined %} <p class="pcd pd"  style=" font-weight: 400 !important;"> {{inscription.moyenne5 }}  <span>/ </span> 20 </p> {% endif %}</td>
+                        <td> </td>
+                        <td> </td>
+
+                    </tr>
+                {% endif %}
+                <tr  class="score moy">
+                     <td> </td>
+                    <td colspan="3"  >
+                        {% if inscription.moyenneGenerale is not null and inscription.moyenneGenerale is defined %}
+                            <label  class="mt-3 ">
+                                {{labelMoyG}}  <span>: </span>
+                            </label>
+                        {% endif %}
+                        {% if inscription.moyenneGenerale is not null and inscription.moyenneGenerale is defined %} <p class="pcd"> {{inscription.moyenneGenerale }} <span>/ </span> 20 </p>{% endif %}
+                    </td>
+                    <td> </td>
+                    <td> </td>
+                
+                </tr>
+                <tr class="vide">
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                </tr>
+                <tr>
+                    <th  colspan="4">5<span>. </span>   المعدل المتحصّل عليه في شهادة البكالوريا  <span>: </span> 
+                    </th>
+                    <th> </th>
+                    <th> </th>
+                    <th> </th>
+                
+                </tr>
+            
+                <tr>
+                    <td colspan="3">
+                   {#     {% if inscription.diplomeTanfil =="bac" %}
+                                    <label  style=" font-weight: 400 !important;">     متحصل على شهادة البكالوريا بملاحظة   <span>: </span></label>
+                                    
+                               <b> {% if inscription.scoreTanfil == "0,5" %}متوسط
+                                {% elseif inscription.scoreTanfil == 2 %} قريب من الحسن أو فوق المتوسّط
+                                {% elseif inscription.scoreTanfil == 3 %} حسن
+                                    {% elseif inscription.scoreTanfil == 4 %} حسن جدا   
+                                    {% endif %}  
+                                </b>
+                        {% else %}
+                            <label style=" font-weight: 400 !important;">  متحصل على شهادة تكوين منظرة بالمستوى الثالث من سلم الوظائف   <span class="esp"> </span>  الوطني</label>
+                        {% endif %}  #}                    </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                </tr>
+                <tr  class="score moy ">
+                    <td> </td>
+                    <td colspan="3" class="" >
+                        {% if inscription.diplomeTanfil =="bac" %}
+                                <label  class="mt-3 "> المعدّل المتحصّل عليه في شهادة البكالوريا   <span>: </span></label>
+                            {% else %}
+                               {# <label  class="mt-3 "> تنفيل  شهادة التكوين المنظرة بالمستوى الثالث   <span>: </span></label>  #}
+                            {% endif %}
+                            <p class="pcd">   {{inscription.scoreTanfil }}<span>&nbsp;</span> </p>
+                    </td> 
+                    <td> </td>
+                    <td> </td>
+                
+                </tr>
+            
+                <tr class="vide">
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                </tr>   
+                <tr class="score moy scoreTotal">
+                     <td> </td>
+                    <td colspan="3" >
+                         <label class="mt-3">    مجموع النقاط المسندة لملف الترشح   <span>: </span></label>
+                       <p class="pcd">   {{inscription.totalScore }} </p>
+                     </td>
+                    <td> </td> 
+                    <td> </td> 
+                </tr>
+                
+            </tbody>
+        </table> 
+    </div>
+
+</div>                     
+                     
+{% endblock %}
+
+{% block javascripts %} 
+   {{ parent()}}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+    <script>
+    
+    $(document).ready(function() {
+
+
+        window.printPDF = function(name) {
+            $("#printD").empty().html($("#main-wrapper").html())
+            /*Customize html*/
+            $("#printD #navbarSupportedContent").remove()
+            $("#printD footer").remove()
+             $niveau  =$('#printD .niveau').text().replace('(', '<span class="arrow-left">(</span>');
+            $niveau  =$niveau.replace(')', '<span class="arrow-right">(</span>');
+            $('#printD .niveau').html($niveau)
+            $("#printD td.col2").attr('colspan','2')
+            $("#printD td.col3").attr('colspan','3')
+            $("#printD .arrow-right").html('(')
+            $("#printD .arrow-left").html(')')
+            //$("#printD .pd").attr('style','font-weight:600;')
+                $("#printD .esp").html('&nbsp;')
+                $("#printD .esp2").attr('style','padding: 0 4px !important;')
+                $("#printD  .infos").removeClass('print-mobile')
+            $("#printD  .title-inscription").removeClass('title-inscription-mobile')
+            var element = document.getElementById('printD');
+      
+
+            var opt = {
+                    margin: [30, 0, 30, 0], //top, left, buttom, right,
+                    filename: name+'.pdf',
+                    image: {type: 'jpeg',quality: 0.98},
+                    html2canvas: {dpi: 400, scale: 4, letterRendering: true},
+                    pagebreak: {mode: 'avoid-all'},
+                    jsPDF: {unit: 'pt', format: 'a4', orientation: 'portrait'}
+                };
+            var worker = html2pdf();
+       
+           console.log(worker); 
+           worker.set(opt)
+                 .from(element)
+                 .toPdf()
+                 .get('pdf')
+                 .then(function (doc) {
+                     var totalPages = doc.internal.getNumberOfPages();
+                     for (var i=1; i<=totalPages; i++) {
+                         if (i > 1) {
+                           doc.setPage(i);
+                           //?????
+                         }
+                     }
+       
+                }).save();  
+                setTimeout(HidePrintFunction, 10);
+                //setTimeout(urlFunction, 400);
+
+
+                          
+        }
+        function HidePrintFunction() {
+            document.getElementById('printD').style.display = "none";
+         } 
+       
+
+        $('#dow').click(function(){ 
+            libelle  ="{{grade.libelle}}"
+            spec=" {{inscription.specialite.libelle}}"
+            annee= " {{grade.concours.annee}}"
+            numInsc="{{inscription.id}}"
+            printPDF('مطلب ترشح لإنتداب  '+ libelle+'  إختصاص '+spec+  ' بعنوان سنة  2024 - عدد التسجيل - '+numInsc)
+        
+        })
+         
+        });
+        
+    </script>
+     
+{% endblock %}

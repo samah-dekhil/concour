@@ -1,0 +1,53 @@
+{% extends 'layout_admin.html.twig' %}
+
+
+
+{% block main %}
+
+<div class="card-body">
+<h5 class="card-title">Liste des utilisateurs <a href="{{ path('app_register') }}" class="btn btn-primary me-5" style="float:right"><i class="me-2 mdi mdi-plus-circle"></i>Ajouter nouveau utilisateur</a></h5>
+
+</div>    
+    <div class="card">
+      <div class="card-body">
+        
+        <div class="table-responsive col-md-12">
+          <table id="zero_config" class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>Nom & Prénom</th>
+                <th>Email</th>
+                <th>Etat</th>
+                <th>Roles</th>
+                <th>Actions</th>
+             
+              </tr>
+            </thead>
+            <tbody>
+            
+            {% for user in users %}
+              <tr>
+                <td >  {{user.fullName}}</td>
+                <td>  {{user.email}}</td>
+                <td> {% if user.isVerified == 1 %}<i class="me-2 mdi mdi-check-circle" style="color:green"></i> Activé {% else %}<i class="me-2 mdi mdi-close-circle"  style="color:red"></i> Désactivé {% endif %}</td>
+                  <td>{{ user.roles|first}}
+                  <td>
+                  <a class="btn btn-info" href="{{path('user_edit',{id:user.id})}}"><i class="me-2 mdi mdi-grease-pencil"></i>Modifier<a>&nbsp;
+                  <a class="btn btn-danger" href="{{path('user_change_password',{id:user.id})}}"><i class="me-2 mdi mdi-key-variant"></i>Modifier Mot de passe<a> 
+                </td>
+              </tr>
+            {% endfor %}
+              
+                
+            
+              
+            </tbody>
+          
+          </table>
+        </div>
+      </div>
+    </div>
+
+
+
+{% endblock %}

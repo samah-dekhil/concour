@@ -1,0 +1,40 @@
+
+{#
+    This template is used to render errors of type HTTP 404 (Not Found)
+
+    This is the simplest way to customize error pages in Symfony applications.
+    In case you need it, you can also hook into the internal exception handling
+    made by Symfony. This allows you to perform advanced tasks and even recover
+    your application from some errors.
+    See https://symfony.com/doc/current/controller/error_pages.html
+#}
+
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+ {{ parent() }}
+{% endblock %}
+
+
+
+{% block main %}
+  
+
+    <div class="error-box">
+    <div class="error-body text-center">
+      <h1 class="error-title text-danger">{{ 'http_error.name'|trans({ 'status_code': 500 }) }}</h1>
+      <p class="text-muted mt-4 mb-4">
+        {{ 'http_error_500.description'|trans }}  
+      </p>
+            <p class="text-muted mt-4 mb-4">
+            {{exception.message }}
+          </p>
+      <a  href="{{path('app_home')}}" class="btn btn-danger btn-rounded waves-effect waves-light mb-5 text-white">Retour à la page d'accueil</a>
+    </div>
+  </div>
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

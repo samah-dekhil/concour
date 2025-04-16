@@ -1,0 +1,55 @@
+{% extends 'layout_admin.html.twig' %}
+
+{% block body_id admin_concours_new %}
+
+{% block main %}
+  <style>
+    #zero_config_wrapper{width:100%;}
+    .libelle{
+      background-color: #cccccc7a;
+      width: auto;
+      font-size: 17px;
+      color: #2222bbd6;
+      padding: 5px 15px;
+      font-weight: 600;
+      border: 1px solid #cccccc38;
+      border-radius: 20px;
+    }
+    label.mt-3{font-weight:700!important;}
+  </style>
+  <div class="card-body">
+    <h4 class="card-title">Détails du concours</h4>
+    <div class="d-flex justify-content-end" style="margin-top:0">
+      <!-- begin::Button -->
+
+      {% if is_granted("ROLE_ADMIN") %}
+      <a href="{{ path('concours_edit', { token: concours.token }) }}" class="btn btn-primary me-5"><i class="me-2 mdi mdi-grease-pencil"></i>Modifier</a>
+      <a href="{{ path('phase_index', { tokenConcours: concours.token }) }}" class="btn btn-warning me-5"><i class="me-2 mdi mdi-format-list-numbers"></i>Phases Concours</a>
+      <a href="{{ path('grade_index', { token: concours.token }) }}" class="btn btn-info me-5"><i class="me-2 mdi mdi-format-list-numbers"></i>Liste des Grades</a>
+        {% endif %}
+      <a href="{{ path('daf_dashboard', { tokenConcours: concours.token }) }}" class="btn btn-success me-5" style="Color:#fff"><i class="me-2 mdi mdi-check-circle" aria-hidden="true"></i>Liste des Inscrptions Activées</a>
+      {% if is_granted("ROLE_ADMIN") %}
+      <a href="{{ path('inscription_desactives_index', { tokenConcours: concours.token }) }}" class="btn btn-danger me-5"><i class="me-2 mdi mdi-close-outline" aria-hidden="true"></i>Liste des Inscrptions désactivées</a>
+    {% endif %}
+    </div>
+  </div>
+
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="form-group row">
+          <label class="mt-3">Libellé :</label>
+          <div class="input-group libelle">{{ concours.libelle }}</div>
+        </div>
+        <div class="form-group row">
+          <label class="mt-3">Date Début Inscription</label>
+          <div class="input-group">{{ concours.dateDebutInscription|date('d/m/Y') }}</div>
+        </div>
+        <div class="form-group row">
+          <label class="mt-3">Date Fin Inscription</label>
+          <div class="input-group">{{ concours.dateFinInscription|date('d/m/Y') }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

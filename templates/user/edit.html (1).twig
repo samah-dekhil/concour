@@ -1,0 +1,56 @@
+{% extends 'layout_admin.html.twig' %}
+
+{% block main %}
+  <h5 class="card-title title-page title-form-bo">  <b class="text-danger"> Profil Utilsateur  </b> </h5>      
+            
+                     
+  <div class="col-md-12 " >
+      
+
+            <div class="card-body card  ">
+                      
+                {{ form_start(form, {'attr': {'id': 'regForm', 'class': 'form-bo form w-100 fv-plugins-bootstrap5 fv-plugins-framework'}}) }}
+                    <div class="form-group row">
+                        {{ form_label(form.fullName) }}
+                        {{ form_widget(form.fullName, {'attr': {'class': 'form-control bg-transparent','placeholder': 'Nom et prénom'}}) }}
+                        <div class="fv-plugins-message-container invalid-feedback">{{ form_errors(form.fullName) }}</div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="form-check mr-sm-2">
+                            {{ form_label(form.isVerified) }}
+                            {{ form_widget(form.isVerified, {'attr': {'class': 'form-check-input'}}) }}
+                        </div>
+                        <div class="fv-plugins-message-container invalid-feedback">{{ form_errors(form.isVerified) }}</div>
+                    </div>
+                    {# <div class="form-group row">
+                        {{ form_widget(form.email, {'attr': {'class': 'form-control bg-transparent','placeholder': 'Email'}}) }}
+                        <div class="fv-plugins-message-container invalid-feedback">{{ form_errors(form.email) }}</div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        {{ form_widget(form.password.first, {'attr': {'class': 'form-control bg-transparent','placeholder': 'Mot de passe'}}) }}
+                        <div class="fv-plugins-message-container invalid-feedback">{{ form_errors(form.password.first) }}</div>
+                    </div>
+                    <div class="form-group row">
+                    {{ form_widget(form.password.second, {'attr': {'class': 'form-control bg-transparent','placeholder': 'Resaisir le mot de passe'}}) }}
+                        <div class="fv-plugins-message-container invalid-feedback">{{ form_errors(form.password.second) }}</div>
+                    </div>#}
+                    {# <div class="g-recaptcha" data-sitekey="6LcNeXImAAAAAJ3hfLjkSS7aEUOwYf1AZHKTjd5Q" data-callback="recaptchaCallback" style="margin-top: 41px;float: right;"></div>
+                    <input type="text" class="hiddenRecaptcha required" name="hiddenRecaptcha" id="hiddenRecaptcha">
+                    #} 
+
+                    <div class="card-body" style="padding-right: 0;">
+                        <button type="submit" class="btn btn-primary">
+                        Enregistrer
+                        </button>
+                    </div>
+                    
+                    {{ form_end(form) }} 
+                            
+              </div>    
+        
+    
+  
+  </div>
+
+{% endblock %}

@@ -1,0 +1,226 @@
+{% extends 'layout_admin.html.twig' %}
+
+{% block main %}
+<div class="col-md-6 col-lg-4 col-xlg-4">
+  
+</div>
+<div class="col-md-6 col-lg-4 col-xlg-4">
+    <div class="card card-hover">
+    <div class="box bg-warning text-center">
+        <h1 class="font-light text-white">
+        <i class="me-2 mdi mdi-account-plus"></i>
+        </h1>
+        <h6 class="text-white">Toutes les inscriptions</h6><br> 
+        <a href="{{path('daf_inscription_actives_index',{tokenConcours:concours.token})}}" class="small-box-footer">Plus de détails <i class="fas fa-arrow-circle-right"></i></a>
+    </div>
+    </div>
+</div>
+<div class="col-md-6 col-lg-4 col-xlg-4">
+  
+</div>
+<div class="col-md-2 col-lg-2 col-xlg-2">
+  
+</div>
+{% for key,inscriptionsGrade in inscriptions %}
+{% set idGrade = ids[key]%}
+<div class="col-md-6 col-lg-4 col-xlg-4">
+    <div class="card card-hover">
+    <div class="box bg-success text-center">
+        <h1 class="font-light text-white">
+        <i class="me-2 mdi mdi-account-plus"></i>
+        </h1>
+        <h6 class="text-white">Inscriptions de "{{key}}"</h6><br> 
+    
+        <a href="{{path('inscriptions_grade',{tokenConcours:concours.token,token:idGrade})}}" class="small-box-footer">Plus de détails <i class="fas fa-arrow-circle-right"></i></a>
+    </div>
+    </div>
+</div>
+{% endfor %}
+
+
+<div class="col-md-2 col-lg-2 col-xlg-2">
+  
+</div>
+
+    <style>
+            [role="table"] div.filter-panel label[for="filter-column"]:hover {
+                background: #3d4451;
+            }
+            [role="table"] div.filter-panel label[for="filter-column"] {
+                float: right;
+                border-radius: 4px;
+                margin: 0 0 0 10px;
+                padding: 10px 20px 11px 20px;
+                line-height: 24px;
+                height: 43px;
+                background: #1d5fd1;
+                font-family: "Roboto", arial, sans-serif;
+                color: #fff;display: inline-block;
+                cursor: pointer;
+                text-align: center;    min-width: 20px;-moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                -webkit-transition-property: background, color;
+                -webkit-transition-duration: 0.2s;
+                -webkit-transition-timing-function: ease;
+                -moz-transition-property: background, color;
+                -moz-transition-duration: 0.2s;
+                -moz-transition-timing-function: ease;
+                -o-transition-property: background, color;
+                -o-transition-duration: 0.2s;
+                -o-transition-timing-function: ease;
+                -ms-transition-property: background, color;
+                -ms-transition-duration: 0.2s;
+                -ms-transition-timing-function: ease;
+                transition-property: background, color;
+                transition-duration: 0.2s;
+                transition-timing-function: ease;
+            }[role="table"] div.filter-panel {
+                display: block;
+                position: relative;
+                float: right;
+            }[role="table"] div.filter-panel label[for="filter-column"]::after {
+                display: inline-block;
+                content: "▼";
+                margin-left: 30px;
+                position: relative;
+                top: -2px;
+                line-height: 1;
+                font-family: arial, sans-serif;
+            }[role="table"] input#filter-column[type="checkbox"]:checked ~ div.table-desc > div.filter-panel label[for="filter-column"]::after {
+                transform: scaleY(-1);
+                -webkit-transform: scaleY(-1);
+                top: 3px;
+            }
+                        /* Table Cell Text Wrap Button */
+                        [role="table"] div.filter-panel label[for="wrap-text"] {
+                        float: right;
+                        padding: 10px 20px 11px 20px;
+                        line-height: 24px;
+                        height: 24px;
+                        border-radius: 4px;
+                        font-family: "Roboto", arial, sans-serif;
+                        }
+
+                        [role="table"] div.filter-panel label[for="wrap-text"]::after {
+                        content: "â€¦";
+                        margin: 0 0 0 10px;
+                        font-family: arial, sans-serif;
+                        display: inline-block;
+                        width: 15px;
+                        }
+
+                        /* Wrap/ Unwrap Table Cell */
+                        [role="table"]
+                        input#wrap-text[type="checkbox"]:checked
+                        ~ [role="row-group"]
+                        [role="row"]
+                        span[role="cell"],
+                        [role="table"]
+                        input#wrap-text[type="checkbox"]:checked
+                        ~ [role="row-group"]
+                        [role="row"]
+                        span[role="column-header"] {
+                        display: flex;
+                        white-space: normal;
+                        align-items: center;
+                        z-index: 1;
+                        word-break: break-word;
+                        }
+
+                        [role="table"]
+                        input#wrap-text[type="checkbox"]:checked
+                        ~ div.table-desc
+                        div.filter-panel
+                        label[for="wrap-text"]::after {
+                        content: "â¤¶";
+                        color: #fff;
+                        font-family: arial, sans-serif;
+                        }
+
+                        [role="table"]
+                        input#wrap-text[type="checkbox"]:checked
+                        ~ div.table-desc
+                        div.filter-panel
+                        label[for="wrap-text"] {
+                        background: #1d5fd1;
+                        color: #fff;
+                        }
+                        .ul{overflow: scroll;
+                        height: 350px;}
+                        [role="table"] div.filter-panel .ul,.ul {
+                            display: none;
+                            position: absolute;
+                            top: 55px;
+                            right: 0;
+                            z-index: 10;
+                            min-width: 190px;
+                            white-space: normal;
+                            list-style-type: none;
+                            border: 1px solid #dde5f0;
+                            border-radius: 4px;
+                            margin: 0;
+                            padding: 15px 25px 15px 20px;
+                            background: #fff;
+                            box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.1);
+                            -webkit-box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.1);
+                            -moz-box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.1);
+                        }
+                        [role="table"] div.filter-panel .ul li  {
+                            padding:3px 0;font-size: 14px;
+
+                        }
+
+                        [role="table"] div.filter-panel .ul li input , .ul input{margin-right: 5px}
+                        .small-box-footer{
+                            background-color: rgba(0,0,0,.1);
+                            color: rgba(255,255,255,.8);
+                            display: block;
+                            padding: 3px 0;
+                            position: relative;
+                            text-align: center;
+                            text-decoration: none;
+                            z-index: 10;
+                            color: #1f2d3d!important;
+                            margin: -9px;
+                        }
+                        .nbr{margin-bottom: 10px;}
+    </style>
+
+
+{% endblock %}
+{% block javascripts %}
+    {{parent()}}
+
+    <script> 
+        jQuery(function () {
+    
+            jQuery('.btndisable').click(function(){
+                $link=$(this).attr('data-link')
+                $('.disable').attr('href',$link)
+                jQuery('#ModalConfirm').modal('show');
+            })
+            jQuery('.disable').click(function(){
+                $link=$(this).attr('href')
+                window.location.href = $link;
+            })
+
+
+            $('.toggle-vis').change(function(){
+                $dataColumn=  $(this).attr('data-column')
+                table.columns($dataColumn).visible($(this).is(':checked'))
+            })
+            $('.toggle-vis').each(function(){
+                $dataColumn=  $(this).attr('data-column')
+                table.columns($dataColumn).visible($(this).is(':checked'))
+            })
+
+            $('.table-desc > div > label').click(function(){
+                $('div.filter-panel .ul').toggle();
+            });
+            
+            $('.dt-buttons').remove()
+        })
+
+    </script>
+{% endblock %}

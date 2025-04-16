@@ -1,0 +1,11 @@
+/var/
+/vendor/
+/node_modules/
+/.env
+.env.local
+.env.*.local
+*.log
+.idea/
+*.swp
+.DS_Store
+Thumbs.db

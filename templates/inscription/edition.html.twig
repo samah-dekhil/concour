@@ -1,0 +1,171 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block main %}
+  <h5 class="card-title title-page">
+    <b class="text-danger">
+     طباعة مطلب  ترشح للمناظرة الخارجيّة لإنتداب  {{grade.libelle}} بعنوان سنة 2024 
+
+    </b>
+    </h5>      
+            
+                     
+  <div class="col-md-12" >
+      <div class="col-md-5 editionPage" style="margin: 0 auto;">
+        <div class=" mssssg">
+                    {{ include('_flash_messages.html.twig') }}
+                    </div>
+          
+              <div class="card-body card edition " attr-g="{{grade.id}}">
+                      
+                {{ form_start(form) }}
+            
+                    <div class="form-group row col-md-6">
+                      {{ form_label(form.cin_search) }}
+                      {{ form_widget(form.cin_search) }}
+                    </div>
+                      
+                    <div class="form-group row col-md-6">
+                      {{ form_label(form.dateCin) }}
+                      <div class="input-group" style="padding-right: 0;">
+                      {{ form_widget(form.dateCin) }}
+                      </div>
+                    </div>
+                    <div class="form-group row col-md-6">
+                      {{ form_label(form.dateNaissance) }}
+                      <div class="input-group" style="padding-right: 0;">
+                      {{ form_widget(form.dateNaissance) }}
+                      </div>
+                    </div>
+                  <div class="g-recaptcha" data-sitekey="6LcNeXImAAAAAJ3hfLjkSS7aEUOwYf1AZHKTjd5Q" data-callback="recaptchaCallback" style="margin-top: 41px;float: right;"></div>
+                  <input type="text" class="hiddenRecaptcha required" name="hiddenRecaptcha" id="hiddenRecaptcha">
+        
+                    <div class="border-top">
+                        <div class="card-body" style="padding-right: 0;">
+                            <button type="submit" class="btn btn-primary">
+                            مصادقة
+                            </button>
+                        </div>
+                        
+                    </div>
+          {{ form_end(form) }} 
+                            
+              </div>    
+        
+      </div>
+  
+  </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script>
+      console.log($('.edition').attr('attr-g'))
+      if($('.edition').attr('attr-g')==2){
+        $('#inscription_edition_specialite option[value="1"]').remove()
+        $('#inscription_edition_specialite option[value="2"]').remove()
+        $('#inscription_edition_specialite option[value="3"]').remove()
+      }if($('.edition').attr('attr-g')==1){
+        $('#inscription_edition_specialite option[value="4"]').remove()
+      }
+
+        function restrictInputOtherThanArabic($field)
+        {
+          // Arabic characters fall in the Unicode range 0600 - 06FF
+          var arabicCharUnicodeRange = /[\u0600-\u06FF]/;
+
+          $field.bind("keypress hover", function(event)
+          {
+            var key = event.which;
+            // 0 = numpad
+            // 8 = backspace
+            // 32 = space
+            if (key==8 || key==0 || key === 32)
+            {
+              return true;
+            }
+
+            var str = String.fromCharCode(key);
+            if ( arabicCharUnicodeRange.test(str) )
+            {
+              return true;
+            }
+
+            return false;
+          });
+        }
+
+
+
+
+      $('input.required')
+        .on('invalid', function(){
+          return this.setCustomValidity('الرجاء تعمير هذه الخانة');
+        })
+        .on('input', function(){
+          return this.setCustomValidity('');
+        });
+        var form = $("form");
+      form.validate({
+        errorPlacement: function errorPlacement(error, element) {
+          element.after(error);
+        },
+       
+        ignore: ".ignore",
+        rules: {
+          hiddenRecaptcha: {
+            required: function () {
+                if (grecaptcha.getResponse() == '') {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+           } 
+    			},
+          messages: {
+            hiddenRecaptcha: {
+            required: '.Veuillez valider le test reCAPTCHA '
+           }
+            
+        },
+      });
+      $("#inscription_edition_cin_search").inputmask("99999999");
+      function recaptchaCallback() {
+      $('#hiddenRecaptcha').valid();
+    };
+      jQuery.extend(jQuery.validator.messages, {
+        required: "الرجاء تعمير هذه الخانة",
+        remote: "الرجاء تصحيح هذا المجال.",
+        email: "يرجى إدخال عنوان بريد إلكتروني صالح.",
+        url: "Please enter a valid URL.",
+        date: "ارجوك ادخل تاريخ صحيح.",
+        dateISO: "Please enter a valid date (ISO).",
+        number: "يرجى إدخال  رقما صالحا.",
+        digits: "الرجاء إدخال أرقام فقط.",
+        creditcard: "Please enter a valid credit card number.",
+        equalTo: "من فظلك ادخل نفس الخانة مرة أخرى.",
+        accept: "Please enter a value with a valid extension.",
+        maxlength: jQuery.validator.format("الرجاء إدخال ما لا يزيد عن {0} حرف."),
+        minlength: jQuery.validator.format("الرجاء إدخال {0} حرف على الأقل."),
+        rangelength: jQuery.validator.format("الرجاء إدخال قيمة يتراوح طولها بين {0} و {1} حرفًا."),
+        range: jQuery.validator.format("Please enter a value between {0} and {1}."),
+        max: jQuery.validator.format("الرجاء إدخال قيمة أقل من أو تساوي {0}."),
+        min: jQuery.validator.format("الرجاء إدخال قيمة أكبر من أو تساوي {0}.")
+      });
+        jQuery("#inscription_edition_cin_search").rules("add", {
+          required: true,
+          number:true,
+          rangelength: [8,8],
+          
+        messages: {
+            number: "يتكوّن رقم ب.ت.و من أرقام",
+          rangelength: " يتكوّن رقم ب.ت.و  من 8  أرقام",
+        
+        }})  
+    
+    </script>
+{% endblock %}

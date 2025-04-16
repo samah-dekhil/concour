@@ -1,0 +1,455 @@
+{% extends 'layout_admin.html.twig' %}
+
+{% block main %}
+
+
+    {% set gradeLibelle = grade.libelle %}
+
+    <div class="card-body">
+        <h5 class="card-title">Liste des inscriptions "{{grade.libelle}}"  </h5>
+    </div>
+    
+    <div class="card" role="table">
+        <div class="card-body">
+        <div class="table-desc">
+        <span></span>
+        <div class="filter-panel">
+            <label for="filter-column">Filter</label>
+            <div class="ul">
+                <p><input type="checkbox"  class="toggle-vis" checked data-column="0"/>ID Dossier</p>
+                <p><input type="checkbox"  class="toggle-vis" checked data-column="1"/>CIN</p>
+                <p><input type="checkbox"  class="toggle-vis" data-column="2"/>Date CIN </p>
+                <p><input type="checkbox"  class="toggle-vis" data-column="3"/>Nom </p>
+                <p><input type="checkbox"  class="toggle-vis" data-column="4"/>Prénom </p>
+                <p><input type="checkbox"  class="toggle-vis" data-column="5"/>nom Jeune fille</p>  
+                <p><input type="checkbox"  class="toggle-vis" data-column="6"/>prenom Pere</p> 
+                <p><input type="checkbox"  class="toggle-vis" data-column="7"/>prenom Mere </p> 
+                <p><input type="checkbox"  class="toggle-vis" data-column="8"/>Date Naissance</p>
+                <p><input type="checkbox"  class="toggle-vis" data-column="9"/>Ville naissance</p>
+                <p><input type="checkbox"  class="toggle-vis" data-column="10"/>Sexe</p>
+                <p><input type="checkbox"  class="toggle-vis" data-column="11"/>Etat civil</p>
+                <p><input type="checkbox"  class="toggle-vis" data-column="12"/>Nb Enfants</p>
+                <p><input type="checkbox"  class="toggle-vis" data-column="13"/>Nom & prénom Conjoint</p>
+                <p><input type="checkbox"  class="toggle-vis" data-column="14"/>Emploi Conjoint </p>
+                <p><input type="checkbox"  class="toggle-vis" data-column="15"/>Adresse</p>
+                <p><input type="checkbox"  class="toggle-vis" data-column="16"/>Region</p>
+                <p><input type="checkbox"  class="toggle-vis" data-column="17"/>Code postal</p>
+                <p><input type="checkbox"  class="toggle-vis" data-column="18"/>Gouvernorat</p>
+                <p><input type="checkbox"  class="toggle-vis" checked data-column="19"/>Email</p>
+                <p><input type="checkbox"  class="toggle-vis" data-column="20"/>N° Tél fixe</p>
+                <p><input type="checkbox"  class="toggle-vis" data-column="21"/>N° Tél Portable</p>
+                <p><input type="checkbox"  class="toggle-vis" data-column="22"/>Niveau</p>
+                <p><input type="checkbox"  class="toggle-vis" data-column="23"/>Diplome</p>
+                <p><input type="checkbox"  class="toggle-vis" data-column="24"/>Spécialité Diplome </p>
+                <p><input type="checkbox"  class="toggle-vis" data-column="25"/>Type Etablissement</p>
+                <p><input type="checkbox"  class="toggle-vis" data-column="26"/>Annee diplome</p>
+                <p><input type="checkbox"  class="toggle-vis" data-column="27"/>annee equivalence</p>
+                <p><input type="checkbox"  class="toggle-vis" data-column="28"/>Nom Etablissement</p>
+                <p><input type="checkbox"  class="toggle-vis" data-column="29"/>diplome tanfil</p>
+                <p><input type="checkbox"  class="toggle-vis" data-column="30"/>Moyenne 1 </p>
+                <p><input type="checkbox"  class="toggle-vis" data-column="31"/>Moyenne 2 </p>
+                <p><input type="checkbox"  class="toggle-vis" data-column="32"/>Moyenne 3 </p>
+                <p><input type="checkbox"  class="toggle-vis" data-column="33"/>Moyenne 4 </p>
+                <p><input type="checkbox"  class="toggle-vis" data-column="34"/>Moyenne 5 </p>
+                <p><input type="checkbox"  class="toggle-vis" data-column="35"/>Moyenne Générale </p>
+                <p><input type="checkbox"  class="toggle-vis" data-column="36"/>Score Tanfil</p>
+                <p><input type="checkbox" class="toggle-vis" checked  data-column="37"/>Score Total</p>
+                <p><input type="checkbox" class="toggle-vis" checked data-column="38"/>Gouv Concours </p>
+                <p><input type="checkbox" class="toggle-vis" checked data-column="39"/>Grade</p>
+                <p><input type="checkbox" class="toggle-vis" checked data-column="40"/>Specialité</p>
+                <p><input type="checkbox" class="toggle-vis"  checked  data-column="41"/>Date Insc </p>
+            </div>
+        </div>
+    </div>
+        <div class="table-responsive col-md-12">
+          <table id="zero_config_11" class="table table-striped table-bordered" style="width:100%;">
+            <thead>
+              <tr>
+                <th>ID Dossier</th>
+                <th>CIN</th>
+                <th>Date CIN</th>
+             
+                <th>Nom</th>
+                <th>Prénom </th>
+                <th> Nom Jeune fille</th>  
+                <th> Prénom pere</th> 
+                <th>Prénom mere </th> 
+                <th>Date Naissance</th>
+                <th>Ville naissance</th> 
+                <th> Sexe</th> 
+                <th> Etat civil</th> 
+                <th> Nb Enfants</th> 
+                <th>Nom & prénom Conjoint</th> 
+                <th>Emploi Conjoint </th>
+
+                <th>Adresse</th>
+                <th>Region</th>
+                <th>Code postal</th>
+                <th>Gouvernorat</th>
+                <th>Email</th>
+                <th>N° Tél fixe</th>
+                <th>N° Tél Portable</th>
+                <th>Niveau</th>
+                <th>Diplome</th>
+                <th>Spécialité Diplome </th>
+                <th>Type Etablissement</th>
+                <th>Annee diplome</th>
+                <th>anne equivalence</th>
+                <th>Nom Etablissement</th>
+
+                <th>diplome tanfil</th>
+                <th>Moyenne 1 </th>
+                <th>Moyenne 2 </th>
+                <th>Moyenne 3 </th>
+                <th>Moyenne 4 </th>
+                <th>Moyenne 5 </th>
+                <th>Moyenne Générale </th>
+
+                <th>Score Tanfil</th>
+                <th>Score Total</th>
+
+
+                <th>Gouv Concours </th>
+                <th>Grade</th>
+                <th>Specialité</th>
+                <th>Date Insc</th>
+              
+                {% if is_granted("ROLE_ADMIN") %}
+                <th>Actions</th>
+                {% endif %}
+
+              </tr>
+            </thead>
+            <tbody>
+            
+                {% for inscription in list %}
+                <tr>
+                  <td>{{inscription.id}}</td>
+                  <td>{{inscription.cin}}</td>
+                  <td>{{inscription.dateCin|date("d/m/Y")}}</td>
+          
+                  <td>{{inscription.nom}}</td>
+                  <td>{{inscription.prenom}}</td>
+                  <td> {{inscription.nomJeunefille}}</td>  
+                  <td> {{inscription.prenomPere}}</td> 
+                  <td>{{inscription.prenomMere}} </td> 
+                  <td>{{inscription.dateNaissance|date("d/m/Y")}}</td>
+  
+                  <td>
+                      {# {{inscription.villeNaissance}}  ************  #}
+                  
+                      {% set variant = gouvs|filter(variant => variant.id == inscription.villeNaissance)|first %}
+                      {% if variant %}
+                          {{variant.libelleGouv}}
+                      {% endif %}
+                  </td> 
+  
+                  <td> {{inscription.sexe}}</td> 
+                  <td> {{inscription.etatCivil}}</td> 
+                  <td>{{inscription.nbEnfants}}</td> 
+                  <td>{{inscription.nomPrenomConjoint}}</td> 
+                  <td>{{inscription.emploiConjoint}}  </td> 
+  
+                  <td>{{inscription.adresse}}</td>
+                  <td>{{inscription.regionAdresse}}</td>
+                  <td>{{inscription.codePostal}} </td>
+                  <td>
+                      
+                      {# {{inscription.codeGouvAdresse}}  ******** #}
+  
+                      {% set variant = gouvs|filter(variant => variant.id == inscription.codeGouvAdresse)|first %}
+                      {% if variant %}
+                          {{variant.libelleGouv}}
+                      {% endif %}
+                  
+                  </td>
+                  <td>{{ inscription.mail}} </td>
+                  <td>{{ inscription.telephoneFixe}}</td>
+                  <td>{{ inscription.telephonePortable}} </td>
+                  <td>{{inscription.niveauAffiche}}</td>
+                  <td>{{inscription.nomDiplome}} </td>
+                  <td>{{inscription.specialiteDiplome}} </td>
+                  <td> &nbsp;مؤسّسة &nbsp;{{inscription.typeEtablissement}} </td>
+                  <td> {{inscription.anneeDiplome}}</td>
+                  <td>{{inscription.anneeEquivalence}} </td>
+                  <td>{{inscription.nomEtablissement}}</td>
+  
+                  <td>{{inscription.diplomeTanfil}}</td>
+                  <td>{{inscription.moyenne1 }} </td>
+                  <td>{{inscription.moyenne2 }} </td>
+                  <td>{{inscription.moyenne3 }} </td>
+                  <td>{{inscription.moyenne4 }} </td>
+                  <td>{{inscription.moyenne5 }}</td>
+                  <td> {{inscription.moyenneGenerale }} </td>
+  
+                  <td>{{inscription.scoreTanfil}}</td>
+                  <td>{{inscription.totalScore }}</td>
+                  <td>{{inscription.codeGouv }}</td>
+                  <td>{{inscription.specialite.grade.libelle}}</td>
+                  <td>{{inscription.specialite.libelle}}</td>
+  
+                  <td>{{inscription.dateInscription|date("d/m/Y H:i:s")}}</td>
+
+                    {% if is_granted("ROLE_ADMIN") %}
+                <td>
+                    <button  class="btn btn-danger btndisable" data-link="{{path('inscription_disable',{tokenConcours:inscription.specialite.grade.concours.token,token:inscription.token})}}"><i class="me-2 mdi mdi-close-outline" aria-hidden="true"></i>Désactiver</button> 
+                  </td>
+                {% endif %}
+                </tr>
+              {% endfor %}
+              
+            </tbody>
+          
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="ModalConfirm" tabindex="-1" role="dialog"  data-bs-keyboard="false" data-bs-backdrop="static">
+        <div class="modal-dialog modal-lg" style="margin-top: 8%;"    >
+            <div class="modal-content">
+            
+            <div class="modal-body">
+                <h5 class="modal-title" style="margin-top:15px;margin-bottom:15px;"> Voulez vous vraiment désactiver  cette Inscription ?</h5>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary disable"  data-bs-dismiss="modal" href="">
+                    Oui 
+                </a>
+            
+                <button type="button"  class="btn btn-warning btnnonConf"  data-bs-dismiss="modal">
+                    Non
+                </button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        [role="table"] div.filter-panel label[for="filter-column"]:hover {
+            background: #3d4451;
+        }
+        [role="table"] div.filter-panel label[for="filter-column"] {
+            float: right;
+            border-radius: 4px;
+            margin: 0 0 0 10px;
+            padding: 10px 20px 11px 20px;
+            line-height: 24px;
+            height: 43px;
+            background: #1d5fd1;
+            font-family: "Roboto", arial, sans-serif;
+            color: #fff;display: inline-block;
+            cursor: pointer;
+            text-align: center;    min-width: 20px;-moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-transition-property: background, color;
+            -webkit-transition-duration: 0.2s;
+            -webkit-transition-timing-function: ease;
+            -moz-transition-property: background, color;
+            -moz-transition-duration: 0.2s;
+            -moz-transition-timing-function: ease;
+            -o-transition-property: background, color;
+            -o-transition-duration: 0.2s;
+            -o-transition-timing-function: ease;
+            -ms-transition-property: background, color;
+            -ms-transition-duration: 0.2s;
+            -ms-transition-timing-function: ease;
+            transition-property: background, color;
+            transition-duration: 0.2s;
+            transition-timing-function: ease;
+        }[role="table"] div.filter-panel {
+            display: block;
+            position: relative;
+            float: right;
+        }[role="table"] div.filter-panel label[for="filter-column"]::after {
+            display: inline-block;
+            content: "▼";
+            margin-left: 30px;
+            position: relative;
+            top: -2px;
+            line-height: 1;
+            font-family: arial, sans-serif;
+        }[role="table"] input#filter-column[type="checkbox"]:checked ~ div.table-desc > div.filter-panel label[for="filter-column"]::after {
+            transform: scaleY(-1);
+            -webkit-transform: scaleY(-1);
+            top: 3px;
+        }
+                    /* Table Cell Text Wrap Button */
+                    [role="table"] div.filter-panel label[for="wrap-text"] {
+                    float: right;
+                    padding: 10px 20px 11px 20px;
+                    line-height: 24px;
+                    height: 24px;
+                    border-radius: 4px;
+                    font-family: "Roboto", arial, sans-serif;
+                    }
+
+                    [role="table"] div.filter-panel label[for="wrap-text"]::after {
+                    content: "â€¦";
+                    margin: 0 0 0 10px;
+                    font-family: arial, sans-serif;
+                    display: inline-block;
+                    width: 15px;
+                    }
+
+                    /* Wrap/ Unwrap Table Cell */
+                    [role="table"]
+                    input#wrap-text[type="checkbox"]:checked
+                    ~ [role="row-group"]
+                    [role="row"]
+                    span[role="cell"],
+                    [role="table"]
+                    input#wrap-text[type="checkbox"]:checked
+                    ~ [role="row-group"]
+                    [role="row"]
+                    span[role="column-header"] {
+                    display: flex;
+                    white-space: normal;
+                    align-items: center;
+                    z-index: 1;
+                    word-break: break-word;
+                    }
+
+                    [role="table"]
+                    input#wrap-text[type="checkbox"]:checked
+                    ~ div.table-desc
+                    div.filter-panel
+                    label[for="wrap-text"]::after {
+                    content: "â¤¶";
+                    color: #fff;
+                    font-family: arial, sans-serif;
+                    }
+
+                    [role="table"]
+                    input#wrap-text[type="checkbox"]:checked
+                    ~ div.table-desc
+                    div.filter-panel
+                    label[for="wrap-text"] {
+                    background: #1d5fd1;
+                    color: #fff;
+                    }
+                    .ul{overflow: scroll;
+                    height: 350px;}
+                    [role="table"] div.filter-panel .ul,.ul {
+                        display: none;
+                        position: absolute;
+                        top: 55px;
+                        right: 0;
+                        z-index: 10;
+                        min-width: 190px;
+                        white-space: normal;
+                        list-style-type: none;
+                        border: 1px solid #dde5f0;
+                        border-radius: 4px;
+                        margin: 0;
+                        padding: 15px 25px 15px 20px;
+                        background: #fff;
+                        box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.1);
+                        -webkit-box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.1);
+                        -moz-box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.1);
+                    }
+                    [role="table"] div.filter-panel .ul li  {
+                        padding:3px 0;font-size: 14px;
+
+                    }
+
+                    [role="table"] div.filter-panel .ul li input , .ul input{margin-right: 5px}
+                    .small-box-footer{
+                        background-color: rgba(0,0,0,.1);
+                        color: rgba(255,255,255,.8);
+                        display: block;
+                        padding: 3px 0;
+                        position: relative;
+                        text-align: center;
+                        text-decoration: none;
+                        z-index: 10;
+                        color: #1f2d3d!important;
+                        margin: -9px;
+                    }
+                    .nbr{margin-bottom: 10px;}
+                    button.dt-button, div.dt-button, a.dt-button,button.dt-button:hover:not(.disabled), div.dt-button:hover:not(.disabled), a.dt-button:hover:not(.disabled){
+                        background-color: #da542e !important;
+                         background-image: none !important;
+                         border:none !important;
+                    }
+    </style>
+{% endblock %}
+{% block javascripts %}
+    {{parent()}}
+
+<script> 
+    jQuery(function () {
+        
+    var exportExcel = "{{exportExcel}}"
+    console.log('export "'+exportExcel+'"')
+   /* if(exportExcel == "0")
+       className ="remove"
+    else*/
+    className ="show"  
+        /************************************************
+         *                  Basic Table                 *
+         ************************************************/
+         /************************************************
+     *                  Basic Table                 *
+     ************************************************/
+    gradeLibellee ="{{grade.libelle}}" 
+
+        const table1 = $('#zero_config_11').DataTable({
+            //lengthMenu: [ [5, 25, 50, -1], [5, 25, 50, "All"] ],
+            language: {
+              url: 'https://cdn.datatables.net/plug-ins/1.10.15/i18n/French.json'
+            },
+            dom: 'Bfrtip',
+            buttons: [
+              {
+                extend: 'excelHtml5',
+                text: 'Exporter  en  Excel',
+                className: 'btn btn-danger dropdown-toggle text-white '+className,
+       
+                filename: 'Liste des inscriptions '+gradeLibellee,
+              }
+            ],"initComplete": function(settings, json) {
+              //  alert( 'DataTables has finished its initialisation.'+exportExcel );
+              //  if(exportExcel==0)
+                     //   $('.dt-buttons').remove()
+
+             //   else
+                $('.dt-buttons').attr('style','display:block !important')
+              }
+          })
+   
+  
+        jQuery('.btndisable').click(function(){
+            $link=$(this).attr('data-link')
+            $('.disable').attr('href',$link)
+            jQuery('#ModalConfirm').modal('show');
+        })
+        jQuery('.disable').click(function(){
+            $link=$(this).attr('href')
+            window.location.href = $link;
+        })
+
+
+        $('.toggle-vis').change(function(){
+            $dataColumn=  $(this).attr('data-column')
+            table1.columns($dataColumn).visible($(this).is(':checked'))
+        })
+        $('.toggle-vis').each(function(){
+            $dataColumn=  $(this).attr('data-column')
+            table1.columns($dataColumn).visible($(this).is(':checked'))
+        })
+
+        $('.table-desc > div > label').click(function(){
+            $('div.filter-panel .ul').toggle();
+         });
+      
+
+
+      
+       
+         
+       
+    })
+
+</script>
+{% endblock %}
