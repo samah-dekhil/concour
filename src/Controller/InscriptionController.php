@@ -237,7 +237,7 @@ class InscriptionController extends AbstractController
               /*  $tab_moyenne[] = (float) str_replace(',', '.', $request->request->all()['inscription']['moyenne5']);*/
               $scoreTanfil = (float) str_replace(',', '.', $request->request->all()['inscription']['scoreTanfil']);
                 /**************************************************CHECK LIST listNiveauxValides**********************************************************/
-                $listNiveauxValides = ["1er cycle", "licence", "iset", "formation"];
+                $listNiveauxValides = ["1er cycle", "licence", "iset", "formation","ing"];
                 $niveau = $request->request->all()['inscription']['niveau'];
 
                 if (in_array($niveau, $listNiveauxValides)) {
@@ -267,7 +267,7 @@ class InscriptionController extends AbstractController
                 $Inscription->setScoreTanfil($scoreTanfil);
                 $st = (float) str_replace(',', '.', $scoreTanfil);
                 $mg = (float) str_replace(',', '.', $moyenneGenerale);
-                $totalScore = number_format(((($mg * 2 ) + $st)/3), 3);/*moy generale modifiée */
+                $totalScore = number_format(((($mg * 2 ) + $st)/3), 2);/*moy generale modifiée */
                 $Inscription->setTotalScore(str_replace('.', ',', $totalScore));
 
                 /**************************************************CHECK LIST etatCivil******************************************************************/
@@ -403,7 +403,7 @@ class InscriptionController extends AbstractController
         $inscriptionDisabled->setEtatCivil($inscription->getEtatCivil());
         $inscriptionDisabled->setNbEnfants($inscription->getNbEnfants());
 
-        $inscriptionDisabled->setCodeGouv(11);
+        $inscriptionDisabled->setCodeGouv($inscription->getCodeGouv());
 
         $inscriptionDisabled->setAdresse($inscription->getAdresse());
         $inscriptionDisabled->setRegionAdresse($inscription->getRegionAdresse());
@@ -496,7 +496,10 @@ class InscriptionController extends AbstractController
             $nb = 4;
         } elseif ($niveau == "licence") {
             $nb = 3;
-        } elseif ($niveau == "1er cycle") {
+        } elseif ($niveau == "ing") {
+            $nb = 1;
+        }
+        elseif ($niveau == "1er cycle") {
             $nb = 2;
         } elseif ($niveau == "formation") {
             $nb = 4;
@@ -505,7 +508,7 @@ class InscriptionController extends AbstractController
         for ($i = 0; $i < $nb; $i++) {
             $somme += $tab_mayenne[$i];
         }
-        $moyenne_generale = number_format(($somme) / $nb, 3);
+        $moyenne_generale = number_format(($somme) / $nb, 2);
 
         return str_replace('.', ',', $moyenne_generale);
     }
@@ -542,15 +545,12 @@ class InscriptionController extends AbstractController
             } elseif ($niveau == "formation") {
                 $libelleDiplome = "شهادة تكوينية منظرة بالمستوى الرابع من سلم الوظائف  في إختصاص : (محاسبة أو جباية)";
             }
-
         }
-        if ($idGrade == 6) {
+        if ($idGrade == 2) {
 
-            if ($niveau == "iset") {
-                $libelleDiplome = "شهادة الأستاذية على الأقل أو شهادة معادلة لها في إختصاص : ( علوم اقتصادية أو حقوق )";
-            } elseif ($niveau == "licence") {
-                $libelleDiplome = "شهادة الإجازة التطبيقية في نظام أمد على الأقل أو شهادة معادلة لها في إختصاص : (علوم اقتصادية أو حقوق)";
-            }
+            if ($niveau == "ing") {
+                $libelleDiplome = " شهادة مهندس ";
+            } 
 
         }
         return $libelleDiplome;

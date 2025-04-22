@@ -68,7 +68,7 @@
                             {% set decision= asset('theme/documents/inspect/decision-inscpecteurs.pdf') %}
                                {% set programme= asset('theme/documents/inspect/programme-concours.pdf') %}
                                 {% set elements = asset('theme/documents/inspect/elements-evaluation.pdf') %}
-                            {% elseif grade.id == 6 %}
+                            {% elseif grade.id == 2 %}
                               {% set avis = asset('theme/documents/tresor/avis-concours.pdf')%}
                               {% set decision= asset('theme/documents/tresor/decision-tresor.pdf') %}
                                {% set programme= asset('theme/documents/tresor/programme-concours.pdf') %}
@@ -108,7 +108,16 @@
                          
                           
                       </ul>
+                        <div class="form-group row col-md-6">
+           <label for="math_captcha">الرجاء حل المعادلة التالية:</label>
+                <div class="input-group">
+                    <span class="input-group-text" id="math-captcha-question"></span>
+                   <input type="text" id="math_captcha" name="math_captcha" class="form-control required mathCaptcha" aria-describedby="math-captcha-question">
 
+                </div>
+                <p class="errorMathCaptcha" style="color: red; display: none;"></p>
+                  </div>
+                
                  
                     </div>
           
@@ -259,10 +268,7 @@
                     </div>
                   </div>
                   <div class="col-md-12 right">
-                    <div class="form-group row col-md-4 phone right">
-                              {{ form_label(form.telephoneFixe) }}
-                      {{ form_widget(form.telephoneFixe) }}
-                    </div>
+                    
                     <div class="form-group row col-md-4 phone right">
                       {{ form_label(form.telephonePortable) }}
                       {{ form_widget(form.telephonePortable) }}
@@ -336,7 +342,7 @@
                     <div class="bloc  bloc-moyenne">
 
                         <p class="text-danger"> مثال توضيحي لطريقة إدراج المعدّلات: 
-                        12,120
+                        12,12
                       </p>
                      
                        {# <div class="col-md-12 right"> #}
@@ -433,7 +439,7 @@
                       {# <input type="button" class="btn-3"value="verifier"/> #}
                 </div>
             </div>
-           <div class="g-recaptcha" data-sitekey="6Lf0LEgqAAAAAJIzrgBaxDjFKr2E4cHtvKisgzIw" data-callback="recaptchaCallback" style="margin-top: 41px;float: right;"></div>
+              
         </section>
         <h3>تأكيد التسجيل</h3>
         <section data-step="2">
@@ -523,8 +529,75 @@
 
 {% block javascripts %}
     {{ parent() }}
-      <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script>
+let expectedResult = 0;
+
+// Fonction pour générer une équation mathématique en arabe
+function generateMathCaptcha() {
+    const operators = ['+', '-', '×']; // opérateurs autorisés
+    const op1 = Math.floor(Math.random() * 10) + 1; // 1 à 10
+    const op2 = Math.floor(Math.random() * 10) + 1;
+    const operator = operators[Math.floor(Math.random() * operators.length)];
+
+    let question = '';
+    switch (operator) {
+        case '+':
+            expectedResult = op1 + op2;
+            question = `${op1} + ${op2} = ؟`;
+            break;
+        case '-':
+            expectedResult = op1 - op2;
+            question = `${op1} - ${op2} = ؟`;
+            break;
+        case '×':
+            expectedResult = op1 * op2;
+            question = `${op1} × ${op2} = ؟`;
+            break;
+    }
+
+    $('#math-captcha-question').text(question);
+    $('.errorMathCaptcha').hide();
+    $('#math_captcha').val('').removeClass('is-invalid is-valid');
+}
+
+// Vérifie la réponse
+function validateMathCaptcha() {
+    const userAnswer = parseInt($('#math_captcha').val().trim(), 10);
+    const inputField = $('#math_captcha');
+
+    if (userAnswer === expectedResult) {
+        inputField.removeClass('is-invalid error').addClass('is-valid');
+        $('.errorMathCaptcha').hide();
+        return true;
+    } else {
+        inputField.removeClass('is-valid').addClass('is-invalid error');
+        $('.errorMathCaptcha').text("❌ الإجابة غير صحيحة، حاول مرة أخرى").show();
+        return false;
+    }
+}
+
+// Exécution au chargement
+$(document).ready(function () {
+    generateMathCaptcha();
+
+    // Vérifie au changement de valeur ou avant envoi du formulaire
+    $('#math_captcha').on('blur keyup', function () {
+        validateMathCaptcha();
+    });
+
+    // Exemple : empêche l’envoi du formulaire si captcha faux
+    $('form').on('submit', function (e) {
+        if (!validateMathCaptcha()) {
+            e.preventDefault(); 
+        }
+    });
+});
+</script>
+
+
    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.fr.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/jquery.validation/1.19.3/jquery.validate.min.js"></script>
+   
     <script>
 
       $(function () {
@@ -556,6 +629,7 @@
                 equalTo: "الرجاء التّثبّت من  تاريخ الولادة.",
             
               }})
+           
           });
     });
 
@@ -623,7 +697,7 @@
    
              niveau =$('#inscription_niveau input:checked').val()
          //   //console.log('niveau selected '+niveau )
-            tab =["1er cycle","licence","iset","formation"];
+            tab =["1er cycle","licence","iset","formation","ing"];
            // errorNiveau=0;
             if(niveau=="licence"){
               $('.inscription_moyenne4,.inscription_moyenne5').remove()
@@ -632,6 +706,11 @@
             else if(niveau=="1er cycle"){
               $('.inscription_moyenne3,.inscription_moyenne4,.inscription_moyenne5').remove()
               $('.confirm_inscription_moyenne3,.confirm_inscription_moyenne4,.confirm_inscription_moyenne5').remove()
+            }
+            else if(niveau=="ing"){
+             /* $('.inscription_moyenne1,.inscription_moyenne2,.inscription_moyenne3,.inscription_moyenne4,.inscription_moyenne5').show() */
+              $('.inscription_moyenne2,.inscription_moyenne3,.inscription_moyenne4,.inscription_moyenne5').remove()
+              $('.confirm_inscription_moyenne2,.confirm_inscription_moyenne3,.confirm_inscription_moyenne4,.confirm_inscription_moyenne5').remove()
             }
             else if(niveau=="formation"){
               $('.inscription_moyenne5').remove()
@@ -810,9 +889,7 @@ $( document ).ready(function() {
             
         },
       });
-    function recaptchaCallback() {
-      $('#hiddenRecaptcha').valid();
-    };
+ validateMathCaptcha();
     
       $('#inscription_diplomeTanfil_placeholder,#inscription_diplomeTanfil > label[for="inscription_diplomeTanfil_placeholder"]').remove()
 
@@ -856,12 +933,13 @@ $( document ).ready(function() {
         bodyTag: "section",
         transitionEffect: "slideLeft",
         onStepChanged: function(e, currentIndex, priorIndex) {      
-        
+        validateMathCaptcha() 
           var fv         = $('form').data('formValidation'), // FormValidation instance
         
           step = $('form').find('section.current').attr('data-step');
 
               if(currentIndex==0)  
+              
                      $('.wizard-content .wizard>.actions>ul>li>a[href="#next"]').html(' التالي >>')
 
               if(currentIndex==1) {
@@ -873,79 +951,86 @@ $( document ).ready(function() {
               $('.wizard-content .wizard>.actions>ul>li>a[href="#previous"]').html('<< رجوع')
       },
         onStepChanging: function (event, currentIndex, newIndex) {
-          form.validate().settings.ignore = ":disabled,:hidden";
-         
-            $errorEmail =checkEmail() ;
-            
-            $('.special_caratc').each(function(evt){
+    form.validate().settings.ignore = ":disabled,:hidden";
 
-              if($(this).val() !=""){         
-              $('#'+$(this).attr('id')+'-error').remove()
-                $(this).removeClass('error-lg')
-                if(!onlyLettersAndNumbers($(this).val())){
-                    $('#'+$(this).attr('id')+'-error').remove()
-                          $(this).addClass('error-lg')
-                          $(this).removeClass('valid')
-                          $(this).attr('aria-invalid','true')
-                              alert='يجب إدخال جميع المعلومات باللّغة العربيّة';
-                          $(this).after('<label id="'+$(this).attr('id')+'-error" class="error">     '+alert+' </label>')
-                    
-                        
-                }
-              }
-            
-            }) 
-            $('.special_caratc4').each(function(){
-                if($(this).val() !=""){
+    // Vérifier le champ captcha à l'étape 0
+    if (currentIndex === 0) {
+        if (!validateMathCaptcha()) {
+            generateMathCaptcha(); // recrée une équation si mauvaise réponse
+            return false; // empêche d'aller à l'étape suivante
+        }
+    }
 
-                $('#'+$(this).attr('id')+'-error').remove()
-                  $(this).removeClass('error-lg')
-                  if(!onlyLetters($(this).val())){
-                      $('#'+$(this).attr('id')+'-error').remove()
-                            $(this).addClass('error-lg')
-                            $(this).removeClass('valid')
-                            $(this).attr('aria-invalid','true')
-                                alert='يجب إدخال جميع المعلومات باللّغة العربيّة';
-                            $(this).after('<label id="'+$(this).attr('id')+'-error" class="error">     '+alert+' </label>')
-                  }
-                }
-            })
-          $countErrorLang = $('input.errorlg').length
-         
-          if($countErrorLang ==0 && $errorEmail== 0   && erroranneeEquivalence==0 
-            && erroranneeDiplome==0   && errorscore==0  && error_moyenne1==0 && error_moyenne2==0
-            && error_moyenne3==0 && error_moyenne4==0 && error_moyenne5==0 && errorNiveau==0 ){ 
-              if(form.valid() &&  currentIndex==1 && newIndex==2) 
-                {
-                    if(checkModalVerification ==1){
-                        summary()
-                      return form.valid();  
-                    }
-                    else{
-                      $('#ModalVerif').modal('show');
-                    }
-                }
-                else{
-                  if((currentIndex==2 && newIndex==1) ||(currentIndex==1 && newIndex==0) ||(currentIndex==2 && newIndex==0)){
-                    checkModalVerification =0;
-                   }
-                   if(newIndex<2) {checkModalConfirmation =0;}
+    // Vérification Email
+    $errorEmail = checkEmail();
 
-                  return form.valid();
-                }
-           
-              
-            } else{
+    // Validation des champs arabes (caractères spéciaux)
+    $('.special_caratc').each(function () {
+        if ($(this).val() !== "") {
+            $('#' + $(this).attr('id') + '-error').remove();
+            $(this).removeClass('error-lg');
+            if (!onlyLettersAndNumbers($(this).val())) {
+                $(this).addClass('error-lg').removeClass('valid').attr('aria-invalid', 'true');
+                $(this).after('<label id="' + $(this).attr('id') + '-error" class="error">يجب إدخال جميع المعلومات باللّغة العربيّة</label>');
+            }
+        }
+    });
+
+    $('.special_caratc4').each(function () {
+        if ($(this).val() !== "") {
+            $('#' + $(this).attr('id') + '-error').remove();
+            $(this).removeClass('error-lg');
+            if (!onlyLetters($(this).val())) {
+                $(this).addClass('error-lg').removeClass('valid').attr('aria-invalid', 'true');
+                $(this).after('<label id="' + $(this).attr('id') + '-error" class="error">يجب إدخال جميع المعلومات باللّغة العربيّة</label>');
+            }
+        }
+    });
+
+    $countErrorLang = $('input.errorlg').length;
+
+    // Vérifications globales (captcha inclus maintenant)
+    if (
+        $countErrorLang === 0 &&
+        $errorEmail === 0 &&
+        erroranneeEquivalence === 0 &&
+        erroranneeDiplome === 0 &&
+        errorscore === 0 &&
+        error_moyenne1 === 0 &&
+        error_moyenne2 === 0 &&
+        error_moyenne3 === 0 &&
+        error_moyenne4 === 0 &&
+        error_moyenne5 === 0 &&
+        errorNiveau === 0
+    ) {
+        // Si on passe de l'étape 1 vers l'étape 2 (vérification finale)
+        if (form.valid() && currentIndex === 1 && newIndex === 2) {
+            if (checkModalVerification === 1) {
+                summary();
+                return form.valid();
+            } else {
+                $('#ModalVerif').modal('show');
                 return false;
             }
-         
-        },
+        } else {
+            if ((currentIndex === 2 && newIndex === 1) || (currentIndex === 1 && newIndex === 0) || (currentIndex === 2 && newIndex === 0)) {
+                checkModalVerification = 0;
+            }
+            if (newIndex < 2) {
+                checkModalConfirmation = 0;
+            }
+            return form.valid();
+        }
+    } else {
+        return false;
+    }
+},
         onFinishing: function (event, currentIndex) {
           form.validate().settings.ignore = ":disabled";
           $countErrorLang = $('input.errorlg').length
-     
-          if($('.hiddenRecaptcha ').hasClass('error')){
-           form.children("div").steps("previous");
+   
+            if ($('.mathCaptcha').hasClass('error')) {
+           form.children("div").steps("next");
           }
           return form.valid();
         },
@@ -1096,7 +1181,7 @@ $( document ).ready(function() {
         $label5 ="";
         $conf_label5 ="" 
         $val = diplome;
-        tab =["1er cycle","licence","iset","formation"];
+        tab =["1er cycle","licence","iset","formation","ing"];
         errorNiveau=0;
     
          if(diplome =="iset" && isInArray($val,tab) ){
@@ -1139,6 +1224,15 @@ $( document ).ready(function() {
            $('.moyenne4 input,.moyenne5 input').removeAttr('required')
 
            $('.moyenne4 input,.moyenne5 input').addClass('NOTrequired')
+        }   else  if(diplome =="ing" && isInArray($val,tab)){
+          
+         $label1 ="معدل سنة التخرج (دون مذكرة ختم الدروس)(1)";
+          $conf_label1 ="تأكيد معدل سنة التخرج (دون مذكرة ختم الدروس)(1)";
+
+           $('.scoreTanfil,.moyenne1').show()
+           $('.moyenne2 input ,.moyenne3 input,.moyenne4 input,.moyenne5 input').removeAttr('required')
+
+           $('.moyenne2 input ,.moyenne3 input,.moyenne4 input,.moyenne5 input').addClass('NOTrequired')
         } 
         else   if(diplome  =="1er cycle"  && isInArray($val,tab)){
        
@@ -1240,6 +1334,12 @@ $( document ).ready(function() {
                   label="(I)- المعدل العام لسنوات الدراسة   ";
                   formule=" f4"; 
                   src="{{asset('theme/dist/img/f4.png')}}"
+
+                }
+                   if($niveau =="ing"){
+                  label="(I)- معدل سنة التخرج (دون مذكرة ختم الدروس)  ";
+                  formule=" f1"; 
+                  src="{{asset('theme/dist/img/f1.png')}}"
 
                 }
 
@@ -1422,6 +1522,7 @@ $( document ).ready(function() {
 
         
 
+
           jQuery("#inscription_telephoneFixe").rules("add", {
  						required: true,
 						number:true,
@@ -1459,7 +1560,7 @@ $( document ).ready(function() {
            jQuery("#confirm_inscription_scoreTanfil").rules("add", {
               required: true,
               equalTo: "#inscription_scoreTanfil",
-              rangelength: [6,6],
+              rangelength: [5,5],
               messages: {
                 rangelength: " الرجاء التّثبّت من طريقة إدراج المعدل "   ,
                 equalTo: " الرجاء التّثبّت من  المعدل ",
@@ -1469,7 +1570,7 @@ $( document ).ready(function() {
            jQuery("#confirm_inscription_moyenne1").rules("add", {
               required: true,
               equalTo: "#inscription_moyenne1",
-              rangelength: [6,6],
+              rangelength: [5,5],
               messages: {
                 rangelength: " الرجاء التّثبّت من طريقة إدراج المعدل "   ,
                 equalTo: " الرجاء التّثبّت من  المعدل ",
@@ -1479,7 +1580,7 @@ $( document ).ready(function() {
             jQuery("#confirm_inscription_moyenne2").rules("add", {
               required: true,
               equalTo: "#inscription_moyenne2",
-              rangelength: [6,6],
+              rangelength: [5,5],
             
               messages: {
                 rangelength: " الرجاء التّثبّت من طريقة إدراج المعدل "   ,
@@ -1490,7 +1591,7 @@ $( document ).ready(function() {
             jQuery("#confirm_inscription_moyenne3").rules("add", {
               //required: true,
               equalTo: "#inscription_moyenne3",
-              rangelength: [6,6],
+              rangelength: [5,5],
             
               messages: {
                 rangelength: " الرجاء التّثبّت من طريقة إدراج المعدل "   ,
@@ -1501,7 +1602,7 @@ $( document ).ready(function() {
               jQuery("#confirm_inscription_moyenne4").rules("add", {
                 //required: true,
                 equalTo: "#inscription_moyenne4",
-                rangelength: [6,6],
+                rangelength: [5,5],
           
                messages: {
                 rangelength: " الرجاء التّثبّت من طريقة إدراج المعدل "   ,
@@ -1512,7 +1613,7 @@ $( document ).ready(function() {
             jQuery("#confirm_inscription_moyenne5").rules("add", {
               //required: true,
               equalTo: "#inscription_moyenne5",
-              rangelength: [6,6],
+              rangelength: [5,5],
             
               messages: {
                 rangelength: " الرجاء التّثبّت من طريقة إدراج المعدل "   ,
@@ -1535,9 +1636,9 @@ $( document ).ready(function() {
         let error_moyenne4 =0;
         let error_moyenne5 =0;
 
-        $(".confirm_inscription").inputmask("\(0|1)9,999");
+        $(".confirm_inscription").inputmask("\(0|1)9,99");
 
-        $("#inscription_moyenne1").inputmask("\(0|1)9,999",{ 
+        $("#inscription_moyenne1").inputmask("\(0|1)9,99",{ 
           //autoUnmask: true,
 
           "onincomplete": function(){ 
@@ -1556,7 +1657,7 @@ $( document ).ready(function() {
         });
        
 
-        $("#inscription_moyenne2").inputmask("\(0|1)9,999",{ 
+        $("#inscription_moyenne2").inputmask("\(0|1)9,99",{ 
           
           "onincomplete": function(){ 
             $('#'+$(this).attr('id')+'-errorM').remove()
@@ -1573,7 +1674,7 @@ $( document ).ready(function() {
         });
 
 
-        $("#inscription_moyenne3,#confirm_inscription_moyenne3").inputmask("\(0|1)9,999",{ 
+        $("#inscription_moyenne3,#confirm_inscription_moyenne3").inputmask("\(0|1)9,99",{ 
           "onincomplete": function(){ 
             $('#'+$(this).attr('id')+'-errorM').remove()
              if($(this).val()!='' &&     $(this).hasClass('check-moy')){
@@ -1588,7 +1689,7 @@ $( document ).ready(function() {
           } 
         });
 
-        $("#inscription_moyenne4,#confirm_inscription_moyenne4").inputmask("\(0|1)9,999",{ 
+        $("#inscription_moyenne4,#confirm_inscription_moyenne4").inputmask("\(0|1)9,99",{ 
           "onincomplete": function(){ 
             $('#'+$(this).attr('id')+'-errorM').remove()
              if($(this).val()!='' &&     $(this).hasClass('check-moy')){
@@ -1603,7 +1704,7 @@ $( document ).ready(function() {
           }  
         });
 
-        $("#inscription_moyenne5,#confirm_inscription_moyenne5").inputmask("\(0|1)9,999",{ 
+        $("#inscription_moyenne5,#confirm_inscription_moyenne5").inputmask("\(0|1)9,99",{ 
           "onincomplete": function(){ 
             $('#'+$(this).attr('id')+'-errorM').remove()
              if($(this).val()!='' &&     $(this).hasClass('check-moy')){
@@ -1619,7 +1720,7 @@ $( document ).ready(function() {
         });
 
 /****moy bac*/
-  $("#inscription_scoreTanfil,confirm_inscription_scoreTanfil").inputmask("\(0|1)9,999",{ 
+  $("#inscription_scoreTanfil,confirm_inscription_scoreTanfil").inputmask("\(0|1)9,99",{ 
           "onincomplete": function(){ 
             $('#'+$(this).attr('id')+'-errorM').remove()
              if($(this).val()!='' &&     $(this).hasClass('check-moy')){
@@ -1646,6 +1747,8 @@ $( document ).ready(function() {
                 let $error_chek_langue=0;
         $( ".special_caract" ).on( 'keypress blur mouseup',function( evt ) {
       
+
+ 
 
         
             if($(this).val() !=""){
@@ -1811,5 +1914,29 @@ $( document ).ready(function() {
               }
           });
          
+    </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const confirmButton = document.querySelector('a[href="#finish"]');
+
+        confirmButton.addEventListener('click', function (e) {
+            e.preventDefault(); // Prevent the default form submission
+
+            // Show the confirmation modal
+            const modal = new bootstrap.Modal(document.getElementById('ModalConfirm'));
+            modal.show();
+
+            // Handle the modal confirmation buttons
+            document.querySelector('.btnnonConf').addEventListener('click', function () {
+                // If the user confirms, submit the form
+                document.querySelector('form').submit();
+            });
+
+            document.querySelector('.btnouiConf').addEventListener('click', function () {
+                // If the user wants to review, close the modal
+                modal.hide();
+            });
+        });
+    });
     </script>
 {% endblock %}

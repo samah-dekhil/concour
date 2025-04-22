@@ -247,15 +247,15 @@ class InscriptionType extends AbstractType
                 'label_attr' => ['class' => 'mt-3'],
                 'label_html' => true, 'required' => true,
             ])
-            ->add('telephoneFixe', TextType::class, [
-                'attr' => [
-                    'class' => 'form-control',
+            //->add('telephoneFixe', TextType::class, [
+              //  'attr' => [
+                //    'class' => 'form-control',
 
-                ],
-                'label' => 'رقم الهاتـف القـارّ<font style="color:red">*</font>:',
-                'label_attr' => ['class' => 'mt-3'],
-                'label_html' => true, 'required' => true,
-            ])
+              //  ],
+               // 'label' => 'رقم الهاتـف القـارّ<font style="color:red">*</font>:',
+               // 'label_attr' => ['class' => 'mt-3'],
+               // 'label_html' => true, 'required' => true,
+           // ])
             ->add('telephonePortable', NumberType::class, [
                 'attr' => [
                     'class' => 'form-control required',
@@ -277,8 +277,7 @@ class InscriptionType extends AbstractType
                 'label_html' => true, 'required' => true,
                 'multiple' => false,
                 'expanded' => true,
-                'choices' => array('  شهادة الأستاذية أو شهادة معادلة لها في الحقوق أو العلوم الاقتصادية ' => 'iset',
-                    ' الشهادة الوطنية للإجازة أو شهادة معادلة لها في الحقوق أو العلوم الاقتصادية (نظام أمد) ' => 'licence',
+                'choices' => array(' شهادة مهندس ' => 'ing'
                    /* ' الشهادة الجامعية للمرحلة الأولى من التعليم العالي على الأقل أو شهادة معادلة لها في إختصاص : (الحقوق أو العلوم الاقتصادية )' => '1er cycle',*/
                     /*'شهادة تكوينية منظرة بالمستوى الرابع من سلم الوظائف  في إختصاص : (الحقوق أو العلوم الاقتصادية )' => 'formation',*/
                 ),

@@ -16,7 +16,7 @@
       content="Matrix Admin Lite Free Version is powerful and clean admin dashboard template, inpired from Bootstrap Framework"
     />
     <meta name="robots" content="noindex,nofollow" />
-    <title>Concours - Ministère d'Agriculture </title>
+     <title>Concours - Office Des Terres Domaniales</title>
     {% block stylesheets %}
           <link
           rel="icon"
@@ -99,7 +99,7 @@
                 />
               </span>
               <!-- Logo icon -->
-            
+   
 
               <!-- </b> -->
               <!--End Logo icon -->
@@ -129,10 +129,21 @@
           
 
             <a {% if route in ['app_home'] %}style="display:none;"{% endif %} href="{{path('app_home')}}"> <i class="fa fa-home" aria-hidden="true"></i>الصّفحة الرّئيسيّة</a>
-            <a class="reclamation" href="{{path('reclamation_new')}}" {% if route in ['reclamation_new'] %}style="text-decoration: underline; font-weight: 700;color: #0c1221;"{% endif %} > <i class="fa fa-envelope" aria-hidden="true"></i> إرسال إشعارات</a>
+          {#  <a class="reclamation" href="{{path('reclamation_new')}}" {% if route in ['reclamation_new'] %}style="text-decoration: underline; font-weight: 700;color: #0c1221;"{% endif %} > <i class="fa fa-envelope" aria-hidden="true"></i> إرسال إشعارات</a>#}
 
           </div>
+                   <!-- New logo added here -->
+    <div class="new-logo">
+        <img
+            src="{{ asset('theme/assets/images/logo-otd.png') }}"
+            alt="New Logo"
+            style="max-height:77px;
+            style=" width: 39px;"
+        />
+    </div>
         </nav>
+  
+   
       </header>
  
       <div class="page-wrapper" style="margin-left:0;">

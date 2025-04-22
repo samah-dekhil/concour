@@ -38,8 +38,14 @@
                       {{ form_widget(form.dateNaissance) }}
                       </div>
                     </div>
-                  <div class="g-recaptcha" data-sitekey="6LcNeXImAAAAAJ3hfLjkSS7aEUOwYf1AZHKTjd5Q" data-callback="recaptchaCallback" style="margin-top: 41px;float: right;"></div>
-                  <input type="text" class="hiddenRecaptcha required" name="hiddenRecaptcha" id="hiddenRecaptcha">
+                    
+                    <div class="form-group row col-md-6">
+                      <label for="math_captcha">الرجاء حل المعادلة التالية:</label>
+                      <div class="input-group">
+                        <span class="input-group-text" id="math-captcha-question"></span>
+                        <input type="text" id="math_captcha" name="math_captcha" class="form-control required" aria-describedby="math-captcha-question">
+                      </div>
+                    </div>
         
                     <div class="border-top">
                         <div class="card-body" style="padding-right: 0;">
@@ -61,7 +67,6 @@
 
 {% block javascripts %}
     {{ parent() }}
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script>
       console.log($('.edition').attr('attr-g'))
       if($('.edition').attr('attr-g')==2){
@@ -116,27 +121,18 @@
        
         ignore: ".ignore",
         rules: {
-          hiddenRecaptcha: {
-            required: function () {
-                if (grecaptcha.getResponse() == '') {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-           } 
+          math_captcha: {
+            required: true
+          }
     			},
           messages: {
-            hiddenRecaptcha: {
-            required: '.Veuillez valider le test reCAPTCHA '
+            math_captcha: {
+            required: 'الرجاء حل المعادلة'
            }
             
         },
       });
       $("#inscription_edition_cin_search").inputmask("99999999");
-      function recaptchaCallback() {
-      $('#hiddenRecaptcha').valid();
-    };
       jQuery.extend(jQuery.validator.messages, {
         required: "الرجاء تعمير هذه الخانة",
         remote: "الرجاء تصحيح هذا المجال.",
@@ -166,6 +162,23 @@
           rangelength: " يتكوّن رقم ب.ت.و  من 8  أرقام",
         
         }})  
-    
+
+      document.addEventListener('DOMContentLoaded', function () {
+        const num1 = Math.floor(Math.random() * 10) + 1;
+        const num2 = Math.floor(Math.random() * 10) + 1;
+        const question = `${num1} + ${num2} = ?`;
+        const answer = num1 + num2;
+
+        document.getElementById('math-captcha-question').textContent = question;
+
+        const form = document.querySelector('form');
+        form.addEventListener('submit', function (e) {
+          const userAnswer = parseInt(document.getElementById('math_captcha').value, 10);
+          if (userAnswer !== answer) {
+            e.preventDefault();
+            alert('إجابة خاطئة. الرجاء المحاولة مرة أخرى.');
+          }
+        });
+      });
     </script>
 {% endblock %}

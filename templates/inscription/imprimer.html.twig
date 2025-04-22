@@ -267,12 +267,7 @@
                     <td> </td>
                     <td> </td>
                 </tr>
-                <tr  >
-                    <td><label  class="mt-3 ">رقم الهاتـف القـارّ  <span>: </span></label></td> 
-                    <td> {{ inscription.telephoneFixe}} </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
+               
                 <tr>
                     <td ><label  class="mt-3 ">الجـوّال  <span>: </span></label></td>
                     <td> {{ inscription.telephonePortable}} </td>
@@ -367,7 +362,11 @@
                         {% set  labelMoy1 = "المعدل العام  للسنة  الأولى   من التعليم العالي   بنجاح  " %}
                         {% set  labelMoy2 = "المعدل العام  للسنة  الثانية   من التعليم العالي   بنجاح  " %}
                         {% set  labelMoy3 = "المعدل العام  للسنة  الثالثة   من التعليم العالي   بنجاح  " %}
-                    
+                    {% elseif inscription.niveau == "ing" %}
+                        
+                            {% set  labelMoyG = "معدل سنة التخرج (دون مذكرة ختم الدروس)"  %}  
+                            {% set  labelMoy1 = "معدل سنة التخرج (دون مذكرة ختم الدروس)"  %}
+                        
                     {% elseif inscription.niveau == "formation" %}
                         
                             {% set  labelMoyG = "المعدل العام لسنوات الدراسة   " %}  
